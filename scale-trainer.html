@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Violin Scale Trainer | Melinda Coles Violin Academy</title>
+<meta name="description" content="Free beginner violin scale trainer for D Major and A Major with note names, finger numbers, string guidance, audio playback and step-by-step practice.">
+
+<style>
+:root{
+  --cream:#f7f3eb;
+  --card:#fffdf9;
+  --green:#314333;
+  --sage:#aab79b;
+  --sage-dark:#879979;
+  --gold:#b89648;
+  --text:#344038;
+  --muted:#737a73;
+  --line:#e7dfd2;
+  --soft:#eef1e9;
+  --shadow:0 18px 50px rgba(52,64,56,.12);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  background:radial-gradient(circle at top left,rgba(184,150,72,.08),transparent 35%),var(--cream);
+  color:var(--text);
+}
+.page{width:min(1050px,94%);margin:auto;padding:30px 0 50px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo-badge{
+  width:58px;height:58px;border:2px solid var(--gold);border-radius:50%;
+  display:grid;place-items:center;color:var(--gold);font-family:Georgia,serif;
+  font-size:24px;background:var(--card)
+}
+.brand-text strong{display:block;color:var(--green);font-size:18px}
+.brand-text span{color:var(--muted);font-size:13px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:28px;
+  box-shadow:var(--shadow);padding:34px
+}
+.hero{text-align:center}
+.eyebrow{
+  color:var(--gold);text-transform:uppercase;letter-spacing:.16em;
+  font-size:13px;font-weight:bold
+}
+h1{color:var(--green);font-size:clamp(34px,6vw,58px);margin:10px 0 8px}
+.subtitle{color:var(--muted);font-size:18px;line-height:1.6;margin-bottom:26px}
+
+.controls{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:24px 0
+}
+.control-group{
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:14px;
+  text-align:left;
+  background:rgba(255,255,255,.22)
+}
+.control-group label{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:7px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-weight:bold
+}
+select,input[type=range]{
+  width:100%
+}
+select{
+  padding:11px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--card);
+  color:var(--text);
+  font-size:15px
+}
+input[type=range]{accent-color:var(--sage-dark)}
+.bpm-value{font-size:13px;color:var(--muted);margin-top:5px}
+
+.scale-title{
+  margin:25px 0 8px;
+  color:var(--green);
+  font-size:28px
+}
+.scale-subtitle{
+  color:var(--muted);
+  margin-bottom:18px
+}
+
+.notes-grid{
+  display:grid;
+  grid-template-columns:repeat(8,1fr);
+  gap:10px;
+  margin:18px 0 26px
+}
+.note-card{
+  border:1px solid var(--line);
+  background:var(--soft);
+  border-radius:16px;
+  padding:16px 8px;
+  min-height:138px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  transition:.14s ease;
+}
+.note-card.active{
+  background:var(--sage);
+  color:white;
+  transform:translateY(-5px);
+  box-shadow:0 10px 20px rgba(49,67,51,.15)
+}
+.note-name{
+  font-size:32px;
+  font-weight:800;
+  color:var(--green)
+}
+.note-card.active .note-name,
+.note-card.active .finger,
+.note-card.active .string{color:white}
+.finger{
+  margin-top:8px;
+  font-weight:bold;
+  color:var(--gold)
+}
+.string{
+  margin-top:5px;
+  font-size:13px;
+  color:var(--muted)
+}
+.direction{
+  margin-top:5px;
+  font-size:11px;
+  opacity:.8
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  margin-top:10px
+}
+.action{
+  padding:14px 24px;
+  border-radius:12px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+  border:1px solid var(--line)
+}
+.primary{background:var(--sage-dark);color:white;border:none}
+.secondary{background:transparent;color:var(--text)}
+.gold{background:var(--gold);color:white;border:none}
+
+.progress{
+  height:12px;background:var(--line);border-radius:999px;overflow:hidden;
+  margin:22px auto 0;max-width:760px
+}
+.progress-bar{
+  height:100%;width:0;background:linear-gradient(90deg,var(--sage),var(--gold));
+  transition:width .25s
+}
+
+.practice-panel{
+  margin-top:26px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:18px
+}
+.panel{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:20px;
+  text-align:left;
+  background:rgba(170,183,155,.08)
+}
+.panel h2{margin:0 0 12px;color:var(--green);font-size:20px}
+.current-box{
+  display:flex;
+  align-items:center;
+  gap:16px
+}
+.current-note{
+  width:86px;height:86px;border-radius:50%;display:grid;place-items:center;
+  background:var(--green);color:white;font-size:38px;font-weight:800;flex:none
+}
+.current-details strong{display:block;font-size:19px;color:var(--green)}
+.current-details span{display:block;color:var(--muted);margin-top:5px}
+.tip{
+  padding:16px;border-left:4px solid var(--gold);background:rgba(184,150,72,.08);
+  border-radius:12px;line-height:1.55
+}
+.checklist label{display:block;margin:10px 0}
+.home-link{
+  display:inline-block;margin-top:24px;color:var(--green);text-decoration:none;font-weight:bold
+}
+footer{text-align:center;margin-top:26px;color:var(--muted);font-size:14px}
+
+@media(max-width:860px){
+  .controls{grid-template-columns:repeat(2,1fr)}
+  .notes-grid{grid-template-columns:repeat(4,1fr)}
+  .practice-panel{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .card{padding:24px 16px}
+  .controls{grid-template-columns:1fr}
+  .notes-grid{grid-template-columns:repeat(2,1fr)}
+  .brand-text span{display:none}
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo-badge">MC</div>
+      <div class="brand-text">
+        <strong>Melinda Coles Violin Academy</strong>
+        <span>Free interactive violin practice tools</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="card hero">
+    <div class="eyebrow">Free Beginner Violin Tool</div>
+    <h1>Violin Scale Trainer</h1>
+    <div class="subtitle">
+      Practise D Major and A Major one note at a time with note names, finger numbers,
+      string guidance and audio playback.
+    </div>
+
+    <div class="controls">
+      <div class="control-group">
+        <label for="scaleSelect">Scale</label>
+        <select id="scaleSelect">
+          <option value="D">D Major</option>
+          <option value="A">A Major</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label for="directionSelect">Direction</label>
+        <select id="directionSelect">
+          <option value="up">Ascending</option>
+          <option value="down">Descending</option>
+          <option value="both" selected>Up and Down</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label for="modeSelect">Display</label>
+        <select id="modeSelect">
+          <option value="all" selected>Notes + Fingers + Strings</option>
+          <option value="notes">Notes only</option>
+          <option value="fingers">Finger numbers only</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label for="tempoSlider">Tempo</label>
+        <input id="tempoSlider" type="range" min="40" max="120" value="60">
+        <div class="bpm-value"><span id="tempoValue">60</span> BPM</div>
+      </div>
+    </div>
+
+    <div class="scale-title" id="scaleTitle">D Major Scale</div>
+    <div class="scale-subtitle" id="scaleSubtitle">One octave • D and A strings</div>
+
+    <div class="notes-grid" id="notesGrid"></div>
+
+    <div class="actions">
+      <button class="action primary" id="playButton">▶ Play Scale</button>
+      <button class="action secondary" id="prevButton">← Previous Note</button>
+      <button class="action secondary" id="nextButton">Next Note →</button>
+      <button class="action gold" id="resetButton">Reset</button>
+    </div>
+
+    <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+
+    <div class="practice-panel">
+      <section class="panel">
+        <h2>Current Note</h2>
+        <div class="current-box">
+          <div class="current-note" id="currentNote">D</div>
+          <div class="current-details">
+            <strong id="currentInstruction">Open D string</strong>
+            <span id="currentFinger">Finger: Open</span>
+            <span id="currentPitch">Pitch: D4</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Practice Checklist</h2>
+        <div class="checklist">
+          <label><input type="checkbox"> Relaxed shoulders</label>
+          <label><input type="checkbox"> Curved fingers</label>
+          <label><input type="checkbox"> Straight bow</label>
+          <label><input type="checkbox"> Listen for intonation</label>
+        </div>
+      </section>
+    </div>
+
+    <div class="tip" id="tipBox">
+      Start slowly. One clear, accurate note is more valuable than a rushed scale.
+    </div>
+
+    <a class="home-link" href="index.html">← Return to Practice Studio</a>
+  </main>
+
+  <footer>
+    <em>Music is my magic.</em><br>
+    © Melinda Coles Violin Academy
+  </footer>
+
+</div>
+
+<script>
+const scaleData = {
+  D: {
+    title: "D Major Scale",
+    subtitle: "One octave • D and A strings",
+    up: [
+      {note:"D",pitch:"D4",freq:293.66,string:"D string",finger:"Open",instruction:"Open D string"},
+      {note:"E",pitch:"E4",freq:329.63,string:"D string",finger:"1",instruction:"First finger on D"},
+      {note:"F♯",pitch:"F#4",freq:369.99,string:"D string",finger:"2 high",instruction:"High second finger on D"},
+      {note:"G",pitch:"G4",freq:392.00,string:"D string",finger:"3",instruction:"Third finger on D"},
+      {note:"A",pitch:"A4",freq:440.00,string:"A string",finger:"Open",instruction:"Open A string"},
+      {note:"B",pitch:"B4",freq:493.88,string:"A string",finger:"1",instruction:"First finger on A"},
+      {note:"C♯",pitch:"C#5",freq:554.37,string:"A string",finger:"2 high",instruction:"High second finger on A"},
+      {note:"D",pitch:"D5",freq:587.33,string:"A string",finger:"3",instruction:"Third finger on A"}
+    ]
+  },
+  A: {
+    title: "A Major Scale",
+    subtitle: "One octave • A and E strings",
+    up: [
+      {note:"A",pitch:"A4",freq:440.00,string:"A string",finger:"Open",instruction:"Open A string"},
+      {note:"B",pitch:"B4",freq:493.88,string:"A string",finger:"1",instruction:"First finger on A"},
+      {note:"C♯",pitch:"C#5",freq:554.37,string:"A string",finger:"2 high",instruction:"High second finger on A"},
+      {note:"D",pitch:"D5",freq:587.33,string:"A string",finger:"3",instruction:"Third finger on A"},
+      {note:"E",pitch:"E5",freq:659.25,string:"E string",finger:"Open",instruction:"Open E string"},
+      {note:"F♯",pitch:"F#5",freq:739.99,string:"E string",finger:"1",instruction:"First finger on E"},
+      {note:"G♯",pitch:"G#5",freq:830.61,string:"E string",finger:"2 high",instruction:"High second finger on E"},
+      {note:"A",pitch:"A5",freq:880.00,string:"E string",finger:"3",instruction:"Third finger on E"}
+    ]
+  }
+};
+
+const scaleSelect = document.getElementById("scaleSelect");
+const directionSelect = document.getElementById("directionSelect");
+const modeSelect = document.getElementById("modeSelect");
+const tempoSlider = document.getElementById("tempoSlider");
+const tempoValue = document.getElementById("tempoValue");
+const notesGrid = document.getElementById("notesGrid");
+const scaleTitle = document.getElementById("scaleTitle");
+const scaleSubtitle = document.getElementById("scaleSubtitle");
+const playButton = document.getElementById("playButton");
+const prevButton = document.getElementById("prevButton");
+const nextButton = document.getElementById("nextButton");
+const resetButton = document.getElementById("resetButton");
+const progressBar = document.getElementById("progressBar");
+const currentNote = document.getElementById("currentNote");
+const currentInstruction = document.getElementById("currentInstruction");
+const currentFinger = document.getElementById("currentFinger");
+const currentPitch = document.getElementById("currentPitch");
+const tipBox = document.getElementById("tipBox");
+
+let sequence = [];
+let currentIndex = 0;
+let playing = false;
+let timer = null;
+let audioContext = null;
+
+function buildSequence(){
+  const base = scaleData[scaleSelect.value].up;
+  const direction = directionSelect.value;
+
+  if(direction === "up") sequence = [...base];
+  if(direction === "down") sequence = [...base].reverse();
+  if(direction === "both") sequence = [...base, ...base.slice(0,-1).reverse()];
+
+  currentIndex = 0;
+  scaleTitle.textContent = scaleData[scaleSelect.value].title;
+  scaleSubtitle.textContent = scaleData[scaleSelect.value].subtitle;
+  renderNotes();
+  updateCurrent();
+}
+
+function renderNotes(){
+  notesGrid.innerHTML = "";
+  const mode = modeSelect.value;
+
+  sequence.forEach((item,index)=>{
+    const card = document.createElement("div");
+    card.className = "note-card";
+    card.dataset.index = index;
+
+    let noteText = item.note;
+    let fingerText = `Finger ${item.finger}`;
+    let stringText = item.string;
+
+    if(mode === "notes"){
+      fingerText = "";
+      stringText = "";
+    }
+    if(mode === "fingers"){
+      noteText = item.finger === "Open" ? "0" : item.finger.replace(" high","");
+      fingerText = item.finger;
+      stringText = item.string;
+    }
+
+    card.innerHTML = `
+      <div class="note-name">${noteText}</div>
+      <div class="finger">${fingerText}</div>
+      <div class="string">${stringText}</div>
+      <div class="direction">${index < 8 ? "Ascending" : "Descending"}</div>
+    `;
+
+    card.addEventListener("click",()=>{
+      currentIndex = index;
+      playTone(item.freq);
+      updateCurrent();
+    });
+
+    notesGrid.appendChild(card);
+  });
+}
+
+function updateCurrent(){
+  document.querySelectorAll(".note-card").forEach((card,index)=>{
+    card.classList.toggle("active",index === currentIndex);
+  });
+
+  const item = sequence[currentIndex];
+  if(!item) return;
+
+  currentNote.textContent = item.note;
+  currentInstruction.textContent = item.instruction;
+  currentFinger.textContent = `Finger: ${item.finger}`;
+  currentPitch.textContent = `Pitch: ${item.pitch}`;
+
+  const progress = sequence.length <= 1 ? 0 : currentIndex/(sequence.length-1)*100;
+  progressBar.style.width = `${progress}%`;
+
+  tipBox.textContent = currentIndex === 0
+    ? "Begin with a relaxed hand and a slow, straight bow."
+    : "Listen carefully before moving to the next note.";
+}
+
+function ensureAudio(){
+  if(!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  if(audioContext.state === "suspended") audioContext.resume();
+}
+
+function playTone(freq){
+  ensureAudio();
+
+  const osc = audioContext.createOscillator();
+  const gain = audioContext.createGain();
+
+  osc.type = "sine";
+  osc.frequency.value = freq;
+
+  gain.gain.setValueAtTime(0.0001,audioContext.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.22,audioContext.currentTime+0.03);
+  gain.gain.exponentialRampToValueAtTime(0.0001,audioContext.currentTime+0.7);
+
+  osc.connect(gain);
+  gain.connect(audioContext.destination);
+
+  osc.start();
+  osc.stop(audioContext.currentTime+0.75);
+}
+
+function nextStep(){
+  playTone(sequence[currentIndex].freq);
+  updateCurrent();
+
+  if(currentIndex < sequence.length-1){
+    currentIndex++;
+  }else{
+    stopPlayback();
+    currentIndex = 0;
+    updateCurrent();
+  }
+}
+
+function startPlayback(){
+  if(playing) return;
+  playing = true;
+  playButton.textContent = "■ Stop Scale";
+
+  nextStep();
+  const interval = 60000 / Number(tempoSlider.value);
+  timer = setInterval(nextStep,interval);
+}
+
+function stopPlayback(){
+  playing = false;
+  clearInterval(timer);
+  timer = null;
+  playButton.textContent = "▶ Play Scale";
+}
+
+playButton.addEventListener("click",()=>{
+  playing ? stopPlayback() : startPlayback();
+});
+
+prevButton.addEventListener("click",()=>{
+  stopPlayback();
+  currentIndex = Math.max(0,currentIndex-1);
+  playTone(sequence[currentIndex].freq);
+  updateCurrent();
+});
+
+nextButton.addEventListener("click",()=>{
+  stopPlayback();
+  currentIndex = Math.min(sequence.length-1,currentIndex+1);
+  playTone(sequence[currentIndex].freq);
+  updateCurrent();
+});
+
+resetButton.addEventListener("click",()=>{
+  stopPlayback();
+  currentIndex = 0;
+  updateCurrent();
+});
+
+scaleSelect.addEventListener("change",buildSequence);
+directionSelect.addEventListener("change",buildSequence);
+modeSelect.addEventListener("change",renderNotes);
+
+tempoSlider.addEventListener("input",()=>{
+  tempoValue.textContent = tempoSlider.value;
+  if(playing){
+    stopPlayback();
+    startPlayback();
+  }
+});
+
+buildSequence();
+</script>
+</body>
+</html>
