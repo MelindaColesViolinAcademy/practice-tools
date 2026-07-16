@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Violin Drone Notes | Melinda Coles Violin Academy</title>
+<meta name="description" content="Free violin drone notes for G, D, A and E strings. Practise intonation, scales and long bows with steady reference pitches.">
+
+<style>
+:root{
+  --cream:#f7f3eb;
+  --card:#fffdf9;
+  --green:#314333;
+  --sage:#aab79b;
+  --sage-dark:#879979;
+  --gold:#b89648;
+  --text:#344038;
+  --muted:#737a73;
+  --line:#e7dfd2;
+  --soft:#eef1e9;
+  --shadow:0 18px 50px rgba(52,64,56,.12);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  background:radial-gradient(circle at top left,rgba(184,150,72,.08),transparent 35%),var(--cream);
+  color:var(--text);
+}
+.page{width:min(980px,94%);margin:auto;padding:30px 0 50px}
+.topbar{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.logo-badge{
+  width:58px;height:58px;border:2px solid var(--gold);border-radius:50%;
+  display:grid;place-items:center;color:var(--gold);font-family:Georgia,serif;
+  font-size:24px;background:var(--card)
+}
+.brand-text strong{display:block;color:var(--green);font-size:18px}
+.brand-text span{color:var(--muted);font-size:13px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:28px;
+  box-shadow:var(--shadow);padding:34px
+}
+.hero{text-align:center}
+.eyebrow{
+  color:var(--gold);text-transform:uppercase;letter-spacing:.16em;
+  font-size:13px;font-weight:bold
+}
+h1{color:var(--green);font-size:clamp(34px,6vw,58px);margin:10px 0 8px}
+.subtitle{color:var(--muted);font-size:18px;line-height:1.6;margin-bottom:26px}
+
+.note-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin:24px 0
+}
+.note-btn{
+  border:1px solid var(--line);
+  background:var(--soft);
+  border-radius:20px;
+  padding:22px 12px;
+  cursor:pointer;
+  transition:.15s;
+}
+.note-btn:hover{transform:translateY(-3px)}
+.note-btn strong{
+  display:block;
+  color:var(--green);
+  font-size:44px
+}
+.note-btn span{
+  display:block;
+  color:var(--muted);
+  font-size:13px;
+  margin-top:5px
+}
+.note-btn.active{
+  background:var(--sage);
+  color:white;
+  border-color:var(--sage)
+}
+.note-btn.active strong,
+.note-btn.active span{color:white}
+
+.drone-panel{
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:26px;
+  background:linear-gradient(145deg,#fffdf9,#f1ece2);
+  margin-top:18px
+}
+.current-note{
+  font-size:clamp(92px,16vw,150px);
+  font-weight:800;
+  line-height:.9;
+  color:var(--green)
+}
+.frequency{
+  color:var(--muted);
+  font-size:18px;
+  margin-top:10px
+}
+.wave{
+  margin:28px auto;
+  height:90px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:6px
+}
+.bar{
+  width:7px;
+  height:20px;
+  border-radius:999px;
+  background:var(--sage-dark);
+  opacity:.55
+}
+.playing .bar{
+  animation:pulse 1.2s ease-in-out infinite;
+}
+.playing .bar:nth-child(2){animation-delay:.1s}
+.playing .bar:nth-child(3){animation-delay:.2s}
+.playing .bar:nth-child(4){animation-delay:.3s}
+.playing .bar:nth-child(5){animation-delay:.4s}
+.playing .bar:nth-child(6){animation-delay:.5s}
+.playing .bar:nth-child(7){animation-delay:.6s}
+.playing .bar:nth-child(8){animation-delay:.7s}
+.playing .bar:nth-child(9){animation-delay:.8s}
+.playing .bar:nth-child(10){animation-delay:.9s}
+@keyframes pulse{
+  0%,100%{height:20px;opacity:.4}
+  50%{height:78px;opacity:1}
+}
+
+.controls{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:22px
+}
+.control{
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:15px;
+  text-align:left;
+  background:rgba(255,255,255,.22)
+}
+.control label{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:7px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-weight:bold
+}
+select,input[type=range]{width:100%}
+select{
+  padding:11px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--card);
+  color:var(--text);
+  font-size:15px
+}
+input[type=range]{accent-color:var(--sage-dark)}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  margin:24px 0
+}
+button.action{
+  padding:14px 24px;
+  border-radius:12px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer
+}
+.primary{border:none;background:var(--sage-dark);color:white;min-width:180px}
+.secondary{border:1px solid var(--line);background:transparent;color:var(--text)}
+.gold{border:none;background:var(--gold);color:white}
+
+.practice-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  margin-top:22px
+}
+.panel{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:20px;
+  text-align:left
+}
+.panel h2{margin:0 0 13px;color:var(--green);font-size:20px}
+.exercise{
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--soft);
+  margin:10px 0
+}
+.tip-box{
+  margin-top:22px;
+  padding:18px;
+  border-left:4px solid var(--gold);
+  border-radius:12px;
+  background:rgba(184,150,72,.08);
+  line-height:1.55
+}
+.timer{
+  font-size:34px;
+  font-weight:bold;
+  color:var(--green);
+  font-variant-numeric:tabular-nums
+}
+.home-link{
+  display:inline-block;
+  margin-top:24px;
+  color:var(--green);
+  text-decoration:none;
+  font-weight:bold
+}
+footer{text-align:center;margin-top:26px;color:var(--muted);font-size:14px}
+
+@media(max-width:760px){
+  .note-grid{grid-template-columns:repeat(2,1fr)}
+  .controls{grid-template-columns:1fr}
+  .practice-grid{grid-template-columns:1fr}
+  .card{padding:24px 16px}
+  .brand-text span{display:none}
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="logo-badge">MC</div>
+    <div class="brand-text">
+      <strong>Melinda Coles Violin Academy</strong>
+      <span>Free interactive violin practice tools</span>
+    </div>
+  </div>
+
+  <main class="card hero">
+    <div class="eyebrow">Free Violin Intonation Tool</div>
+    <h1>Violin Drone Notes</h1>
+    <div class="subtitle">
+      Play a steady G, D, A or E reference pitch while practising long bows,
+      scales and intonation.
+    </div>
+
+    <div class="note-grid">
+      <button class="note-btn" data-note="G" data-frequency="196.00">
+        <strong>G</strong><span>196.00 Hz</span>
+      </button>
+      <button class="note-btn" data-note="D" data-frequency="293.66">
+        <strong>D</strong><span>293.66 Hz</span>
+      </button>
+      <button class="note-btn active" data-note="A" data-frequency="440.00">
+        <strong>A</strong><span>440.00 Hz</span>
+      </button>
+      <button class="note-btn" data-note="E" data-frequency="659.25">
+        <strong>E</strong><span>659.25 Hz</span>
+      </button>
+    </div>
+
+    <section class="drone-panel">
+      <div class="current-note" id="currentNote">A</div>
+      <div class="frequency"><span id="frequencyDisplay">440.00</span> Hz</div>
+
+      <div class="wave" id="wave">
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      </div>
+
+      <div class="timer" id="timerDisplay">05:00</div>
+      <div style="color:var(--muted);margin-top:6px">Practice time remaining</div>
+    </section>
+
+    <div class="controls">
+      <div class="control">
+        <label for="toneSelect">Tone Colour</label>
+        <select id="toneSelect">
+          <option value="sine">Pure</option>
+          <option value="triangle" selected>Warm</option>
+          <option value="sawtooth">Bright</option>
+        </select>
+      </div>
+
+      <div class="control">
+        <label for="volumeSlider">Volume</label>
+        <input id="volumeSlider" type="range" min="0" max="100" value="28">
+      </div>
+
+      <div class="control">
+        <label for="durationSelect">Practice Time</label>
+        <select id="durationSelect">
+          <option value="60">1 minute</option>
+          <option value="300" selected>5 minutes</option>
+          <option value="600">10 minutes</option>
+          <option value="900">15 minutes</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="action primary" id="playButton">▶ Start Drone</button>
+      <button class="action secondary" id="pauseButton">Pause</button>
+      <button class="action gold" id="resetButton">Reset</button>
+    </div>
+
+    <div class="practice-grid">
+      <section class="panel">
+        <h2>Drone Practice Ideas</h2>
+        <div class="exercise">🎻 Play the matching open string with long, relaxed bows.</div>
+        <div class="exercise">🎼 Play D Major against a D drone.</div>
+        <div class="exercise">🎼 Play A Major against an A drone.</div>
+        <div class="exercise">👂 Hold each note until it blends with the drone.</div>
+      </section>
+
+      <section class="panel">
+        <h2>Listen For</h2>
+        <label><input type="checkbox"> A calm, steady tone</label><br><br>
+        <label><input type="checkbox"> Notes that blend without beating</label><br><br>
+        <label><input type="checkbox"> Relaxed fingers and shoulders</label><br><br>
+        <label><input type="checkbox"> Smooth string crossings</label><br><br>
+        <label><input type="checkbox"> Accurate intonation</label>
+      </section>
+    </div>
+
+    <div class="tip-box" id="tipBox">
+      When your note is in tune, it will begin to blend with the drone and sound calmer.
+    </div>
+
+    <a class="home-link" href="index.html">← Return to Practice Studio</a>
+  </main>
+
+  <footer>
+    <em>Music is my magic.</em><br>
+    © Melinda Coles Violin Academy
+  </footer>
+
+</div>
+
+<script>
+const noteButtons = document.querySelectorAll(".note-btn");
+const currentNote = document.getElementById("currentNote");
+const frequencyDisplay = document.getElementById("frequencyDisplay");
+const toneSelect = document.getElementById("toneSelect");
+const volumeSlider = document.getElementById("volumeSlider");
+const durationSelect = document.getElementById("durationSelect");
+const playButton = document.getElementById("playButton");
+const pauseButton = document.getElementById("pauseButton");
+const resetButton = document.getElementById("resetButton");
+const wave = document.getElementById("wave");
+const timerDisplay = document.getElementById("timerDisplay");
+const tipBox = document.getElementById("tipBox");
+
+let audioContext = null;
+let oscillator = null;
+let gainNode = null;
+let isPlaying = false;
+let isPaused = false;
+
+let selectedNote = "A";
+let selectedFrequency = 440.00;
+let totalSeconds = 300;
+let remainingSeconds = 300;
+let timerId = null;
+
+const tips = [
+  "When your note is in tune, it will begin to blend with the drone and sound calmer.",
+  "Use a D drone for the D Major scale.",
+  "Use an A drone for the A Major scale.",
+  "Listen before adjusting your finger.",
+  "Keep the drone quiet enough that you can still hear your violin clearly.",
+  "Slow, sustained bows make intonation easier to hear."
+];
+
+function formatTime(seconds){
+  const m = Math.floor(seconds/60);
+  const s = seconds%60;
+  return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+}
+
+function ensureAudio(){
+  if(!audioContext){
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if(audioContext.state === "suspended"){
+    audioContext.resume();
+  }
+}
+
+function startOscillator(){
+  ensureAudio();
+
+  oscillator = audioContext.createOscillator();
+  gainNode = audioContext.createGain();
+
+  oscillator.type = toneSelect.value;
+  oscillator.frequency.value = selectedFrequency;
+  gainNode.gain.value = Number(volumeSlider.value) / 100;
+
+  oscillator.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+
+  oscillator.start();
+}
+
+function stopOscillator(){
+  if(oscillator){
+    try{ oscillator.stop(); }catch(e){}
+    oscillator.disconnect();
+    oscillator = null;
+  }
+  if(gainNode){
+    gainNode.disconnect();
+    gainNode = null;
+  }
+}
+
+function startTimer(){
+  if(timerId) return;
+
+  timerId = setInterval(()=>{
+    remainingSeconds--;
+    timerDisplay.textContent = formatTime(remainingSeconds);
+
+    if(remainingSeconds <= 0){
+      stopDrone();
+      playButton.textContent = "✓ Practice Complete";
+    }
+  },1000);
+}
+
+function stopTimer(){
+  clearInterval(timerId);
+  timerId = null;
+}
+
+function startDrone(){
+  if(isPlaying) return;
+
+  isPlaying = true;
+  isPaused = false;
+  startOscillator();
+  startTimer();
+
+  wave.classList.add("playing");
+  playButton.textContent = "■ Stop Drone";
+  pauseButton.textContent = "Pause";
+}
+
+function stopDrone(){
+  isPlaying = false;
+  isPaused = false;
+  stopOscillator();
+  stopTimer();
+
+  wave.classList.remove("playing");
+  playButton.textContent = "▶ Start Drone";
+  pauseButton.textContent = "Pause";
+}
+
+function pauseDrone(){
+  if(!isPlaying) return;
+
+  if(!isPaused){
+    isPaused = true;
+    stopOscillator();
+    stopTimer();
+    wave.classList.remove("playing");
+    pauseButton.textContent = "Resume";
+  }else{
+    isPaused = false;
+    startOscillator();
+    startTimer();
+    wave.classList.add("playing");
+    pauseButton.textContent = "Pause";
+  }
+}
+
+function resetDrone(){
+  stopDrone();
+  totalSeconds = Number(durationSelect.value);
+  remainingSeconds = totalSeconds;
+  timerDisplay.textContent = formatTime(remainingSeconds);
+}
+
+function changeNote(note,frequency){
+  selectedNote = note;
+  selectedFrequency = frequency;
+
+  currentNote.textContent = note;
+  frequencyDisplay.textContent = frequency.toFixed(2);
+
+  if(isPlaying && !isPaused){
+    stopOscillator();
+    startOscillator();
+  }
+}
+
+noteButtons.forEach(button=>{
+  button.addEventListener("click",()=>{
+    noteButtons.forEach(btn=>btn.classList.remove("active"));
+    button.classList.add("active");
+    changeNote(button.dataset.note,Number(button.dataset.frequency));
+  });
+});
+
+toneSelect.addEventListener("change",()=>{
+  if(isPlaying && !isPaused){
+    stopOscillator();
+    startOscillator();
+  }
+});
+
+volumeSlider.addEventListener("input",()=>{
+  if(gainNode){
+    gainNode.gain.value = Number(volumeSlider.value)/100;
+  }
+});
+
+durationSelect.addEventListener("change",resetDrone);
+
+playButton.addEventListener("click",()=>{
+  isPlaying ? stopDrone() : startDrone();
+});
+
+pauseButton.addEventListener("click",pauseDrone);
+resetButton.addEventListener("click",resetDrone);
+
+let tipIndex = 0;
+setInterval(()=>{
+  tipIndex = (tipIndex+1)%tips.length;
+  tipBox.textContent = tips[tipIndex];
+},7000);
+
+resetDrone();
+</script>
+</body>
+</html>
