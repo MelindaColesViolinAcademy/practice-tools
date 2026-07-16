@@ -4,178 +4,519 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Melinda Coles Practice Studio</title>
+<title>Melinda Coles Practice Studio | Free Interactive Violin Apps</title>
+<meta name="description" content="Free interactive violin practice apps from Melinda Coles Violin Academy, including a metronome, tuner, scale trainer, rhythm trainer, practice timer, tracker, bow trainer and flash cards.">
 
 <style>
-
+:root{
+  --cream:#f7f3eb;
+  --card:#fffdf9;
+  --green:#314333;
+  --sage:#aab79b;
+  --sage-dark:#879979;
+  --gold:#b89648;
+  --text:#344038;
+  --muted:#737a73;
+  --line:#e7dfd2;
+  --soft:#eef1e9;
+  --shadow:0 18px 50px rgba(52,64,56,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#F8F5EE;
-    color:#364237;
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at top left,rgba(184,150,72,.09),transparent 34%),
+    var(--cream);
+  color:var(--text);
+}
+.page{width:min(1180px,94%);margin:auto;padding:28px 0 52px}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  margin-bottom:24px;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.logo-badge{
+  width:62px;height:62px;border:2px solid var(--gold);border-radius:50%;
+  display:grid;place-items:center;color:var(--gold);font-family:Georgia,serif;
+  font-size:26px;background:var(--card)
+}
+.brand-text strong{display:block;color:var(--green);font-size:19px}
+.brand-text span{display:block;color:var(--muted);font-size:13px;margin-top:3px}
+.academy-link{
+  color:var(--green);
+  text-decoration:none;
+  font-weight:bold
 }
 
-header{
-    background:white;
-    padding:40px;
-    text-align:center;
-    border-bottom:4px solid #B9C8B1;
+.hero{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:30px;
+  box-shadow:var(--shadow);
+  padding:48px 34px;
+  text-align:center
 }
-
+.eyebrow{
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:.17em;
+  font-size:13px;
+  font-weight:bold
+}
 h1{
-    font-size:48px;
-    margin-bottom:10px;
+  color:var(--green);
+  font-size:clamp(40px,7vw,72px);
+  line-height:1.05;
+  margin:12px 0 14px
+}
+.hero p{
+  max-width:850px;
+  margin:0 auto;
+  color:var(--muted);
+  font-size:19px;
+  line-height:1.7
+}
+.quote{
+  margin-top:20px;
+  color:var(--gold);
+  font-family:Georgia,serif;
+  font-style:italic;
+  font-size:22px
 }
 
-.subtitle{
-    font-size:22px;
-    color:#8A927F;
+.search-wrap{
+  max-width:760px;
+  margin:30px auto 0;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px
+}
+.search-wrap input{
+  width:100%;
+  padding:15px 18px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--soft);
+  color:var(--text);
+  font-size:16px
+}
+.search-wrap button{
+  border:none;
+  border-radius:14px;
+  padding:0 22px;
+  background:var(--sage-dark);
+  color:white;
+  font-weight:bold;
+  cursor:pointer
 }
 
-.container{
-    max-width:1100px;
-    margin:auto;
-    padding:60px 20px;
+.categories{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:26px 0 10px
+}
+.filter-btn{
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--text);
+  border-radius:999px;
+  padding:11px 17px;
+  cursor:pointer;
+  font-weight:bold
+}
+.filter-btn.active{
+  background:var(--green);
+  color:white;
+  border-color:var(--green)
 }
 
-.card-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:30px;
+.section{margin-top:46px}
+.section-heading{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:18px
+}
+.section-heading h2{
+  margin:0;
+  color:var(--green);
+  font-size:32px
+}
+.section-heading p{
+  margin:0;
+  color:var(--muted);
+  max-width:600px
 }
 
-.card{
-    background:white;
-    border-radius:18px;
-    padding:30px;
-    text-align:center;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
-    transition:.3s;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px
 }
-
-.card:hover{
-    transform:translateY(-8px);
+.tool-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 10px 26px rgba(52,64,56,.07);
+  transition:.18s ease;
+  display:flex;
+  flex-direction:column;
+  min-height:300px
 }
-
+.tool-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 16px 35px rgba(52,64,56,.12)
+}
+.tool-card.hidden{display:none}
+.tool-card.featured{
+  border:2px solid rgba(184,150,72,.48);
+  position:relative
+}
+.tool-card.featured:before{
+  content:"Featured";
+  position:absolute;
+  top:15px;
+  right:15px;
+  background:var(--gold);
+  color:white;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:11px;
+  font-weight:bold
+}
 .icon{
-    font-size:60px;
+  width:66px;height:66px;border-radius:18px;
+  display:grid;place-items:center;
+  background:var(--soft);
+  font-size:35px;
+  margin-bottom:18px
+}
+.tool-card h3{
+  margin:0;
+  color:var(--green);
+  font-size:23px
+}
+.tool-card p{
+  color:var(--muted);
+  line-height:1.55;
+  margin:11px 0 18px
+}
+.tags{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-bottom:18px
+}
+.tag{
+  font-size:12px;
+  padding:6px 9px;
+  border-radius:999px;
+  background:rgba(170,183,155,.16);
+  color:var(--green)
+}
+.card-bottom{
+  margin-top:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px
+}
+.open-btn{
+  display:inline-block;
+  text-decoration:none;
+  padding:12px 17px;
+  border-radius:12px;
+  background:var(--sage-dark);
+  color:white;
+  font-weight:bold
+}
+.status{
+  font-size:12px;
+  color:var(--muted);
+  text-align:right
 }
 
-h2{
-    margin-top:20px;
+.challenge{
+  margin-top:46px;
+  background:linear-gradient(135deg,rgba(170,183,155,.22),rgba(184,150,72,.12));
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:30px;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:24px;
+  align-items:center
+}
+.challenge h2{
+  margin:0 0 10px;
+  color:var(--green);
+  font-size:30px
+}
+.challenge p{
+  color:var(--muted);
+  line-height:1.6
+}
+.challenge-list{display:grid;gap:10px}
+.challenge-item{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:12px 14px
 }
 
-.button{
-    display:inline-block;
-    margin-top:20px;
-    background:#A9B79A;
-    color:white;
-    text-decoration:none;
-    padding:12px 24px;
-    border-radius:8px;
-    font-weight:bold;
+.no-results{
+  display:none;
+  text-align:center;
+  padding:28px;
+  color:var(--muted);
+  font-weight:bold
 }
 
 footer{
-    margin-top:70px;
-    padding:40px;
-    text-align:center;
-    color:#777;
+  text-align:center;
+  margin-top:48px;
+  color:var(--muted);
+  line-height:1.7
 }
 
+@media(max-width:960px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .challenge{grid-template-columns:1fr}
+}
+@media(max-width:650px){
+  .hero{padding:34px 18px}
+  .grid{grid-template-columns:1fr}
+  .section-heading{display:block}
+  .section-heading p{margin-top:8px}
+  .search-wrap{grid-template-columns:1fr}
+  .search-wrap button{padding:14px}
+  .brand-text span{display:none}
+  .topbar{align-items:flex-start}
+}
 </style>
-
 </head>
 
 <body>
+<div class="page">
 
-<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo-badge">MC</div>
+      <div class="brand-text">
+        <strong>Melinda Coles Violin Academy</strong>
+        <span>Free interactive violin practice apps</span>
+      </div>
+    </div>
+    <a class="academy-link" href="https://www.melindacoles.au/">Academy Home →</a>
+  </div>
 
-<h1>🎻 Melinda Coles Practice Studio</h1>
+  <header class="hero">
+    <div class="eyebrow">Free Interactive Violin Resources</div>
+    <h1>Melinda Coles Practice Studio</h1>
+    <p>
+      Practise tuning, rhythm, scales, bowing, note reading and daily technique with
+      simple interactive apps designed especially for beginner and returning violinists.
+    </p>
+    <div class="quote">“Music is my magic.”</div>
 
-<div class="subtitle">
-Music is my magic.
+    <div class="search-wrap">
+      <input id="searchInput" type="search" placeholder="Search tuner, scales, bowing, note reading, rhythm...">
+      <button id="clearSearch">Clear</button>
+    </div>
+
+    <div class="categories">
+      <button class="filter-btn active" data-filter="all">All Apps</button>
+      <button class="filter-btn" data-filter="practice">Practice</button>
+      <button class="filter-btn" data-filter="theory">Music Theory</button>
+      <button class="filter-btn" data-filter="technique">Technique</button>
+      <button class="filter-btn" data-filter="ear">Ear & Tuning</button>
+      <button class="filter-btn" data-filter="games">Games</button>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <h2>Choose Your Practice App</h2>
+        <p>All apps are free to use, mobile friendly and open directly in your browser.</p>
+      </div>
+    </div>
+
+    <div class="grid" id="toolsGrid">
+
+      <article class="tool-card featured" data-category="practice rhythm" data-search="metronome beat tempo rhythm timer">
+        <div class="icon">⏱️</div>
+        <h3>Practice Metronome</h3>
+        <p>Build steady rhythm with visual beats, time signatures, tap tempo, practice goals and a session timer.</p>
+        <div class="tags"><span class="tag">Rhythm</span><span class="tag">Tempo</span><span class="tag">Beginner</span></div>
+        <div class="card-bottom">
+          <a class="open-btn" href="metronome.html">Open App →</a>
+          <span class="status">40–200 BPM</span>
+        </div>
+      </article>
+
+      <article class="tool-card featured" data-category="practice ear" data-search="digital tuner tuning pitch strings microphone">
+        <div class="icon">🎻</div>
+        <h3>Digital Violin Tuner</h3>
+        <p>Tune your G, D, A and E strings with microphone support and clear pitch guidance.</p>
+        <div class="tags"><span class="tag">Tuning</span><span class="tag">Pitch</span><span class="tag">Microphone</span></div>
+        <div class="card-bottom">
+          <a class="open-btn" href="digital-tuner.html">Open App →</a>
+          <span class="status">G D A E</span>
+        </div>
+      </article>
+
+      <article class="tool-card" data-category="practice" data-search="practice timer guided session routine five ten twenty thirty">
+        <div class="icon">🕰️</div>
+        <h3>Practice Timer</h3>
+        <p>Choose a guided 5, 10, 20 or 30-minute session with warm-up, technique, scales and reflection.</p>
+        <div class="tags"><span class="tag">Routine</span><span class="tag">Focus</span><span class="tag">Timer</span></div>
+        <div class="card-bottom">
+          <a class="open-btn" href="practice-timer.html">Open App →</a>
+          <span class="status">Guided sessions</span>
+        </div>
+      </article>
+
+      <article class="tool-card" data-category="practice" data-search="practice tracker streak progress weekly log">
+        <div class="icon">📈</div>
+        <h3>Practice Tracker</h3>
+        <p>Record daily practice, build a streak, track weekly minutes and download your personal practice log.</p>
+        <div class="tags"><span class="tag">Habits</span><span class="tag">Progress</span><span class="tag">Reflection</span></div>
+        <div class="card-bottom">
+          <a class="open-btn" href="practice-tracker.html">Open App →</a>
+          <span class="status">Saved on device</span>
+        </div>
+      </article>
+
+      <article class="tool-card featured" data-category="theory technique" data-search="scale trainer d major a major notes fingers strings">
+        <div class="icon">🎼</div>
+        <h3>Scale Trainer</h3>
+        <p>Practise D Major and A Major with note names, finger numbers, strings, audio playback and adjustable tempo.</p>
+        <div class="tags"><span class="tag">D Major</span><span class="tag">A Major</span><span class="tag">Fingers</span></div>
+        <div class="card-bottom">
+          <a class="open-btn" href="scale-trainer.html">Open App →</a>
+          <span class="status">One octave</span>
+        </div>
+      </article>
+
+      <article class="tool-card" data-category="theory rhythm games" data-search="rhythm trainer clap counting quarter eighth jig">
+        <div class="icon">🥁</div>
+        <h3>Rhythm Trainer</h3>
+        <p>Clap, count and play beginner rhythm patterns with audio clicks, visual beats and adjustable tempos.</p>
+        <div class="tags"><span class="tag">Counting</span><span class="tag">Clapping</span><span class="tag">Jig Feel</span></div>
+        <div class="card-bottom">
+          <a class="open-btn" href="rhythm-trainer.html">Open App →</a>
+          <span class="status">Interactive</span>
+        </div>
+      </article>
+
+      <article class="tool-card" data-category="technique" data-search="bow straight trainer angle lane frog tip bowing">
+        <div class="icon">🏹</div>
+        <h3>Straight Bow Trainer</h3>
+        <p>Practise bow angle, bow lanes, frog, middle, tip and full-bow movement with visual feedback.</p>
+        <div class="tags"><span class="tag">Bowing</span><span class="tag">Tone</span><span class="tag">Control</span></div>
+        <div class="card-bottom">
+          <a class="open-btn" href="bow-straight-trainer.html">Open App →</a>
+          <span class="status">Visual guide</span>
+        </div>
+      </article>
+
+      <article class="tool-card featured" data-category="theory games technique" data-search="flash cards note reading finger placement strings game">
+        <div class="icon">🃏</div>
+        <h3>Violin Flash Cards</h3>
+        <p>Play interactive note-reading, finger-placement and string-recognition games with instant feedback.</p>
+        <div class="tags"><span class="tag">Note Reading</span><span class="tag">Finger Placement</span><span class="tag">Game</span></div>
+        <div class="card-bottom">
+          <a class="open-btn" href="violin-flash-cards.html">Open App →</a>
+          <span class="status">G D A E</span>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="no-results" id="noResults">No apps match that search.</div>
+  </section>
+
+  <section class="challenge">
+    <div>
+      <h2>Today’s Five-Minute Practice Challenge</h2>
+      <p>
+        Choose one app, practise with full attention and finish by recording one small improvement.
+      </p>
+    </div>
+    <div class="challenge-list">
+      <div class="challenge-item">☐ 1 minute with the tuner</div>
+      <div class="challenge-item">☐ 2 minutes of scales</div>
+      <div class="challenge-item">☐ 1 minute of rhythm or bowing</div>
+      <div class="challenge-item">☐ 1 minute of reflection</div>
+    </div>
+  </section>
+
+  <footer>
+    <strong>Melinda Coles Violin Academy</strong><br>
+    Free interactive violin practice apps for adult beginners and returning players.<br>
+    <em>Music is my magic.</em>
+  </footer>
+
 </div>
 
-</header>
+<script>
+const searchInput = document.getElementById("searchInput");
+const clearSearch = document.getElementById("clearSearch");
+const filterButtons = document.querySelectorAll(".filter-btn");
+const cards = [...document.querySelectorAll(".tool-card")];
+const noResults = document.getElementById("noResults");
 
-<div class="container">
+let activeFilter = "all";
 
-<p style="font-size:22px;text-align:center;max-width:850px;margin:auto;margin-bottom:50px;">
+function applyFilters(){
+  const query = searchInput.value.trim().toLowerCase();
+  let visible = 0;
 
-Welcome to your free violin practice space.
+  cards.forEach(card=>{
+    const categories = card.dataset.category.toLowerCase();
+    const searchText = `${card.dataset.search} ${card.textContent}`.toLowerCase();
 
-Use these interactive tools to improve your rhythm, tone, bowing, scales and confidence every day.
+    const categoryMatch = activeFilter === "all" || categories.includes(activeFilter);
+    const searchMatch = !query || searchText.includes(query);
 
-</p>
+    const show = categoryMatch && searchMatch;
+    card.classList.toggle("hidden",!show);
+    if(show) visible++;
+  });
 
-<div class="card-grid">
+  noResults.style.display = visible ? "none" : "block";
+}
 
-<div class="card">
+filterButtons.forEach(button=>{
+  button.addEventListener("click",()=>{
+    filterButtons.forEach(btn=>btn.classList.remove("active"));
+    button.classList.add("active");
+    activeFilter = button.dataset.filter;
+    applyFilters();
+  });
+});
 
-<div class="icon">⏱️</div>
+searchInput.addEventListener("input",applyFilters);
 
-<h2>Metronome</h2>
-
-<p>Practise with a steady beat.</p>
-
-<a class="button" href="#">
-Coming Soon
-</a>
-
-</div>
-
-<div class="card">
-
-<div class="icon">🎻</div>
-
-<h2>Drone Notes</h2>
-
-<p>Improve your intonation.</p>
-
-<a class="button" href="#">
-Coming Soon
-</a>
-
-</div>
-
-<div class="card">
-
-<div class="icon">🎵</div>
-
-<h2>Practice Timer</h2>
-
-<p>Stay focused every day.</p>
-
-<a class="button" href="#">
-Coming Soon
-</a>
-
-</div>
-
-<div class="card">
-
-<div class="icon">🎼</div>
-
-<h2>Scale Trainer</h2>
-
-<p>Build confidence one scale at a time.</p>
-
-<a class="button" href="#">
-Coming Soon
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-<footer>
-
-© Melinda Coles Violin Academy
-
-</footer>
-
+clearSearch.addEventListener("click",()=>{
+  searchInput.value = "";
+  activeFilter = "all";
+  filterButtons.forEach(btn=>btn.classList.toggle("active",btn.dataset.filter==="all"));
+  applyFilters();
+  searchInput.focus();
+});
+</script>
 </body>
 </html>
