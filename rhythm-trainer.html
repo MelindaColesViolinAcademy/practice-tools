@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Violin Rhythm Trainer | Melinda Coles Violin Academy</title>
+<meta name="description" content="Free beginner violin rhythm trainer with clap exercises, metronome, counting patterns and rhythm playback.">
+<style>
+:root{--cream:#f7f3eb;--green:#314333;--sage:#879979;--gold:#b89648;--card:#fffdf9;--line:#e7dfd2;}
+body{margin:0;font-family:Arial,sans-serif;background:var(--cream);color:#344038}
+.wrap{max-width:1000px;margin:auto;padding:30px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+h1{text-align:center;color:var(--green);margin:0}
+p.sub{text-align:center;color:#666;margin-bottom:25px}
+.controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:25px}
+button,select{padding:12px 18px;border-radius:10px;border:1px solid var(--line);font-size:16px}
+.primary{background:var(--sage);color:#fff;border:none}
+#pattern{font-size:42px;text-align:center;margin:25px 0;font-weight:bold;color:var(--green)}
+#count{font-size:28px;text-align:center;color:var(--gold);height:40px}
+.beats{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;margin:30px 0}
+.beat{height:60px;border-radius:12px;background:#e8ece5;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:bold}
+.active{background:var(--sage);color:#fff;transform:scale(1.08)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.panel{border:1px solid var(--line);border-radius:15px;padding:18px}
+ul{line-height:1.8}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.beats{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h1>🎵 Violin Rhythm Trainer</h1>
+<p class="sub">Clap first. Count aloud. Then play on an open string.</p>
+
+<div class="controls">
+<select id="exercise">
+<option value="Ta Ta Ta Ta">Quarter Notes</option>
+<option value="Ti-Ti Ti-Ti Ti-Ti Ti-Ti">Eighth Notes</option>
+<option value="Ta Ti-Ti Ta Ti-Ti">Mixed Rhythm</option>
+<option value="Ta-ah Ta-ah">Half Notes</option>
+<option value="Ti-Ti-Ta Ti-Ti-Ta">Jig Feel</option>
+</select>
+
+<select id="tempo">
+<option>50</option>
+<option selected>60</option>
+<option>70</option>
+<option>80</option>
+<option>90</option>
+<option>100</option>
+</select>
+
+<button class="primary" id="play">▶ Start</button>
+<button id="stop">■ Stop</button>
+</div>
+
+<div id="pattern">Ta Ta Ta Ta</div>
+<div id="count">1 2 3 4</div>
+
+<div class="beats" id="beats"></div>
+
+<div class="grid">
+<div class="panel">
+<h2>How to Practise</h2>
+<ul>
+<li>👏 Clap the rhythm.</li>
+<li>🗣 Count out loud.</li>
+<li>🎻 Play on an open string.</li>
+<li>🎵 Repeat until it feels easy.</li>
+<li>🥁 Then try it in D Major.</li>
+</ul>
+</div>
+
+<div class="panel">
+<h2>Beginner Tips</h2>
+<ul>
+<li>Slow is good.</li>
+<li>Keep a steady pulse.</li>
+<li>Use long relaxed bows.</li>
+<li>Listen carefully.</li>
+<li>Accuracy before speed.</li>
+</ul>
+</div>
+</div>
+
+<p style="text-align:center;margin-top:25px"><em>Music is my magic.</em></p>
+</div>
+</div>
+
+<script>
+const beatsDiv=document.getElementById('beats');
+for(let i=1;i<=8;i++){
+ let d=document.createElement('div');
+ d.className='beat';
+ d.textContent=i;
+ beatsDiv.appendChild(d);
+}
+const ctx=new (window.AudioContext||window.webkitAudioContext)();
+let timer=null,beat=0;
+function beep(freq){
+ const o=ctx.createOscillator(),g=ctx.createGain();
+ o.frequency.value=freq;o.type='sine';
+ g.gain.value=.12;
+ o.connect(g);g.connect(ctx.destination);
+ o.start();o.stop(ctx.currentTime+.08);
+}
+function updatePattern(){
+ document.getElementById('pattern').textContent=document.getElementById('exercise').value;
+}
+updatePattern();
+document.getElementById('exercise').onchange=updatePattern;
+
+document.getElementById('play').onclick=()=>{
+ if(timer)return;
+ const bpm=parseInt(document.getElementById('tempo').value);
+ const ms=60000/bpm;
+ timer=setInterval(()=>{
+   let b=document.querySelectorAll('.beat');
+   b.forEach(x=>x.classList.remove('active'));
+   b[beat].classList.add('active');
+   beep(beat===0?880:660);
+   document.getElementById('count').textContent=(beat%4)+1;
+   beat=(beat+1)%8;
+ },ms);
+};
+document.getElementById('stop').onclick=()=>{
+ clearInterval(timer);
+ timer=null;
+ beat=0;
+ document.querySelectorAll('.beat').forEach(x=>x.classList.remove('active'));
+ document.getElementById('count').textContent="1 2 3 4";
+};
+</script>
+</body>
+</html>
