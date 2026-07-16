@@ -1,50 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Melinda Coles Practice Metronome</title>
 
 <style>
 
 body{
     margin:0;
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
     background:#F8F5EE;
-    color:#354234;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
 }
 
-.container{
-    max-width:700px;
-    margin:auto;
-    padding:60px 25px;
+.card{
+    width:420px;
+    background:white;
+    border-radius:20px;
+    padding:40px;
     text-align:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
 }
 
 h1{
-    font-size:48px;
+    color:#314132;
     margin-bottom:10px;
 }
 
 .subtitle{
-    color:#8B937D;
-    font-size:22px;
-    margin-bottom:50px;
+    color:#B79C55;
+    margin-bottom:30px;
 }
 
-.metronome{
-    background:white;
-    padding:40px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-}
-
-.bpm{
-    font-size:70px;
+#bpm{
+    font-size:72px;
     font-weight:bold;
-    margin:20px 0;
+    color:#314132;
+}
+
+.small{
+    color:#888;
+    margin-bottom:30px;
 }
 
 input[type=range]{
@@ -54,23 +53,32 @@ input[type=range]{
 button{
     margin-top:30px;
     padding:16px 40px;
-    font-size:22px;
+    font-size:20px;
     border:none;
     border-radius:10px;
     cursor:pointer;
-    background:#A9B79A;
+    background:#AAB79B;
     color:white;
 }
 
-.tip{
-    margin-top:35px;
-    font-size:20px;
-    color:#666;
+button:hover{
+    background:#93A483;
 }
 
-footer{
-    margin-top:60px;
-    color:#888;
+.quote{
+    margin-top:40px;
+    font-style:italic;
+    color:#777;
+}
+
+.quick{
+    margin-top:25px;
+}
+
+.quick button{
+    margin:4px;
+    padding:10px 16px;
+    font-size:16px;
 }
 
 </style>
@@ -79,144 +87,105 @@ footer{
 
 <body>
 
-<div class="container">
+<div class="card">
 
-<h1>🎻 Practice Metronome</h1>
+<h1>Practice Metronome</h1>
 
 <div class="subtitle">
-
-Music is my magic.
-
+Melinda Coles Violin Academy
 </div>
 
-<div class="metronome">
+<div id="bpm">60</div>
 
-<h2>Tempo</h2>
-
-<div class="bpm">
-
-<span id="tempoValue">60</span>
-
-BPM
-
-</div>
+<div class="small">Beats Per Minute</div>
 
 <input
+id="slider"
 type="range"
 min="40"
 max="200"
-value="60"
-id="tempoSlider">
+value="60">
 
-<br>
+<div class="quick">
 
-<button onclick="toggleMetronome()" id="button">
+<button onclick="setTempo(40)">40</button>
+<button onclick="setTempo(50)">50</button>
+<button onclick="setTempo(60)">60</button>
+<button onclick="setTempo(72)">72</button>
+<button onclick="setTempo(80)">80</button>
+<button onclick="setTempo(100)">100</button>
+<button onclick="setTempo(120)">120</button>
 
-▶ Start
+</div>
 
+<button id="start">
+Start
 </button>
 
-<div class="tip">
-
-Recommended for beginners:
-<strong>60 BPM</strong>
-
+<div class="quote">
+Music is my magic.
 </div>
-
-</div>
-
-<footer>
-
-© Melinda Coles Violin Academy
-
-</footer>
 
 </div>
 
 <script>
 
+let bpm=60;
 let playing=false;
-let interval;
-let audio;
+let timer;
 
-const slider=document.getElementById("tempoSlider");
-const display=document.getElementById("tempoValue");
+const audio=new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
+
+const slider=document.getElementById("slider");
+const bpmText=document.getElementById("bpm");
 
 slider.oninput=function(){
 
-display.innerHTML=this.value;
+bpm=this.value;
+bpmText.innerHTML=bpm;
 
 if(playing){
 
-stopMetronome();
-
-startMetronome();
+clearInterval(timer);
+start();
 
 }
+
+}
+
+function setTempo(x){
+
+slider.value=x;
+slider.oninput();
 
 }
 
 function click(){
 
-const ctx=new(window.AudioContext||window.webkitAudioContext)();
-
-const osc=ctx.createOscillator();
-
-const gain=ctx.createGain();
-
-osc.frequency.value=1000;
-
-osc.connect(gain);
-
-gain.connect(ctx.destination);
-
-osc.start();
-
-gain.gain.exponentialRampToValueAtTime(
-
-0.00001,
-
-ctx.currentTime+0.05
-
-);
-
-osc.stop(ctx.currentTime+0.05);
+audio.currentTime=0;
+audio.play();
 
 }
 
-function startMetronome(){
+function start(){
+
+timer=setInterval(click,60000/bpm);
+
+}
+
+document.getElementById("start").onclick=function(){
+
+if(!playing){
 
 playing=true;
-
-document.getElementById("button").innerHTML="■ Stop";
-
-const bpm=parseInt(slider.value);
-
-interval=setInterval(click,60000/bpm);
-
-click();
-
-}
-
-function stopMetronome(){
-
-playing=false;
-
-document.getElementById("button").innerHTML="▶ Start";
-
-clearInterval(interval);
-
-}
-
-function toggleMetronome(){
-
-if(playing){
-
-stopMetronome();
+this.innerHTML="Stop";
+start();
 
 }else{
 
-startMetronome();
+playing=false;
+this.innerHTML="Start";
+clearInterval(timer);
 
 }
 
