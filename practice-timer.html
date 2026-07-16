@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Violin Practice Timer | Melinda Coles Violin Academy</title>
+<meta name="description" content="Free violin practice timer with 5, 10, 20 and 30 minute guided sessions for beginner violinists. Practise posture, bowing, scales, tone and reflection.">
+
+<style>
+:root{
+  --cream:#f7f3eb;
+  --card:#fffdf9;
+  --green:#314333;
+  --sage:#aab79b;
+  --sage-dark:#879979;
+  --gold:#b89648;
+  --text:#344038;
+  --muted:#737a73;
+  --line:#e7dfd2;
+  --soft:#eef1e9;
+  --shadow:0 18px 50px rgba(52,64,56,.12);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  background:radial-gradient(circle at top left,rgba(184,150,72,.08),transparent 35%),var(--cream);
+  color:var(--text);
+}
+.page{width:min(980px,94%);margin:auto;padding:30px 0 50px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo-badge{
+  width:58px;height:58px;border:2px solid var(--gold);border-radius:50%;
+  display:grid;place-items:center;color:var(--gold);font-family:Georgia,serif;
+  font-size:24px;background:var(--card)
+}
+.brand-text strong{display:block;color:var(--green);font-size:18px}
+.brand-text span{color:var(--muted);font-size:13px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:28px;
+  box-shadow:var(--shadow);padding:34px
+}
+.hero{text-align:center}
+.eyebrow{
+  color:var(--gold);text-transform:uppercase;letter-spacing:.16em;
+  font-size:13px;font-weight:bold
+}
+h1{color:var(--green);font-size:clamp(34px,6vw,58px);margin:10px 0 8px}
+.subtitle{color:var(--muted);font-size:18px;line-height:1.6;margin-bottom:26px}
+
+.preset-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:24px 0
+}
+.preset-btn{
+  border:1px solid var(--line);
+  background:var(--soft);
+  color:var(--text);
+  border-radius:16px;
+  padding:16px 8px;
+  cursor:pointer;
+  transition:.14s;
+}
+.preset-btn strong{
+  display:block;
+  color:var(--green);
+  font-size:28px;
+}
+.preset-btn span{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  margin-top:5px;
+}
+.preset-btn.selected{
+  background:var(--sage);
+  color:white;
+  border-color:var(--sage)
+}
+.preset-btn.selected strong,
+.preset-btn.selected span{color:white}
+.preset-btn:hover{transform:translateY(-3px)}
+
+.timer-wrap{
+  display:grid;
+  grid-template-columns:1fr 1.4fr 1fr;
+  align-items:center;
+  gap:18px;
+  margin:28px 0
+}
+.phase-card{
+  background:rgba(170,183,155,.12);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+}
+.phase-card h2{
+  margin:0 0 8px;
+  font-size:15px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.phase-name{
+  font-size:23px;
+  font-weight:bold;
+  color:var(--green);
+}
+.phase-note{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:7px;
+}
+.timer{
+  font-size:clamp(76px,14vw,124px);
+  font-weight:800;
+  line-height:.9;
+  color:var(--green);
+  font-variant-numeric:tabular-nums;
+}
+.timer-label{
+  color:var(--muted);
+  margin-top:12px;
+}
+.progress{
+  max-width:760px;
+  height:14px;
+  background:var(--line);
+  border-radius:999px;
+  overflow:hidden;
+  margin:22px auto 0
+}
+.progress-bar{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--sage),var(--gold));
+  transition:width .3s linear
+}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  margin:24px 0
+}
+.action{
+  padding:14px 26px;
+  border-radius:12px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.primary{background:var(--sage-dark);color:white;border:none;min-width:170px}
+.secondary{background:transparent;color:var(--text);border:1px solid var(--line)}
+.gold{background:var(--gold);color:white;border:none}
+
+.session-grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:18px;
+  margin-top:24px
+}
+.panel{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:20px;
+  text-align:left;
+  background:rgba(255,255,255,.22)
+}
+.panel h2{margin:0 0 14px;color:var(--green);font-size:20px}
+.plan-list{
+  display:grid;
+  gap:10px
+}
+.plan-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--soft)
+}
+.plan-item.current{
+  background:var(--sage);
+  color:white
+}
+.plan-item strong{display:block}
+.plan-item span{font-size:13px;color:var(--muted)}
+.plan-item.current span{color:white;opacity:.9}
+
+.checklist label{display:block;margin:11px 0}
+.tip-box{
+  margin-top:24px;
+  padding:18px;
+  border-left:4px solid var(--gold);
+  border-radius:12px;
+  background:rgba(184,150,72,.08);
+  line-height:1.55
+}
+.complete{
+  display:none;
+  margin-top:20px;
+  padding:20px;
+  border-radius:16px;
+  background:rgba(170,183,155,.18);
+  color:var(--green);
+  font-size:20px;
+  font-weight:bold
+}
+.sound-row{
+  margin-top:14px;
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  align-items:center;
+  color:var(--muted);
+  font-size:14px
+}
+.home-link{
+  display:inline-block;
+  margin-top:24px;
+  color:var(--green);
+  text-decoration:none;
+  font-weight:bold
+}
+footer{text-align:center;margin-top:26px;color:var(--muted);font-size:14px}
+
+@media(max-width:820px){
+  .preset-grid{grid-template-columns:repeat(2,1fr)}
+  .timer-wrap{grid-template-columns:1fr}
+  .session-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .card{padding:24px 16px}
+  .brand-text span{display:none}
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo-badge">MC</div>
+      <div class="brand-text">
+        <strong>Melinda Coles Violin Academy</strong>
+        <span>Free interactive violin practice tools</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="card hero">
+    <div class="eyebrow">Free Beginner Violin Tool</div>
+    <h1>Violin Practice Timer</h1>
+    <div class="subtitle">
+      Choose a guided practice session and stay focused with a simple step-by-step routine
+      for warm-up, technique, scales, music and reflection.
+    </div>
+
+    <div class="preset-grid">
+      <button class="preset-btn" data-minutes="5">
+        <strong>5</strong><span>Quick practice</span>
+      </button>
+      <button class="preset-btn selected" data-minutes="10">
+        <strong>10</strong><span>Beginner routine</span>
+      </button>
+      <button class="preset-btn" data-minutes="20">
+        <strong>20</strong><span>Focused session</span>
+      </button>
+      <button class="preset-btn" data-minutes="30">
+        <strong>30</strong><span>Complete practice</span>
+      </button>
+    </div>
+
+    <div class="timer-wrap">
+      <div class="phase-card">
+        <h2>Current Activity</h2>
+        <div class="phase-name" id="phaseName">Warm-Up</div>
+        <div class="phase-note" id="phaseNote">Relax your shoulders and play long open strings.</div>
+      </div>
+
+      <div>
+        <div class="timer" id="timerDisplay">10:00</div>
+        <div class="timer-label">Time remaining</div>
+      </div>
+
+      <div class="phase-card">
+        <h2>Next Activity</h2>
+        <div class="phase-name" id="nextPhaseName">Left-Hand Technique</div>
+        <div class="phase-note" id="nextPhaseNote">Finger placement and slow coordination.</div>
+      </div>
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="actions">
+      <button class="action primary" id="startButton">▶ Start Practice</button>
+      <button class="action secondary" id="pauseButton">Pause</button>
+      <button class="action secondary" id="skipButton">Skip Activity</button>
+      <button class="action gold" id="resetButton">Reset</button>
+    </div>
+
+    <div class="sound-row">
+      <label><input type="checkbox" id="soundToggle" checked> Play a gentle chime when each activity changes</label>
+    </div>
+
+    <div class="session-grid">
+      <section class="panel">
+        <h2>Your Guided Practice Plan</h2>
+        <div class="plan-list" id="planList"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Practice Checklist</h2>
+        <div class="checklist">
+          <label><input type="checkbox"> Violin and bow ready</label>
+          <label><input type="checkbox"> Shoulders relaxed</label>
+          <label><input type="checkbox"> Tuner checked</label>
+          <label><input type="checkbox"> Metronome ready</label>
+          <label><input type="checkbox"> Water nearby</label>
+        </div>
+      </section>
+    </div>
+
+    <div class="tip-box" id="tipBox">
+      Ten focused minutes is far more valuable than one rushed hour.
+    </div>
+
+    <div class="complete" id="completeMessage">
+      🎉 Practice complete! You showed up, listened carefully and built your technique one step at a time.
+    </div>
+
+    <a class="home-link" href="index.html">← Return to Practice Studio</a>
+  </main>
+
+  <footer>
+    <em>Music is my magic.</em><br>
+    © Melinda Coles Violin Academy
+  </footer>
+
+</div>
+
+<script>
+const plans = {
+  5: [
+    {name:"Warm-Up", note:"Long bows on open strings.", weight:1},
+    {name:"Technique", note:"Choose one bow or finger exercise.", weight:1},
+    {name:"Scale", note:"Play D Major or A Major slowly.", weight:1},
+    {name:"Music", note:"Play one short tune or passage.", weight:1},
+    {name:"Reflection", note:"Notice one improvement.", weight:1}
+  ],
+  10: [
+    {name:"Warm-Up", note:"Relax and play open strings.", weight:2},
+    {name:"Left-Hand Technique", note:"Finger placement and coordination.", weight:2},
+    {name:"Bow Control", note:"Long bows and straight bowing.", weight:2},
+    {name:"Scale Practice", note:"D Major or A Major with steady rhythm.", weight:2},
+    {name:"Music & Reflection", note:"Play a tune and note one win.", weight:2}
+  ],
+  20: [
+    {name:"Warm-Up", note:"Open strings and posture check.", weight:3},
+    {name:"Tone & Bowing", note:"Long bows, bow lanes and bow speed.", weight:4},
+    {name:"Left-Hand Technique", note:"Finger lifts and sequential fingers.", weight:4},
+    {name:"Scales", note:"D Major and A Major with metronome.", weight:4},
+    {name:"Repertoire", note:"Slow, focused work on a piece.", weight:4},
+    {name:"Reflection", note:"Record one improvement and one goal.", weight:1}
+  ],
+  30: [
+    {name:"Warm-Up", note:"Posture, breathing and open strings.", weight:4},
+    {name:"Tone Development", note:"Bow placement, pressure and speed.", weight:5},
+    {name:"Left-Hand Technique", note:"Finger independence and intonation.", weight:5},
+    {name:"Scales", note:"D Major and A Major, slowly and steadily.", weight:5},
+    {name:"Rhythm Practice", note:"Clap and bow with a metronome.", weight:4},
+    {name:"Repertoire", note:"Work carefully on your current music.", weight:6},
+    {name:"Reflection", note:"Celebrate progress and choose tomorrow's goal.", weight:1}
+  ]
+};
+
+const tips = [
+  "Ten focused minutes is far more valuable than one rushed hour.",
+  "Slow is smooth. Smooth becomes fast.",
+  "Keep your shoulders low and your breathing easy.",
+  "Accuracy before speed.",
+  "One beautiful note is worth more than one rushed scale.",
+  "Consistency always beats intensity.",
+  "Listen carefully—your ears are one of your greatest teachers."
+];
+
+const timerDisplay = document.getElementById("timerDisplay");
+const phaseName = document.getElementById("phaseName");
+const phaseNote = document.getElementById("phaseNote");
+const nextPhaseName = document.getElementById("nextPhaseName");
+const nextPhaseNote = document.getElementById("nextPhaseNote");
+const progressBar = document.getElementById("progressBar");
+const planList = document.getElementById("planList");
+const startButton = document.getElementById("startButton");
+const pauseButton = document.getElementById("pauseButton");
+const skipButton = document.getElementById("skipButton");
+const resetButton = document.getElementById("resetButton");
+const completeMessage = document.getElementById("completeMessage");
+const soundToggle = document.getElementById("soundToggle");
+const tipBox = document.getElementById("tipBox");
+
+let selectedMinutes = 10;
+let totalSeconds = 600;
+let remainingSeconds = totalSeconds;
+let elapsedSeconds = 0;
+let sessionPlan = [];
+let currentPhaseIndex = 0;
+let running = false;
+let timerId = null;
+let audioContext = null;
+
+function formatTime(seconds){
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+}
+
+function buildPlan(){
+  const raw = plans[selectedMinutes];
+  const totalWeight = raw.reduce((sum,item)=>sum+item.weight,0);
+
+  let allocated = 0;
+  sessionPlan = raw.map((item,index)=>{
+    let seconds;
+    if(index === raw.length - 1){
+      seconds = totalSeconds - allocated;
+    }else{
+      seconds = Math.round(totalSeconds * item.weight / totalWeight);
+      allocated += seconds;
+    }
+    return {...item, seconds};
+  });
+
+  currentPhaseIndex = 0;
+  renderPlan();
+  updatePhaseDisplay();
+}
+
+function renderPlan(){
+  planList.innerHTML = "";
+
+  sessionPlan.forEach((item,index)=>{
+    const row = document.createElement("div");
+    row.className = "plan-item" + (index === currentPhaseIndex ? " current" : "");
+    row.innerHTML = `
+      <div>
+        <strong>${item.name}</strong>
+        <span>${item.note}</span>
+      </div>
+      <div>${Math.max(1,Math.round(item.seconds/60))} min</div>
+    `;
+    planList.appendChild(row);
+  });
+}
+
+function phaseStartTime(index){
+  let sum = 0;
+  for(let i=0;i<index;i++) sum += sessionPlan[i].seconds;
+  return sum;
+}
+
+function findCurrentPhase(){
+  let sum = 0;
+  for(let i=0;i<sessionPlan.length;i++){
+    sum += sessionPlan[i].seconds;
+    if(elapsedSeconds < sum) return i;
+  }
+  return sessionPlan.length - 1;
+}
+
+function updatePhaseDisplay(){
+  currentPhaseIndex = findCurrentPhase();
+  const current = sessionPlan[currentPhaseIndex];
+  const next = sessionPlan[currentPhaseIndex + 1];
+
+  phaseName.textContent = current ? current.name : "Complete";
+  phaseNote.textContent = current ? current.note : "Beautiful work.";
+
+  nextPhaseName.textContent = next ? next.name : "Finish";
+  nextPhaseNote.textContent = next ? next.note : "Take a breath and celebrate your progress.";
+
+  renderPlan();
+}
+
+function updateDisplay(){
+  timerDisplay.textContent = formatTime(remainingSeconds);
+  const progress = totalSeconds ? (elapsedSeconds / totalSeconds) * 100 : 0;
+  progressBar.style.width = `${Math.min(100,progress)}%`;
+  updatePhaseDisplay();
+}
+
+function ensureAudio(){
+  if(!audioContext){
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if(audioContext.state === "suspended") audioContext.resume();
+}
+
+function playChime(){
+  if(!soundToggle.checked) return;
+  ensureAudio();
+
+  const now = audioContext.currentTime;
+  [523.25,659.25,783.99].forEach((freq,index)=>{
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    osc.type = "sine";
+    osc.frequency.value = freq;
+
+    gain.gain.setValueAtTime(0.0001,now + index*0.12);
+    gain.gain.exponentialRampToValueAtTime(0.13,now + index*0.12 + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001,now + index*0.12 + 0.65);
+
+    osc.connect(gain);
+    gain.connect(audioContext.destination);
+
+    osc.start(now + index*0.12);
+    osc.stop(now + index*0.12 + 0.7);
+  });
+}
+
+function startTimer(){
+  if(running || remainingSeconds <= 0) return;
+
+  running = true;
+  startButton.textContent = "Running…";
+  pauseButton.textContent = "Pause";
+  completeMessage.style.display = "none";
+
+  timerId = setInterval(()=>{
+    const previousPhase = findCurrentPhase();
+
+    remainingSeconds--;
+    elapsedSeconds++;
+
+    const newPhase = findCurrentPhase();
+
+    if(newPhase !== previousPhase){
+      playChime();
+    }
+
+    updateDisplay();
+
+    if(remainingSeconds <= 0){
+      finishSession();
+    }
+  },1000);
+}
+
+function pauseTimer(){
+  if(!running) return;
+  running = false;
+  clearInterval(timerId);
+  timerId = null;
+  startButton.textContent = "▶ Resume Practice";
+  pauseButton.textContent = "Paused";
+}
+
+function finishSession(){
+  running = false;
+  clearInterval(timerId);
+  timerId = null;
+  remainingSeconds = 0;
+  elapsedSeconds = totalSeconds;
+  updateDisplay();
+  startButton.textContent = "Practice Complete";
+  pauseButton.textContent = "Pause";
+  completeMessage.style.display = "block";
+  playChime();
+}
+
+function resetTimer(){
+  running = false;
+  clearInterval(timerId);
+  timerId = null;
+  totalSeconds = selectedMinutes * 60;
+  remainingSeconds = totalSeconds;
+  elapsedSeconds = 0;
+  startButton.textContent = "▶ Start Practice";
+  pauseButton.textContent = "Pause";
+  completeMessage.style.display = "none";
+  buildPlan();
+  updateDisplay();
+}
+
+function skipActivity(){
+  const nextIndex = Math.min(currentPhaseIndex + 1,sessionPlan.length - 1);
+  if(nextIndex === currentPhaseIndex) return;
+
+  elapsedSeconds = phaseStartTime(nextIndex);
+  remainingSeconds = totalSeconds - elapsedSeconds;
+  playChime();
+  updateDisplay();
+}
+
+document.querySelectorAll(".preset-btn").forEach(button=>{
+  button.addEventListener("click",()=>{
+    document.querySelectorAll(".preset-btn").forEach(b=>b.classList.remove("selected"));
+    button.classList.add("selected");
+    selectedMinutes = Number(button.dataset.minutes);
+    resetTimer();
+  });
+});
+
+startButton.addEventListener("click",()=>{
+  if(!running) startTimer();
+});
+
+pauseButton.addEventListener("click",pauseTimer);
+skipButton.addEventListener("click",skipActivity);
+resetButton.addEventListener("click",resetTimer);
+
+let tipIndex = 0;
+setInterval(()=>{
+  tipIndex = (tipIndex + 1) % tips.length;
+  tipBox.textContent = tips[tipIndex];
+},7000);
+
+resetTimer();
+</script>
+</body>
+</html>
