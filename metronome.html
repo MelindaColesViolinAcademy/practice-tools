@@ -2,196 +2,131 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Melinda Coles Practice Metronome</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practice Metronome | Melinda Coles Violin Academy</title>
+<meta name="description" content="Free beginner violin metronome with visual beat, time signatures, practice timer and tempo guidance.">
 <style>
-
-body{
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#F8F5EE;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
-
-.card{
-    width:420px;
-    background:white;
-    border-radius:20px;
-    padding:40px;
-    text-align:center;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-}
-
-h1{
-    color:#314132;
-    margin-bottom:10px;
-}
-
-.subtitle{
-    color:#B79C55;
-    margin-bottom:30px;
-}
-
-#bpm{
-    font-size:72px;
-    font-weight:bold;
-    color:#314132;
-}
-
-.small{
-    color:#888;
-    margin-bottom:30px;
-}
-
-input[type=range]{
-    width:100%;
-}
-
-button{
-    margin-top:30px;
-    padding:16px 40px;
-    font-size:20px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    background:#AAB79B;
-    color:white;
-}
-
-button:hover{
-    background:#93A483;
-}
-
-.quote{
-    margin-top:40px;
-    font-style:italic;
-    color:#777;
-}
-
-.quick{
-    margin-top:25px;
-}
-
-.quick button{
-    margin:4px;
-    padding:10px 16px;
-    font-size:16px;
-}
-
+:root{--cream:#f7f3eb;--card:#fffdf9;--green:#314333;--sage:#aab79b;--sage-dark:#8f9f82;--gold:#b89648;--text:#344038;--muted:#767b75;--line:#e7dfd2;--shadow:0 18px 50px rgba(52,64,56,.12);--flash:#d8bd73}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at top left,rgba(184,150,72,.08),transparent 35%),var(--cream);color:var(--text);transition:.25s}
+body.dark{--cream:#1f2821;--card:#2b352d;--green:#edf4eb;--sage:#718269;--sage-dark:#84947c;--gold:#d6b76b;--text:#eef2ec;--muted:#c2c8c0;--line:#435047;--shadow:0 18px 50px rgba(0,0,0,.28);--flash:#d6b76b}
+.page{width:min(980px,94%);margin:auto;padding:30px 0 50px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo-badge{width:58px;height:58px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-family:Georgia,serif;font-size:24px;background:var(--card)}
+.brand-text strong{display:block;color:var(--green);font-size:18px}
+.brand-text span{color:var(--muted);font-size:13px}
+.icon-button{border:1px solid var(--line);background:var(--card);color:var(--text);width:46px;height:46px;border-radius:50%;cursor:pointer;font-size:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:34px}
+.hero{text-align:center}
+.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.16em;font-size:13px;font-weight:bold}
+h1{color:var(--green);font-size:clamp(34px,6vw,58px);margin:10px 0 8px}
+.subtitle{color:var(--muted);font-size:18px;margin-bottom:24px}
+.visual-zone{display:grid;grid-template-columns:1fr 1.2fr 1fr;align-items:center;gap:18px;margin:22px 0}
+.beat-light{width:88px;height:88px;border-radius:50%;margin:auto;border:4px solid var(--sage);transition:.08s}
+.beat-light.active{transform:scale(1.13);background:var(--flash);box-shadow:0 0 0 12px rgba(184,150,72,.15)}
+.bpm-number{font-size:clamp(72px,13vw,120px);font-weight:800;line-height:.9;color:var(--green)}
+.bpm-label{color:var(--muted);margin-top:10px}
+.pendulum-wrap{height:150px;position:relative;display:flex;justify-content:center;align-items:flex-start}
+.pendulum{width:8px;height:118px;background:linear-gradient(var(--gold),var(--sage-dark));border-radius:8px;transform-origin:50% 10%;transform:rotate(-24deg);position:relative}
+.pendulum:after{content:"";width:30px;height:30px;background:var(--gold);border-radius:50%;position:absolute;bottom:-10px;left:50%;transform:translateX(-50%)}
+.pendulum.playing{animation:swing var(--swing-duration,1s) ease-in-out infinite alternate}
+@keyframes swing{from{transform:rotate(-25deg)}to{transform:rotate(25deg)}}
+.slider{width:100%;accent-color:var(--sage-dark);margin:12px 0 20px}
+.quick-tempos{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tempo-btn,.signature-btn,.action-btn,.goal-btn{border:none;border-radius:12px;cursor:pointer;transition:.12s}
+.tempo-btn{padding:12px 8px;background:var(--sage);color:white}
+.tempo-btn strong{display:block;font-size:18px}.tempo-btn span{display:block;font-size:11px;margin-top:3px}
+.tempo-btn:hover,.signature-btn:hover,.action-btn:hover,.goal-btn:hover{transform:translateY(-2px)}
+.controls-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
+.panel{border:1px solid var(--line);border-radius:18px;padding:20px;background:rgba(255,255,255,.18)}
+.panel h2{margin:0 0 14px;font-size:18px;color:var(--green)}
+.signature-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.signature-btn{padding:12px 6px;background:transparent;color:var(--text);border:1px solid var(--line);font-weight:bold}
+.signature-btn.selected{background:var(--gold);color:white;border-color:var(--gold)}
+.beat-counter{display:flex;gap:9px;justify-content:center;min-height:30px;align-items:center}
+.beat-dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--sage)}
+.beat-dot.current{background:var(--sage-dark);transform:scale(1.18)}
+.beat-dot.accent.current{background:var(--gold);border-color:var(--gold)}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.action-btn{padding:15px 28px;font-size:18px;font-weight:bold}
+.start-btn{background:var(--sage-dark);color:white;min-width:180px}
+.tap-btn{background:transparent;color:var(--text);border:1px solid var(--line)}
+.timer{font-size:34px;font-variant-numeric:tabular-nums;color:var(--green);font-weight:bold}
+.tip-box{margin-top:22px;padding:18px;border-left:4px solid var(--gold);background:rgba(184,150,72,.08);border-radius:12px;min-height:64px}
+.goal-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.goal-btn{padding:12px 8px;border:1px solid var(--line);background:transparent;color:var(--text)}
+.goal-btn.selected{background:var(--sage);color:white}
+.progress-wrap{margin-top:15px;height:12px;background:var(--line);border-radius:999px;overflow:hidden}
+.progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--sage),var(--gold));transition:.4s}
+.success{display:none;margin-top:12px;font-weight:bold;color:var(--gold)}
+.home-link{display:inline-block;margin-top:24px;color:var(--green);text-decoration:none;font-weight:bold}
+footer{text-align:center;margin-top:26px;color:var(--muted);font-size:14px}
+@media(max-width:760px){.card{padding:24px 18px}.visual-zone{grid-template-columns:1fr}.pendulum-wrap{order:3;height:125px}.pendulum{height:95px}.quick-tempos{grid-template-columns:repeat(2,1fr)}.controls-grid{grid-template-columns:1fr}.brand-text span{display:none}}
 </style>
-
 </head>
-
 <body>
-
-<div class="card">
-
+<div class="page">
+<div class="topbar">
+<div class="brand"><div class="logo-badge">MC</div><div class="brand-text"><strong>Melinda Coles Violin Academy</strong><span>Gentle, encouraging practice tools for violinists</span></div></div>
+<button class="icon-button" id="darkModeBtn" aria-label="Toggle dark mode">🌙</button>
+</div>
+<main class="card hero">
+<div class="eyebrow">Free Violin Practice Tool</div>
 <h1>Practice Metronome</h1>
-
-<div class="subtitle">
-Melinda Coles Violin Academy
+<div class="subtitle">Build steady rhythm, confidence and beautiful playing—one beat at a time.</div>
+<div class="visual-zone">
+<div><div class="beat-light" id="beatLight"></div><div class="bpm-label">Visual beat</div></div>
+<div><div class="bpm-number" id="bpmDisplay">60</div><div class="bpm-label">Beats Per Minute</div></div>
+<div class="pendulum-wrap"><div class="pendulum" id="pendulum"></div></div>
 </div>
-
-<div id="bpm">60</div>
-
-<div class="small">Beats Per Minute</div>
-
-<input
-id="slider"
-type="range"
-min="40"
-max="200"
-value="60">
-
-<div class="quick">
-
-<button onclick="setTempo(40)">40</button>
-<button onclick="setTempo(50)">50</button>
-<button onclick="setTempo(60)">60</button>
-<button onclick="setTempo(72)">72</button>
-<button onclick="setTempo(80)">80</button>
-<button onclick="setTempo(100)">100</button>
-<button onclick="setTempo(120)">120</button>
-
+<input class="slider" id="tempoSlider" type="range" min="40" max="200" value="60">
+<div class="quick-tempos">
+<button class="tempo-btn" data-bpm="40"><strong>40</strong><span>Very slow</span></button>
+<button class="tempo-btn" data-bpm="50"><strong>50</strong><span>Slow</span></button>
+<button class="tempo-btn" data-bpm="60"><strong>60</strong><span>Beginner</span></button>
+<button class="tempo-btn" data-bpm="72"><strong>72</strong><span>Warm-up</span></button>
+<button class="tempo-btn" data-bpm="80"><strong>80</strong><span>Practice</span></button>
+<button class="tempo-btn" data-bpm="100"><strong>100</strong><span>Moderate</span></button>
+<button class="tempo-btn" data-bpm="120"><strong>120</strong><span>Performance</span></button>
+<button class="tempo-btn" data-bpm="144"><strong>144</strong><span>Challenge</span></button>
 </div>
-
-<button id="start">
-Start
-</button>
-
-<div class="quote">
-Music is my magic.
+<div class="controls-grid">
+<section class="panel"><h2>Time Signature</h2><div class="signature-row"><button class="signature-btn" data-beats="2">2/4</button><button class="signature-btn" data-beats="3">3/4</button><button class="signature-btn selected" data-beats="4">4/4</button><button class="signature-btn" data-beats="6">6/8</button></div></section>
+<section class="panel"><h2>Beat Counter</h2><div class="beat-counter" id="beatCounter"></div></section>
+<section class="panel"><h2>Practice Time</h2><div class="timer" id="timerDisplay">00:00</div></section>
+<section class="panel"><h2>Today's Goal</h2><div class="goal-row"><button class="goal-btn" data-minutes="5">5 min</button><button class="goal-btn selected" data-minutes="10">10 min</button><button class="goal-btn" data-minutes="15">15 min</button></div><div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div><div class="success" id="successMessage">🎉 Beautiful work—goal completed!</div></section>
 </div>
-
+<div class="actions"><button class="action-btn start-btn" id="startStopBtn">▶ Start</button><button class="action-btn tap-btn" id="tapTempoBtn">Tap Tempo</button><button class="action-btn tap-btn" id="resetTimerBtn">Reset Timer</button></div>
+<div class="tip-box" id="tipBox">Slow practice creates confident playing.</div>
+<a class="home-link" href="index.html">← Return to Practice Studio</a>
+</main>
+<footer><em>Music is my magic.</em><br>© Melinda Coles Violin Academy</footer>
 </div>
-
 <script>
-
-let bpm=60;
-let playing=false;
-let timer;
-
-const audio=new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
-
-const slider=document.getElementById("slider");
-const bpmText=document.getElementById("bpm");
-
-slider.oninput=function(){
-
-bpm=this.value;
-bpmText.innerHTML=bpm;
-
-if(playing){
-
-clearInterval(timer);
-start();
-
-}
-
-}
-
-function setTempo(x){
-
-slider.value=x;
-slider.oninput();
-
-}
-
-function click(){
-
-audio.currentTime=0;
-audio.play();
-
-}
-
-function start(){
-
-timer=setInterval(click,60000/bpm);
-
-}
-
-document.getElementById("start").onclick=function(){
-
-if(!playing){
-
-playing=true;
-this.innerHTML="Stop";
-start();
-
-}else{
-
-playing=false;
-this.innerHTML="Start";
-clearInterval(timer);
-
-}
-
-}
-
+const slider=document.getElementById("tempoSlider"),bpmDisplay=document.getElementById("bpmDisplay"),startStopBtn=document.getElementById("startStopBtn"),tapTempoBtn=document.getElementById("tapTempoBtn"),resetTimerBtn=document.getElementById("resetTimerBtn"),beatLight=document.getElementById("beatLight"),pendulum=document.getElementById("pendulum"),beatCounter=document.getElementById("beatCounter"),timerDisplay=document.getElementById("timerDisplay"),progressBar=document.getElementById("progressBar"),successMessage=document.getElementById("successMessage"),darkModeBtn=document.getElementById("darkModeBtn"),tipBox=document.getElementById("tipBox");
+let bpm=60,beatsPerBar=4,currentBeat=0,isPlaying=false,schedulerTimer=null,audioContext=null,practiceSeconds=0,timerInterval=null,goalMinutes=10,tapTimes=[];
+const tips=["Keep your shoulders relaxed.","Slow practice creates confident playing.","Straight bows create beautiful tone.","Accuracy before speed.","Listen more than you play.","One beautiful note is worth more than one rushed scale.","Consistency always beats intensity."];
+let tipIndex=0;setInterval(()=>{tipIndex=(tipIndex+1)%tips.length;tipBox.textContent=tips[tipIndex]},7000);
+function ensureAudio(){if(!audioContext)audioContext=new(window.AudioContext||window.webkitAudioContext)();if(audioContext.state==="suspended")audioContext.resume()}
+function playClick(accent=false){ensureAudio();const osc=audioContext.createOscillator(),gain=audioContext.createGain();osc.type="sine";osc.frequency.value=accent?1350:950;gain.gain.setValueAtTime(.0001,audioContext.currentTime);gain.gain.exponentialRampToValueAtTime(accent?.35:.22,audioContext.currentTime+.005);gain.gain.exponentialRampToValueAtTime(.0001,audioContext.currentTime+.06);osc.connect(gain);gain.connect(audioContext.destination);osc.start();osc.stop(audioContext.currentTime+.065)}
+function renderBeatDots(){beatCounter.innerHTML="";for(let i=0;i<beatsPerBar;i++){const dot=document.createElement("div");dot.className="beat-dot"+(i===0?" accent":"");beatCounter.appendChild(dot)}}
+function flashBeat(){const dots=[...document.querySelectorAll(".beat-dot")];dots.forEach(d=>d.classList.remove("current"));if(dots[currentBeat])dots[currentBeat].classList.add("current");beatLight.classList.add("active");setTimeout(()=>beatLight.classList.remove("active"),90)}
+function tick(){playClick(currentBeat===0);flashBeat();currentBeat=(currentBeat+1)%beatsPerBar}
+function startMetronome(){if(isPlaying)return;ensureAudio();isPlaying=true;currentBeat=0;tick();const ms=60000/bpm;schedulerTimer=setInterval(tick,ms);pendulum.style.setProperty("--swing-duration",`${ms*2}ms`);pendulum.classList.add("playing");startStopBtn.textContent="■ Stop";startPracticeTimer()}
+function stopMetronome(){isPlaying=false;clearInterval(schedulerTimer);schedulerTimer=null;pendulum.classList.remove("playing");startStopBtn.textContent="▶ Start";stopPracticeTimer()}
+function restartMetronome(){if(!isPlaying)return;clearInterval(schedulerTimer);currentBeat=0;tick();const ms=60000/bpm;schedulerTimer=setInterval(tick,ms);pendulum.style.setProperty("--swing-duration",`${ms*2}ms`)}
+function setBpm(v){bpm=Math.max(40,Math.min(200,Number(v)));slider.value=bpm;bpmDisplay.textContent=bpm;restartMetronome()}
+slider.addEventListener("input",e=>setBpm(e.target.value));document.querySelectorAll(".tempo-btn").forEach(b=>b.addEventListener("click",()=>setBpm(b.dataset.bpm)));startStopBtn.addEventListener("click",()=>isPlaying?stopMetronome():startMetronome());
+document.querySelectorAll(".signature-btn").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll(".signature-btn").forEach(b=>b.classList.remove("selected"));btn.classList.add("selected");beatsPerBar=Number(btn.dataset.beats);currentBeat=0;renderBeatDots()}));
+tapTempoBtn.addEventListener("click",()=>{const now=performance.now();tapTimes.push(now);tapTimes=tapTimes.filter(t=>now-t<3000);if(tapTimes.length>=2){const intervals=[];for(let i=1;i<tapTimes.length;i++)intervals.push(tapTimes[i]-tapTimes[i-1]);setBpm(Math.round(60000/(intervals.reduce((a,b)=>a+b,0)/intervals.length)))}tapTempoBtn.textContent="Tap Again";setTimeout(()=>tapTempoBtn.textContent="Tap Tempo",500)});
+function startPracticeTimer(){if(timerInterval)return;timerInterval=setInterval(()=>{practiceSeconds++;updateTimer()},1000)}
+function stopPracticeTimer(){clearInterval(timerInterval);timerInterval=null}
+function updateTimer(){const m=Math.floor(practiceSeconds/60),s=practiceSeconds%60;timerDisplay.textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;const p=Math.min(100,practiceSeconds/(goalMinutes*60)*100);progressBar.style.width=`${p}%`;if(p>=100)successMessage.style.display="block"}
+resetTimerBtn.addEventListener("click",()=>{practiceSeconds=0;successMessage.style.display="none";updateTimer()});
+document.querySelectorAll(".goal-btn").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll(".goal-btn").forEach(b=>b.classList.remove("selected"));btn.classList.add("selected");goalMinutes=Number(btn.dataset.minutes);successMessage.style.display="none";updateTimer()}));
+darkModeBtn.addEventListener("click",()=>{document.body.classList.toggle("dark");darkModeBtn.textContent=document.body.classList.contains("dark")?"☀️":"🌙"});
+renderBeatDots();updateTimer();
 </script>
-
 </body>
 </html>
