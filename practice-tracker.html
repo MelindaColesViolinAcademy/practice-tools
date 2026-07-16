@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Violin Practice Tracker | Melinda Coles Violin Academy</title>
+<meta name="description" content="Free violin practice tracker for beginner violinists. Record daily practice, build a streak, track weekly goals and celebrate progress.">
+
+<style>
+:root{
+  --cream:#f7f3eb;
+  --card:#fffdf9;
+  --green:#314333;
+  --sage:#aab79b;
+  --sage-dark:#879979;
+  --gold:#b89648;
+  --text:#344038;
+  --muted:#737a73;
+  --line:#e7dfd2;
+  --soft:#eef1e9;
+  --shadow:0 18px 50px rgba(52,64,56,.12);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  background:radial-gradient(circle at top left,rgba(184,150,72,.08),transparent 35%),var(--cream);
+  color:var(--text);
+}
+.page{width:min(1050px,94%);margin:auto;padding:30px 0 50px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo-badge{
+  width:58px;height:58px;border:2px solid var(--gold);border-radius:50%;
+  display:grid;place-items:center;color:var(--gold);font-family:Georgia,serif;
+  font-size:24px;background:var(--card)
+}
+.brand-text strong{display:block;color:var(--green);font-size:18px}
+.brand-text span{color:var(--muted);font-size:13px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:28px;
+  box-shadow:var(--shadow);padding:34px
+}
+.hero{text-align:center}
+.eyebrow{
+  color:var(--gold);text-transform:uppercase;letter-spacing:.16em;
+  font-size:13px;font-weight:bold
+}
+h1{color:var(--green);font-size:clamp(34px,6vw,58px);margin:10px 0 8px}
+.subtitle{color:var(--muted);font-size:18px;line-height:1.6;margin-bottom:26px}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin:24px 0
+}
+.stat{
+  border:1px solid var(--line);
+  background:var(--soft);
+  border-radius:18px;
+  padding:18px 12px
+}
+.stat strong{
+  display:block;
+  color:var(--green);
+  font-size:34px
+}
+.stat span{
+  display:block;
+  color:var(--muted);
+  font-size:13px;
+  margin-top:4px
+}
+
+.main-grid{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:20px;
+  margin-top:22px
+}
+.panel{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:20px;
+  text-align:left;
+  background:rgba(255,255,255,.22)
+}
+.panel h2{
+  margin:0 0 14px;
+  color:var(--green);
+  font-size:21px
+}
+.today-date{
+  color:var(--gold);
+  font-weight:bold;
+  margin-bottom:12px
+}
+.field{
+  margin:14px 0
+}
+.field label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:7px;
+  color:var(--green)
+}
+input[type=number], textarea, select{
+  width:100%;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--card);
+  color:var(--text);
+  font:inherit
+}
+textarea{min-height:92px;resize:vertical}
+.skills{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:8px
+}
+.skill{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:11px;
+  background:var(--soft)
+}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:16px
+}
+button{
+  border-radius:12px;
+  padding:13px 20px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer
+}
+.primary{border:none;background:var(--sage-dark);color:white}
+.secondary{border:1px solid var(--line);background:transparent;color:var(--text)}
+.gold{border:none;background:var(--gold);color:white}
+
+.week-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:9px;
+  margin-top:14px
+}
+.day{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:12px 6px;
+  text-align:center;
+  background:var(--soft)
+}
+.day .name{font-size:12px;color:var(--muted)}
+.day .mark{
+  width:34px;height:34px;border-radius:50%;
+  margin:8px auto 5px;
+  display:grid;place-items:center;
+  border:2px solid var(--sage);
+  color:var(--muted);
+  font-weight:bold
+}
+.day.done .mark{
+  background:var(--sage-dark);
+  color:white;
+  border-color:var(--sage-dark)
+}
+.day .mins{font-size:12px;color:var(--muted)}
+
+.progress-wrap{
+  height:14px;background:var(--line);
+  border-radius:999px;overflow:hidden;
+  margin-top:14px
+}
+.progress-bar{
+  height:100%;width:0;
+  background:linear-gradient(90deg,var(--sage),var(--gold));
+  transition:.35s
+}
+.goal-row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  align-items:end
+}
+.goal-row input{width:100%}
+
+.history{
+  display:grid;
+  gap:10px;
+  max-height:350px;
+  overflow:auto;
+  margin-top:12px
+}
+.entry{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+  background:var(--soft)
+}
+.entry strong{color:var(--green)}
+.entry small{color:var(--muted)}
+.entry p{margin:8px 0 0;line-height:1.45}
+
+.message{
+  display:none;
+  margin-top:18px;
+  padding:16px;
+  border-radius:14px;
+  background:rgba(170,183,155,.18);
+  color:var(--green);
+  font-weight:bold;
+  text-align:center
+}
+.tip-box{
+  margin-top:24px;
+  padding:18px;
+  border-left:4px solid var(--gold);
+  border-radius:12px;
+  background:rgba(184,150,72,.08);
+  line-height:1.55
+}
+.home-link{
+  display:inline-block;
+  margin-top:24px;
+  color:var(--green);
+  text-decoration:none;
+  font-weight:bold
+}
+footer{text-align:center;margin-top:26px;color:var(--muted);font-size:14px}
+
+@media(max-width:860px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .main-grid{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .card{padding:24px 16px}
+  .week-grid{grid-template-columns:repeat(4,1fr)}
+  .skills{grid-template-columns:1fr}
+  .brand-text span{display:none}
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo-badge">MC</div>
+      <div class="brand-text">
+        <strong>Melinda Coles Violin Academy</strong>
+        <span>Free interactive violin practice tools</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="card hero">
+    <div class="eyebrow">Free Beginner Violin Tool</div>
+    <h1>Violin Practice Tracker</h1>
+    <div class="subtitle">
+      Record your daily practice, build a consistent routine, celebrate small wins
+      and watch your confidence grow one session at a time.
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat"><strong id="streakStat">0</strong><span>Day streak</span></div>
+      <div class="stat"><strong id="weekMinutesStat">0</strong><span>Minutes this week</span></div>
+      <div class="stat"><strong id="sessionsStat">0</strong><span>Total sessions</span></div>
+      <div class="stat"><strong id="totalMinutesStat">0</strong><span>Total minutes</span></div>
+    </div>
+
+    <div class="main-grid">
+
+      <section class="panel">
+        <h2>Log Today's Practice</h2>
+        <div class="today-date" id="todayDate"></div>
+
+        <div class="field">
+          <label for="minutesInput">Minutes practised</label>
+          <input id="minutesInput" type="number" min="1" max="300" value="10">
+        </div>
+
+        <div class="field">
+          <label>What did you practise?</label>
+          <div class="skills">
+            <label class="skill"><input type="checkbox" value="Open strings"> Open strings</label>
+            <label class="skill"><input type="checkbox" value="Bow control"> Bow control</label>
+            <label class="skill"><input type="checkbox" value="Left-hand technique"> Left-hand technique</label>
+            <label class="skill"><input type="checkbox" value="Scales"> Scales</label>
+            <label class="skill"><input type="checkbox" value="Rhythm"> Rhythm</label>
+            <label class="skill"><input type="checkbox" value="Pieces or tunes"> Pieces or tunes</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="feelingSelect">How did practice feel?</label>
+          <select id="feelingSelect">
+            <option>Relaxed</option>
+            <option>Focused</option>
+            <option>Confident</option>
+            <option>Challenging</option>
+            <option>Fun</option>
+            <option>Tired but proud</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="winInput">Today's win</label>
+          <textarea id="winInput" placeholder="One note, bow stroke, scale or small improvement you are proud of..."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="nextInput">Next practice goal</label>
+          <textarea id="nextInput" placeholder="What would you like to improve next time?"></textarea>
+        </div>
+
+        <div class="actions">
+          <button class="primary" id="saveButton">✓ Save Practice</button>
+          <button class="secondary" id="clearFormButton">Clear Form</button>
+        </div>
+
+        <div class="message" id="saveMessage">
+          🎉 Practice saved. Small, consistent steps create beautiful progress.
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>This Week</h2>
+
+        <div class="goal-row">
+          <div class="field" style="margin:0">
+            <label for="weeklyGoalInput">Weekly minute goal</label>
+            <input id="weeklyGoalInput" type="number" min="10" max="2000" value="70">
+          </div>
+          <button class="gold" id="saveGoalButton">Set Goal</button>
+        </div>
+
+        <div class="week-grid" id="weekGrid"></div>
+
+        <div class="progress-wrap">
+          <div class="progress-bar" id="weeklyProgressBar"></div>
+        </div>
+
+        <p id="goalText" style="color:var(--muted);text-align:center"></p>
+
+        <h2 style="margin-top:28px">Recent Practice</h2>
+        <div class="history" id="historyList"></div>
+
+        <div class="actions">
+          <button class="secondary" id="exportButton">Download Practice Log</button>
+          <button class="secondary" id="clearHistoryButton">Clear All Data</button>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="tip-box" id="tipBox">
+      Consistency always beats intensity. Even five focused minutes counts.
+    </div>
+
+    <a class="home-link" href="index.html">← Return to Practice Studio</a>
+  </main>
+
+  <footer>
+    <em>Music is my magic.</em><br>
+    © Melinda Coles Violin Academy
+  </footer>
+
+</div>
+
+<script>
+const STORAGE_KEY = "mcvaPracticeEntries";
+const GOAL_KEY = "mcvaWeeklyGoal";
+
+const todayDate = document.getElementById("todayDate");
+const minutesInput = document.getElementById("minutesInput");
+const feelingSelect = document.getElementById("feelingSelect");
+const winInput = document.getElementById("winInput");
+const nextInput = document.getElementById("nextInput");
+const saveButton = document.getElementById("saveButton");
+const clearFormButton = document.getElementById("clearFormButton");
+const saveMessage = document.getElementById("saveMessage");
+const weeklyGoalInput = document.getElementById("weeklyGoalInput");
+const saveGoalButton = document.getElementById("saveGoalButton");
+const weekGrid = document.getElementById("weekGrid");
+const weeklyProgressBar = document.getElementById("weeklyProgressBar");
+const goalText = document.getElementById("goalText");
+const historyList = document.getElementById("historyList");
+const exportButton = document.getElementById("exportButton");
+const clearHistoryButton = document.getElementById("clearHistoryButton");
+const streakStat = document.getElementById("streakStat");
+const weekMinutesStat = document.getElementById("weekMinutesStat");
+const sessionsStat = document.getElementById("sessionsStat");
+const totalMinutesStat = document.getElementById("totalMinutesStat");
+const tipBox = document.getElementById("tipBox");
+
+const tips = [
+  "Consistency always beats intensity. Even five focused minutes counts.",
+  "One beautiful note is worth more than one rushed scale.",
+  "Celebrate what improved, not only what still feels difficult.",
+  "Slow practice creates confident playing.",
+  "Your only competition is the musician you were yesterday.",
+  "Relaxed musicians create relaxed music."
+];
+
+let entries = loadEntries();
+let weeklyGoal = Number(localStorage.getItem(GOAL_KEY)) || 70;
+
+function localDateKey(date = new Date()){
+  const y = date.getFullYear();
+  const m = String(date.getMonth()+1).padStart(2,"0");
+  const d = String(date.getDate()).padStart(2,"0");
+  return `${y}-${m}-${d}`;
+}
+
+function prettyDate(key){
+  const [y,m,d] = key.split("-").map(Number);
+  return new Date(y,m-1,d).toLocaleDateString(undefined,{
+    weekday:"short", day:"numeric", month:"short", year:"numeric"
+  });
+}
+
+function loadEntries(){
+  try{
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  }catch{
+    return [];
+  }
+}
+
+function saveEntries(){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(entries));
+}
+
+function startOfWeek(date = new Date()){
+  const copy = new Date(date);
+  const day = copy.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  copy.setDate(copy.getDate() + diff);
+  copy.setHours(0,0,0,0);
+  return copy;
+}
+
+function weekDates(){
+  const start = startOfWeek();
+  return Array.from({length:7},(_,i)=>{
+    const d = new Date(start);
+    d.setDate(start.getDate()+i);
+    return d;
+  });
+}
+
+function entriesForDate(key){
+  return entries.filter(entry=>entry.date===key);
+}
+
+function minutesForDate(key){
+  return entriesForDate(key).reduce((sum,e)=>sum+Number(e.minutes),0);
+}
+
+function calculateStreak(){
+  if(entries.length === 0) return 0;
+
+  const practiced = new Set(entries.map(e=>e.date));
+  let cursor = new Date();
+  cursor.setHours(0,0,0,0);
+
+  if(!practiced.has(localDateKey(cursor))){
+    cursor.setDate(cursor.getDate()-1);
+  }
+
+  let streak = 0;
+  while(practiced.has(localDateKey(cursor))){
+    streak++;
+    cursor.setDate(cursor.getDate()-1);
+  }
+
+  return streak;
+}
+
+function renderWeek(){
+  weekGrid.innerHTML = "";
+  let weekMinutes = 0;
+
+  weekDates().forEach(date=>{
+    const key = localDateKey(date);
+    const mins = minutesForDate(key);
+    weekMinutes += mins;
+
+    const box = document.createElement("div");
+    box.className = "day" + (mins > 0 ? " done" : "");
+    box.innerHTML = `
+      <div class="name">${date.toLocaleDateString(undefined,{weekday:"short"})}</div>
+      <div class="mark">${mins > 0 ? "✓" : "—"}</div>
+      <div class="mins">${mins} min</div>
+    `;
+    weekGrid.appendChild(box);
+  });
+
+  weekMinutesStat.textContent = weekMinutes;
+  const progress = Math.min(100,(weekMinutes/weeklyGoal)*100);
+  weeklyProgressBar.style.width = `${progress}%`;
+  goalText.textContent = `${weekMinutes} of ${weeklyGoal} minutes completed this week`;
+}
+
+function renderStats(){
+  streakStat.textContent = calculateStreak();
+  sessionsStat.textContent = entries.length;
+  totalMinutesStat.textContent = entries.reduce((sum,e)=>sum+Number(e.minutes),0);
+}
+
+function renderHistory(){
+  historyList.innerHTML = "";
+
+  if(entries.length === 0){
+    historyList.innerHTML = `<div class="entry"><small>No practice saved yet.</small><p>Your first session will appear here.</p></div>`;
+    return;
+  }
+
+  [...entries].sort((a,b)=>b.timestamp-a.timestamp).slice(0,12).forEach(entry=>{
+    const item = document.createElement("div");
+    item.className = "entry";
+
+    const skills = entry.skills.length ? entry.skills.join(", ") : "General practice";
+    item.innerHTML = `
+      <strong>${prettyDate(entry.date)} — ${entry.minutes} minutes</strong><br>
+      <small>${skills} • ${entry.feeling}</small>
+      ${entry.win ? `<p><strong>Win:</strong> ${escapeHtml(entry.win)}</p>` : ""}
+      ${entry.next ? `<p><strong>Next:</strong> ${escapeHtml(entry.next)}</p>` : ""}
+    `;
+    historyList.appendChild(item);
+  });
+}
+
+function escapeHtml(text){
+  return text.replace(/[&<>"']/g,char=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  })[char]);
+}
+
+function renderAll(){
+  renderStats();
+  renderWeek();
+  renderHistory();
+}
+
+function selectedSkills(){
+  return [...document.querySelectorAll(".skill input:checked")].map(input=>input.value);
+}
+
+function clearForm(){
+  minutesInput.value = 10;
+  feelingSelect.value = "Relaxed";
+  winInput.value = "";
+  nextInput.value = "";
+  document.querySelectorAll(".skill input").forEach(input=>input.checked=false);
+}
+
+saveButton.addEventListener("click",()=>{
+  const minutes = Number(minutesInput.value);
+
+  if(!minutes || minutes < 1){
+    alert("Please enter at least one minute of practice.");
+    return;
+  }
+
+  entries.push({
+    id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+    date: localDateKey(),
+    timestamp: Date.now(),
+    minutes,
+    skills:selectedSkills(),
+    feeling:feelingSelect.value,
+    win:winInput.value.trim(),
+    next:nextInput.value.trim()
+  });
+
+  saveEntries();
+  renderAll();
+  saveMessage.style.display = "block";
+  setTimeout(()=>saveMessage.style.display="none",3500);
+  clearForm();
+});
+
+clearFormButton.addEventListener("click",clearForm);
+
+saveGoalButton.addEventListener("click",()=>{
+  const goal = Number(weeklyGoalInput.value);
+  if(!goal || goal < 10){
+    alert("Please choose a weekly goal of at least 10 minutes.");
+    return;
+  }
+  weeklyGoal = goal;
+  localStorage.setItem(GOAL_KEY,String(goal));
+  renderWeek();
+});
+
+clearHistoryButton.addEventListener("click",()=>{
+  if(confirm("Clear all saved practice history from this device?")){
+    entries = [];
+    saveEntries();
+    renderAll();
+  }
+});
+
+exportButton.addEventListener("click",()=>{
+  if(entries.length === 0){
+    alert("There is no practice history to download yet.");
+    return;
+  }
+
+  const rows = [
+    ["Date","Minutes","Skills","Feeling","Today's Win","Next Goal"],
+    ...[...entries].sort((a,b)=>a.timestamp-b.timestamp).map(e=>[
+      e.date,
+      e.minutes,
+      e.skills.join("; "),
+      e.feeling,
+      e.win,
+      e.next
+    ])
+  ];
+
+  const csv = rows.map(row=>row.map(value=>{
+    const text = String(value ?? "").replace(/"/g,'""');
+    return `"${text}"`;
+  }).join(",")).join("\n");
+
+  const blob = new Blob([csv],{type:"text/csv;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "melinda-coles-violin-practice-log.csv";
+  link.click();
+  URL.revokeObjectURL(url);
+});
+
+let tipIndex = 0;
+setInterval(()=>{
+  tipIndex = (tipIndex + 1) % tips.length;
+  tipBox.textContent = tips[tipIndex];
+},7000);
+
+todayDate.textContent = new Date().toLocaleDateString(undefined,{
+  weekday:"long", day:"numeric", month:"long", year:"numeric"
+});
+weeklyGoalInput.value = weeklyGoal;
+renderAll();
+</script>
+</body>
+</html>
