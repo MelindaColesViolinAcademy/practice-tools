@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Straight Bow Trainer | Melinda Coles Violin Academy</title>
+<meta name="description" content="Free straight bow trainer for beginner violinists. Practise keeping the bow parallel to the bridge with visual guides, bow lanes, timed exercises and instant feedback.">
+
+<style>
+:root{
+  --cream:#f7f3eb;
+  --card:#fffdf9;
+  --green:#314333;
+  --sage:#aab79b;
+  --sage-dark:#879979;
+  --gold:#b89648;
+  --text:#344038;
+  --muted:#737a73;
+  --line:#e7dfd2;
+  --soft:#eef1e9;
+  --red:#b85d55;
+  --shadow:0 18px 50px rgba(52,64,56,.12);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  background:radial-gradient(circle at top left,rgba(184,150,72,.08),transparent 35%),var(--cream);
+  color:var(--text);
+}
+.page{width:min(1050px,94%);margin:auto;padding:30px 0 50px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo-badge{
+  width:58px;height:58px;border:2px solid var(--gold);border-radius:50%;
+  display:grid;place-items:center;color:var(--gold);font-family:Georgia,serif;
+  font-size:24px;background:var(--card)
+}
+.brand-text strong{display:block;color:var(--green);font-size:18px}
+.brand-text span{color:var(--muted);font-size:13px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:28px;
+  box-shadow:var(--shadow);padding:34px
+}
+.hero{text-align:center}
+.eyebrow{
+  color:var(--gold);text-transform:uppercase;letter-spacing:.16em;
+  font-size:13px;font-weight:bold
+}
+h1{color:var(--green);font-size:clamp(34px,6vw,58px);margin:10px 0 8px}
+.subtitle{color:var(--muted);font-size:18px;line-height:1.6;margin-bottom:26px}
+
+.controls{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:22px 0
+}
+.control{
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:14px;
+  text-align:left;
+  background:rgba(255,255,255,.22)
+}
+.control label{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:7px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-weight:bold
+}
+select,input[type=range]{width:100%}
+select{
+  padding:11px;border:1px solid var(--line);border-radius:10px;
+  background:var(--card);color:var(--text);font-size:15px
+}
+input[type=range]{accent-color:var(--sage-dark)}
+
+.trainer-wrap{
+  display:grid;
+  grid-template-columns:1.5fr .5fr;
+  gap:20px;
+  align-items:stretch;
+  margin-top:22px
+}
+.stage{
+  position:relative;
+  min-height:470px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:linear-gradient(#fbf8f2,#f2ede4);
+  overflow:hidden;
+}
+.violin{
+  position:absolute;
+  left:50%;
+  top:55%;
+  width:360px;
+  height:180px;
+  transform:translate(-50%,-50%);
+}
+.body-left,.body-right{
+  position:absolute;
+  width:135px;height:170px;
+  border-radius:55% 45% 50% 50%;
+  background:linear-gradient(135deg,#a9652e,#cf8d4b);
+  border:4px solid #6f3b1e;
+  top:5px
+}
+.body-left{left:24px;transform:rotate(10deg)}
+.body-right{right:24px;transform:rotate(-10deg)}
+.waist{
+  position:absolute;
+  left:130px;top:42px;
+  width:100px;height:95px;
+  background:#b87335;
+  border-top:4px solid #6f3b1e;
+  border-bottom:4px solid #6f3b1e
+}
+.bridge{
+  position:absolute;
+  left:50%;top:61px;
+  width:12px;height:76px;
+  background:#e6c393;
+  transform:translateX(-50%);
+  border-radius:5px
+}
+.fingerboard{
+  position:absolute;
+  left:50%;top:-95px;
+  width:42px;height:180px;
+  background:#252a28;
+  transform:translateX(-50%);
+  border-radius:8px
+}
+.string-line{
+  position:absolute;
+  left:50%;
+  top:-90px;
+  width:2px;
+  height:260px;
+  background:#d9d2be;
+  transform:translateX(-50%)
+}
+.target-lane{
+  position:absolute;
+  left:12%;
+  right:12%;
+  height:18px;
+  top:52%;
+  transform:translateY(-50%);
+  border-top:3px dashed var(--sage-dark);
+  border-bottom:3px dashed var(--sage-dark);
+  background:rgba(135,153,121,.11);
+  border-radius:999px
+}
+.target-label{
+  position:absolute;
+  left:18px;
+  top:18px;
+  padding:8px 12px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:10px;
+  color:var(--green);
+  font-weight:bold
+}
+.bow{
+  position:absolute;
+  left:50%;
+  top:52%;
+  width:72%;
+  height:10px;
+  background:linear-gradient(#75502e,#362818);
+  border-radius:999px;
+  transform:translate(-50%,-50%) rotate(0deg);
+  transform-origin:center;
+  transition:transform .08s ease, top .08s ease
+}
+.bow:after{
+  content:"";
+  position:absolute;
+  left:0;right:0;
+  top:7px;height:3px;
+  background:#f4efe2;
+  border-radius:999px
+}
+.feedback{
+  position:absolute;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  min-width:260px;
+  padding:12px 18px;
+  border-radius:14px;
+  background:var(--card);
+  border:1px solid var(--line);
+  font-weight:bold;
+  color:var(--green)
+}
+
+.side-panel{
+  display:grid;
+  gap:14px
+}
+.stat{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  background:var(--soft)
+}
+.stat strong{
+  display:block;
+  color:var(--green);
+  font-size:32px
+}
+.stat span{
+  display:block;
+  color:var(--muted);
+  font-size:13px;
+  margin-top:4px
+}
+.score-ring{
+  width:118px;height:118px;border-radius:50%;
+  margin:auto;
+  display:grid;place-items:center;
+  background:conic-gradient(var(--sage-dark) 0%,var(--line) 0);
+  position:relative
+}
+.score-ring:before{
+  content:"";
+  width:88px;height:88px;border-radius:50%;
+  background:var(--card);
+  position:absolute
+}
+.score-ring strong{
+  position:relative;
+  font-size:28px;
+  color:var(--green)
+}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  margin:24px 0
+}
+button{
+  padding:14px 24px;
+  border-radius:12px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer
+}
+.primary{border:none;background:var(--sage-dark);color:white;min-width:180px}
+.secondary{border:1px solid var(--line);background:transparent;color:var(--text)}
+.gold{border:none;background:var(--gold);color:white}
+
+.practice-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  margin-top:22px
+}
+.panel{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:20px;
+  text-align:left;
+  background:rgba(255,255,255,.22)
+}
+.panel h2{margin:0 0 13px;color:var(--green);font-size:20px}
+.exercise-list{display:grid;gap:10px}
+.exercise{
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--soft)
+}
+.exercise.current{
+  background:var(--sage);
+  color:white
+}
+.tip-box{
+  margin-top:22px;
+  padding:18px;
+  border-left:4px solid var(--gold);
+  border-radius:12px;
+  background:rgba(184,150,72,.08);
+  line-height:1.55
+}
+.home-link{
+  display:inline-block;
+  margin-top:24px;
+  color:var(--green);
+  text-decoration:none;
+  font-weight:bold
+}
+footer{text-align:center;margin-top:26px;color:var(--muted);font-size:14px}
+
+@media(max-width:860px){
+  .controls{grid-template-columns:repeat(2,1fr)}
+  .trainer-wrap{grid-template-columns:1fr}
+  .side-panel{grid-template-columns:repeat(3,1fr)}
+  .practice-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .card{padding:24px 14px}
+  .controls{grid-template-columns:1fr}
+  .side-panel{grid-template-columns:1fr}
+  .violin{transform:translate(-50%,-50%) scale(.78)}
+  .brand-text span{display:none}
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo-badge">MC</div>
+      <div class="brand-text">
+        <strong>Melinda Coles Violin Academy</strong>
+        <span>Free interactive violin practice tools</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="card hero">
+    <div class="eyebrow">Free Beginner Violin Tool</div>
+    <h1>Straight Bow Trainer</h1>
+    <div class="subtitle">
+      Practise keeping your bow parallel to the bridge with visual bow lanes,
+      instant feedback and short guided exercises.
+    </div>
+
+    <div class="controls">
+      <div class="control">
+        <label for="exerciseSelect">Exercise</label>
+        <select id="exerciseSelect">
+          <option value="middle">Middle Bow</option>
+          <option value="frog">At the Frog</option>
+          <option value="tip">At the Tip</option>
+          <option value="full">Full Bow</option>
+        </select>
+      </div>
+
+      <div class="control">
+        <label for="angleSlider">Bow Angle</label>
+        <input id="angleSlider" type="range" min="-20" max="20" value="0">
+      </div>
+
+      <div class="control">
+        <label for="laneSlider">Bow Lane</label>
+        <input id="laneSlider" type="range" min="35" max="68" value="52">
+      </div>
+
+      <div class="control">
+        <label for="durationSelect">Practice Time</label>
+        <select id="durationSelect">
+          <option value="30">30 seconds</option>
+          <option value="60" selected>1 minute</option>
+          <option value="120">2 minutes</option>
+          <option value="300">5 minutes</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="trainer-wrap">
+      <section class="stage">
+        <div class="target-label" id="targetLabel">Target: Middle bow lane</div>
+
+        <div class="violin">
+          <div class="body-left"></div>
+          <div class="body-right"></div>
+          <div class="waist"></div>
+          <div class="fingerboard"></div>
+          <div class="bridge"></div>
+          <div class="string-line"></div>
+        </div>
+
+        <div class="target-lane" id="targetLane"></div>
+        <div class="bow" id="bow"></div>
+
+        <div class="feedback" id="feedback">Beautiful—your bow is straight.</div>
+      </section>
+
+      <aside class="side-panel">
+        <div class="stat">
+          <strong id="angleValue">0°</strong>
+          <span>Bow angle</span>
+        </div>
+
+        <div class="stat">
+          <strong id="laneValue">Middle</strong>
+          <span>Bow placement</span>
+        </div>
+
+        <div class="stat">
+          <div class="score-ring" id="scoreRing"><strong id="scoreValue">100%</strong></div>
+          <span style="text-align:center">Straight bow score</span>
+        </div>
+
+        <div class="stat">
+          <strong id="timerValue">01:00</strong>
+          <span>Practice time remaining</span>
+        </div>
+      </aside>
+    </div>
+
+    <div class="actions">
+      <button class="primary" id="startButton">▶ Start Exercise</button>
+      <button class="secondary" id="autoButton">Auto Bow</button>
+      <button class="gold" id="resetButton">Reset</button>
+    </div>
+
+    <div class="practice-grid">
+      <section class="panel">
+        <h2>Guided Exercises</h2>
+        <div class="exercise-list">
+          <div class="exercise current">1. Middle bow — short, even strokes</div>
+          <div class="exercise">2. Frog — keep the wrist flexible</div>
+          <div class="exercise">3. Tip — avoid reaching with the shoulder</div>
+          <div class="exercise">4. Full bow — stay parallel from frog to tip</div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Beginner Checklist</h2>
+        <label><input type="checkbox"> Shoulder relaxed</label><br><br>
+        <label><input type="checkbox"> Wrist flexible</label><br><br>
+        <label><input type="checkbox"> Bow parallel to bridge</label><br><br>
+        <label><input type="checkbox"> Even bow speed</label><br><br>
+        <label><input type="checkbox"> Clear, steady tone</label>
+      </section>
+    </div>
+
+    <div class="tip-box" id="tipBox">
+      Imagine your bow travelling along invisible train tracks across the strings.
+    </div>
+
+    <a class="home-link" href="index.html">← Return to Practice Studio</a>
+  </main>
+
+  <footer>
+    <em>Music is my magic.</em><br>
+    © Melinda Coles Violin Academy
+  </footer>
+
+</div>
+
+<script>
+const bow = document.getElementById("bow");
+const angleSlider = document.getElementById("angleSlider");
+const laneSlider = document.getElementById("laneSlider");
+const exerciseSelect = document.getElementById("exerciseSelect");
+const durationSelect = document.getElementById("durationSelect");
+const feedback = document.getElementById("feedback");
+const angleValue = document.getElementById("angleValue");
+const laneValue = document.getElementById("laneValue");
+const scoreValue = document.getElementById("scoreValue");
+const scoreRing = document.getElementById("scoreRing");
+const timerValue = document.getElementById("timerValue");
+const targetLane = document.getElementById("targetLane");
+const targetLabel = document.getElementById("targetLabel");
+const startButton = document.getElementById("startButton");
+const autoButton = document.getElementById("autoButton");
+const resetButton = document.getElementById("resetButton");
+const tipBox = document.getElementById("tipBox");
+
+let remaining = 60;
+let timerId = null;
+let running = false;
+let autoId = null;
+let autoPlaying = false;
+let autoDirection = 1;
+
+const tips = [
+  "Imagine your bow travelling along invisible train tracks across the strings.",
+  "Move mainly from the elbow and keep the shoulder relaxed.",
+  "A straight bow creates a clearer, more even violin tone.",
+  "Start in the middle of the bow before practising the frog and tip.",
+  "Slow, controlled movement builds reliable bow technique."
+];
+
+function formatTime(seconds){
+  const m = Math.floor(seconds/60);
+  const s = seconds%60;
+  return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+}
+
+function targetForExercise(){
+  const value = exerciseSelect.value;
+  if(value === "frog") return {lane:48,label:"Target: Frog control"};
+  if(value === "tip") return {lane:56,label:"Target: Tip control"};
+  if(value === "full") return {lane:52,label:"Target: Full bow lane"};
+  return {lane:52,label:"Target: Middle bow lane"};
+}
+
+function updateTrainer(){
+  const angle = Number(angleSlider.value);
+  const lane = Number(laneSlider.value);
+  const target = targetForExercise();
+
+  bow.style.transform = `translate(-50%,-50%) rotate(${angle}deg)`;
+  bow.style.top = `${lane}%`;
+  targetLane.style.top = `${target.lane}%`;
+  targetLabel.textContent = target.label;
+
+  angleValue.textContent = `${angle}°`;
+
+  if(lane < target.lane - 4){
+    laneValue.textContent = "Near bridge";
+  }else if(lane > target.lane + 4){
+    laneValue.textContent = "Near fingerboard";
+  }else{
+    laneValue.textContent = "Middle";
+  }
+
+  const anglePenalty = Math.abs(angle) * 3.2;
+  const lanePenalty = Math.abs(lane-target.lane) * 2.4;
+  const score = Math.max(0,Math.round(100-anglePenalty-lanePenalty));
+
+  scoreValue.textContent = `${score}%`;
+  scoreRing.style.background = `conic-gradient(var(--sage-dark) ${score}%,var(--line) ${score}%)`;
+
+  if(Math.abs(angle) <= 2 && Math.abs(lane-target.lane) <= 2){
+    feedback.textContent = "Beautiful—your bow is straight.";
+    feedback.style.color = "var(--green)";
+  }else if(angle < -2){
+    feedback.textContent = "The bow is tilting left. Bring it back parallel.";
+    feedback.style.color = "var(--gold)";
+  }else if(angle > 2){
+    feedback.textContent = "The bow is tilting right. Straighten the bow path.";
+    feedback.style.color = "var(--gold)";
+  }else if(lane < target.lane - 2){
+    feedback.textContent = "You are too close to the bridge.";
+    feedback.style.color = "var(--red)";
+  }else{
+    feedback.textContent = "You are too close to the fingerboard.";
+    feedback.style.color = "var(--red)";
+  }
+}
+
+function startExercise(){
+  if(running) return;
+  running = true;
+  startButton.textContent = "Running…";
+
+  timerId = setInterval(()=>{
+    remaining--;
+    timerValue.textContent = formatTime(remaining);
+
+    if(remaining <= 0){
+      clearInterval(timerId);
+      timerId = null;
+      running = false;
+      startButton.textContent = "✓ Exercise Complete";
+      feedback.textContent = "Wonderful work—your straight bow practice is complete.";
+      feedback.style.color = "var(--green)";
+    }
+  },1000);
+}
+
+function resetExercise(){
+  clearInterval(timerId);
+  timerId = null;
+  running = false;
+  remaining = Number(durationSelect.value);
+  timerValue.textContent = formatTime(remaining);
+  angleSlider.value = 0;
+  laneSlider.value = targetForExercise().lane;
+  startButton.textContent = "▶ Start Exercise";
+  updateTrainer();
+}
+
+function toggleAutoBow(){
+  if(autoPlaying){
+    clearInterval(autoId);
+    autoId = null;
+    autoPlaying = false;
+    autoButton.textContent = "Auto Bow";
+    return;
+  }
+
+  autoPlaying = true;
+  autoButton.textContent = "Stop Auto Bow";
+
+  autoId = setInterval(()=>{
+    let value = Number(angleSlider.value);
+    value += autoDirection * 1;
+
+    if(value >= 12 || value <= -12){
+      autoDirection *= -1;
+    }
+
+    angleSlider.value = value;
+    updateTrainer();
+  },120);
+}
+
+angleSlider.addEventListener("input",updateTrainer);
+laneSlider.addEventListener("input",updateTrainer);
+exerciseSelect.addEventListener("change",resetExercise);
+durationSelect.addEventListener("change",resetExercise);
+startButton.addEventListener("click",startExercise);
+resetButton.addEventListener("click",resetExercise);
+autoButton.addEventListener("click",toggleAutoBow);
+
+let tipIndex = 0;
+setInterval(()=>{
+  tipIndex = (tipIndex+1)%tips.length;
+  tipBox.textContent = tips[tipIndex];
+},7000);
+
+resetExercise();
+</script>
+</body>
+</html>
