@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finger Placement Trainer | Melinda Coles Violin Academy</title>
+<meta name="description" content="Free beginner violin finger placement trainer for learning first-position notes on the G, D, A and E strings.">
+
+<style>
+:root{
+  --cream:#f7f3eb;
+  --card:#fffdf9;
+  --green:#2f4434;
+  --sage:#a9b79b;
+  --sage-dark:#87977b;
+  --gold:#ba9548;
+  --text:#344038;
+  --muted:#747a74;
+  --line:#e5ddd0;
+  --shadow:0 18px 50px rgba(52,64,56,.12);
+  --correct:#6e8b68;
+  --wrong:#a86655;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at top left,rgba(186,149,72,.08),transparent 34%),
+    var(--cream);
+  color:var(--text);
+}
+.page{width:min(1080px,94%);margin:auto;padding:28px 0 50px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{
+  width:58px;height:58px;border:2px solid var(--gold);border-radius:50%;
+  display:grid;place-items:center;color:var(--green);background:var(--card);
+  font:700 25px Georgia,serif;
+}
+.brand strong{display:block;color:var(--green);font-size:18px}
+.brand span{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:28px;
+  box-shadow:var(--shadow);padding:34px;
+}
+.hero{text-align:center}
+.eyebrow{
+  color:var(--gold);letter-spacing:.15em;text-transform:uppercase;
+  font-size:13px;font-weight:bold;
+}
+h1{margin:9px 0 6px;color:var(--green);font-size:clamp(36px,6vw,60px)}
+.subtitle{color:var(--muted);font-size:18px;margin-bottom:28px}
+.controls{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;
+}
+.control{
+  border:1px solid var(--line);border-radius:16px;padding:16px;text-align:left;
+}
+.control label{display:block;color:var(--green);font-weight:bold;margin-bottom:8px;font-size:14px}
+select,button{font:inherit}
+select{
+  width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;
+  background:var(--card);color:var(--text);
+}
+.trainer{
+  display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:stretch;
+}
+.panel{
+  border:1px solid var(--line);border-radius:20px;padding:22px;
+  background:rgba(255,255,255,.35);
+}
+.panel h2{margin:0 0 14px;color:var(--green);font-size:18px}
+.fingerboard-wrap{overflow-x:auto;padding-bottom:6px}
+.fingerboard{
+  min-width:720px;position:relative;height:300px;margin:12px 0 0;
+  border-radius:24px;background:linear-gradient(90deg,#6b3f22,#3a2418);
+  box-shadow:inset 0 0 0 4px rgba(255,255,255,.05);
+  padding:30px 34px;
+}
+.nut{
+  position:absolute;left:70px;top:20px;width:8px;height:260px;
+  background:#e5d5b2;border-radius:4px;z-index:3;
+}
+.string{
+  position:absolute;left:42px;right:28px;height:3px;background:#d8d2c7;
+  box-shadow:0 1px 1px rgba(0,0,0,.4);
+}
+.s1{top:72px}.s2{top:123px}.s3{top:174px}.s4{top:225px}
+.string-label{
+  position:absolute;left:12px;color:#fff;font-weight:bold;font-size:18px;
+  transform:translateY(-50%);
+}
+.l1{top:72px}.l2{top:123px}.l3{top:174px}.l4{top:225px}
+.position-dot{
+  position:absolute;width:34px;height:34px;border-radius:50%;
+  border:3px solid #fff;background:var(--sage);cursor:pointer;
+  transform:translate(-50%,-50%);
+  display:grid;place-items:center;color:#fff;font-weight:bold;
+  transition:.15s;z-index:4;
+}
+.position-dot:hover{transform:translate(-50%,-50%) scale(1.1)}
+.position-dot.correct{background:var(--correct);box-shadow:0 0 0 6px rgba(110,139,104,.18)}
+.position-dot.wrong{background:var(--wrong);box-shadow:0 0 0 6px rgba(168,102,85,.15)}
+.marker{
+  position:absolute;top:16px;bottom:16px;width:2px;background:rgba(255,255,255,.16)
+}
+.m1{left:220px}.m2{left:365px}.m3{left:510px}.m4{left:655px}
+.marker-label{
+  position:absolute;bottom:8px;color:#eadfcf;font-size:13px;transform:translateX(-50%)
+}
+.ml1{left:220px}.ml2{left:365px}.ml3{left:510px}.ml4{left:655px}
+.prompt-card{
+  border:1px solid var(--line);border-radius:18px;padding:22px;text-align:center;
+  background:rgba(186,149,72,.06);
+}
+.prompt-note{
+  font:700 76px Georgia,serif;color:var(--green);line-height:1;margin:8px 0;
+}
+.prompt-detail{color:var(--muted);font-size:16px;min-height:24px}
+.status{
+  min-height:34px;margin-top:16px;font-weight:bold;color:var(--gold);
+}
+.actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:20px}
+.btn{
+  border:none;border-radius:12px;padding:14px 22px;cursor:pointer;font-weight:bold;
+}
+.primary{background:var(--sage-dark);color:white}
+.secondary{background:transparent;border:1px solid var(--line);color:var(--text)}
+.score-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px;
+}
+.score-box{
+  border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center;
+}
+.score-box strong{display:block;color:var(--green);font-size:24px}
+.score-box span{color:var(--muted);font-size:12px}
+.legend{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px;
+}
+.legend-item{
+  border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;
+}
+.legend-item strong{display:block;color:var(--green)}
+.tip{
+  margin-top:20px;padding:17px;border-left:4px solid var(--gold);
+  border-radius:12px;background:rgba(186,149,72,.08);text-align:left;
+}
+.home-link{
+  display:inline-block;margin-top:24px;color:var(--green);font-weight:bold;text-decoration:none;
+}
+footer{margin-top:24px;text-align:center;color:var(--muted);font-size:14px}
+@media(max-width:850px){
+  .controls,.trainer{grid-template-columns:1fr}
+  .card{padding:24px 18px}
+  .brand span{display:none}
+  .legend{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">MC</div>
+      <div>
+        <strong>Melinda Coles Violin Academy</strong>
+        <span>Gentle, encouraging tools for adult violin learners</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="card hero">
+    <div class="eyebrow">Free Violin Practice Tool</div>
+    <h1>Finger Placement Trainer</h1>
+    <div class="subtitle">Learn first-position notes, build finger confidence and recognise where each note belongs.</div>
+
+    <div class="controls">
+      <div class="control">
+        <label for="mode">Practice mode</label>
+        <select id="mode">
+          <option value="guided">Guided practice</option>
+          <option value="quiz">Quiz mode</option>
+        </select>
+      </div>
+
+      <div class="control">
+        <label for="stringFilter">String selection</label>
+        <select id="stringFilter">
+          <option value="all">All strings</option>
+          <option value="G">G string</option>
+          <option value="D">D string</option>
+          <option value="A">A string</option>
+          <option value="E">E string</option>
+        </select>
+      </div>
+
+      <div class="control">
+        <label for="fingerPattern">Finger pattern</label>
+        <select id="fingerPattern">
+          <option value="major">Major pattern — high 2</option>
+          <option value="natural">Natural pattern — low 2</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="trainer">
+      <section class="panel">
+        <h2>Tap the Correct Finger Position</h2>
+
+        <div class="fingerboard-wrap">
+          <div class="fingerboard" id="fingerboard">
+            <div class="nut"></div>
+
+            <div class="string s1"></div>
+            <div class="string s2"></div>
+            <div class="string s3"></div>
+            <div class="string s4"></div>
+
+            <div class="string-label l1">E</div>
+            <div class="string-label l2">A</div>
+            <div class="string-label l3">D</div>
+            <div class="string-label l4">G</div>
+
+            <div class="marker m1"></div><div class="marker-label ml1">1</div>
+            <div class="marker m2"></div><div class="marker-label ml2">2</div>
+            <div class="marker m3"></div><div class="marker-label ml3">3</div>
+            <div class="marker m4"></div><div class="marker-label ml4">4</div>
+          </div>
+        </div>
+
+        <div class="legend">
+          <div class="legend-item"><strong>1</strong><span>Index</span></div>
+          <div class="legend-item"><strong>2</strong><span>Middle</span></div>
+          <div class="legend-item"><strong>3</strong><span>Ring</span></div>
+          <div class="legend-item"><strong>4</strong><span>Little finger</span></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="prompt-card">
+          <div class="eyebrow">Find This Note</div>
+          <div class="prompt-note" id="promptNote">E</div>
+          <div class="prompt-detail" id="promptDetail">1st finger on the D string</div>
+          <div class="status" id="status">Choose the matching finger position.</div>
+
+          <div class="actions">
+            <button class="btn secondary" id="playNote">🔊 Hear Note</button>
+            <button class="btn primary" id="nextBtn">Next Note</button>
+            <button class="btn secondary" id="resetBtn">Reset</button>
+          </div>
+        </div>
+
+        <div class="score-grid">
+          <div class="score-box"><strong id="correctScore">0</strong><span>Correct</span></div>
+          <div class="score-box"><strong id="attemptScore">0</strong><span>Attempts</span></div>
+          <div class="score-box"><strong id="accuracyScore">0%</strong><span>Accuracy</span></div>
+        </div>
+
+        <div class="tip" id="tipBox">
+          <strong>Practice tip:</strong> Keep your fingers curved and close to the string. Use the fingertip rather than the flat pad of the finger.
+        </div>
+      </section>
+    </div>
+
+    <a class="home-link" href="index.html">← Return to Practice Studio</a>
+  </main>
+
+  <footer>
+    <em>Music is my magic.</em><br>
+    © Melinda Coles Violin Academy
+  </footer>
+</div>
+
+<script>
+const modeEl = document.getElementById("mode");
+const stringFilterEl = document.getElementById("stringFilter");
+const fingerPatternEl = document.getElementById("fingerPattern");
+const fingerboard = document.getElementById("fingerboard");
+const promptNote = document.getElementById("promptNote");
+const promptDetail = document.getElementById("promptDetail");
+const statusEl = document.getElementById("status");
+const playNoteBtn = document.getElementById("playNote");
+const nextBtn = document.getElementById("nextBtn");
+const resetBtn = document.getElementById("resetBtn");
+const correctScore = document.getElementById("correctScore");
+const attemptScore = document.getElementById("attemptScore");
+const accuracyScore = document.getElementById("accuracyScore");
+const tipBox = document.getElementById("tipBox");
+
+let current = null;
+let correct = 0;
+let attempts = 0;
+let audioContext = null;
+
+const stringY = {E:72,A:123,D:174,G:225};
+const fingerX = {1:220,2:365,3:510,4:655};
+
+const majorNotes = [
+  {string:"G",finger:1,note:"A",freq:220.00},
+  {string:"G",finger:2,note:"B",freq:246.94},
+  {string:"G",finger:3,note:"C",freq:261.63},
+  {string:"G",finger:4,note:"D",freq:293.66},
+
+  {string:"D",finger:1,note:"E",freq:329.63},
+  {string:"D",finger:2,note:"F#",freq:369.99},
+  {string:"D",finger:3,note:"G",freq:392.00},
+  {string:"D",finger:4,note:"A",freq:440.00},
+
+  {string:"A",finger:1,note:"B",freq:493.88},
+  {string:"A",finger:2,note:"C#",freq:554.37},
+  {string:"A",finger:3,note:"D",freq:587.33},
+  {string:"A",finger:4,note:"E",freq:659.25},
+
+  {string:"E",finger:1,note:"F#",freq:739.99},
+  {string:"E",finger:2,note:"G#",freq:830.61},
+  {string:"E",finger:3,note:"A",freq:880.00},
+  {string:"E",finger:4,note:"B",freq:987.77}
+];
+
+const naturalNotes = [
+  {string:"G",finger:1,note:"A",freq:220.00},
+  {string:"G",finger:2,note:"Bb",freq:233.08},
+  {string:"G",finger:3,note:"C",freq:261.63},
+  {string:"G",finger:4,note:"D",freq:293.66},
+
+  {string:"D",finger:1,note:"E",freq:329.63},
+  {string:"D",finger:2,note:"F",freq:349.23},
+  {string:"D",finger:3,note:"G",freq:392.00},
+  {string:"D",finger:4,note:"A",freq:440.00},
+
+  {string:"A",finger:1,note:"B",freq:493.88},
+  {string:"A",finger:2,note:"C",freq:523.25},
+  {string:"A",finger:3,note:"D",freq:587.33},
+  {string:"A",finger:4,note:"E",freq:659.25},
+
+  {string:"E",finger:1,note:"F#",freq:739.99},
+  {string:"E",finger:2,note:"G",freq:783.99},
+  {string:"E",finger:3,note:"A",freq:880.00},
+  {string:"E",finger:4,note:"B",freq:987.77}
+];
+
+function currentPool(){
+  const base = fingerPatternEl.value === "major" ? majorNotes : naturalNotes;
+  const filter = stringFilterEl.value;
+  return filter === "all" ? base : base.filter(item => item.string === filter);
+}
+
+function buildDots(){
+  fingerboard.querySelectorAll(".position-dot").forEach(el => el.remove());
+
+  const notes = fingerPatternEl.value === "major" ? majorNotes : naturalNotes;
+
+  notes.forEach(item => {
+    const dot = document.createElement("button");
+    dot.className = "position-dot";
+    dot.style.left = fingerX[item.finger] + "px";
+    dot.style.top = stringY[item.string] + "px";
+    dot.textContent = item.finger;
+    dot.dataset.string = item.string;
+    dot.dataset.finger = item.finger;
+    dot.setAttribute("aria-label", `${item.finger} finger on ${item.string} string`);
+    dot.addEventListener("click", () => handleChoice(dot,item));
+    fingerboard.appendChild(dot);
+  });
+}
+
+function newPrompt(){
+  clearFeedback();
+  const pool = currentPool();
+  current = pool[Math.floor(Math.random()*pool.length)];
+  promptNote.textContent = current.note;
+
+  if(modeEl.value === "guided"){
+    promptDetail.textContent = `${ordinal(current.finger)} finger on the ${current.string} string`;
+  }else{
+    promptDetail.textContent = `Which finger position plays ${current.note}?`;
+  }
+
+  statusEl.textContent = "Choose the matching finger position.";
+}
+
+function ordinal(n){
+  return n === 1 ? "1st" : n === 2 ? "2nd" : n === 3 ? "3rd" : "4th";
+}
+
+function handleChoice(dot,item){
+  if(!current) return;
+
+  attempts++;
+  const isCorrect = item.string === current.string && item.finger === current.finger;
+
+  if(isCorrect){
+    correct++;
+    dot.classList.add("correct");
+    statusEl.textContent = `Correct — ${current.note} is ${ordinal(current.finger)} finger on the ${current.string} string.`;
+  }else{
+    dot.classList.add("wrong");
+    statusEl.textContent = "Not quite. Look carefully at the string and finger number, then try again.";
+  }
+
+  updateScore();
+}
+
+function clearFeedback(){
+  fingerboard.querySelectorAll(".position-dot").forEach(dot => {
+    dot.classList.remove("correct","wrong");
+  });
+}
+
+function updateScore(){
+  correctScore.textContent = correct;
+  attemptScore.textContent = attempts;
+  accuracyScore.textContent = attempts ? Math.round(correct/attempts*100) + "%" : "0%";
+}
+
+playNoteBtn.addEventListener("click",()=>{
+  if(!current) return;
+
+  audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
+  if(audioContext.state === "suspended") audioContext.resume();
+
+  const osc = audioContext.createOscillator();
+  const gain = audioContext.createGain();
+
+  osc.type = "sine";
+  osc.frequency.value = current.freq;
+
+  gain.gain.setValueAtTime(0.0001,audioContext.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.22,audioContext.currentTime+0.03);
+  gain.gain.exponentialRampToValueAtTime(0.0001,audioContext.currentTime+1.1);
+
+  osc.connect(gain);
+  gain.connect(audioContext.destination);
+  osc.start();
+  osc.stop(audioContext.currentTime+1.15);
+});
+
+nextBtn.addEventListener("click",newPrompt);
+
+resetBtn.addEventListener("click",()=>{
+  correct = 0;
+  attempts = 0;
+  updateScore();
+  newPrompt();
+});
+
+modeEl.addEventListener("change",newPrompt);
+stringFilterEl.addEventListener("change",newPrompt);
+fingerPatternEl.addEventListener("change",()=>{
+  buildDots();
+  newPrompt();
+  tipBox.innerHTML = fingerPatternEl.value === "major"
+    ? "<strong>Practice tip:</strong> This pattern uses a high second finger. Keep fingers curved and close to the strings."
+    : "<strong>Practice tip:</strong> This pattern uses a low second finger. Listen carefully to the smaller space between fingers 1 and 2.";
+});
+
+buildDots();
+newPrompt();
+</script>
+</body>
+</html>
