@@ -842,6 +842,9 @@ h1{font-family:var(--display);font-weight:700;color:var(--forest);font-size:2rem
 #reading{font-family:var(--body);font-size:1.24rem;line-height:2;color:#2A2621;font-weight:500;white-space:pre-wrap;
   background:rgba(255,255,255,.55);border:1px solid rgba(170,182,162,.4);border-radius:16px;padding:26px;margin:26px 0 0;backdrop-filter:blur(2px)}
 #reading .s{border-radius:5px;padding:1px 3px}
+#reading.live .s{cursor:pointer}
+#reading.live .s:hover{background:rgba(170,182,162,.28)}
+.synchint{font-family:var(--body);font-size:.88rem;color:var(--eucalypt);line-height:1.6;margin:12px 0 0}
 #reading .s.on{background:rgba(197,161,92,.38);color:#2A2621;box-shadow:0 0 0 2px rgba(197,161,92,.22)}
 #reading .s.done{color:#6E7A6B}
 label{display:block;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;color:var(--eucalypt);margin:0 0 6px}
@@ -893,16 +896,15 @@ select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
       <span id="arateLabel">1</span>
     </div>
     <p class="minehint">Slowing this down keeps Melinda&rsquo;s voice sounding normal.</p>
-    <p class="orline">or have the words read out and highlighted</p>
   </div>
 
   <button class="bigbtn" id="play">Listen to this lesson</button>
-  <div class="mini">
+  <div class="mini" id="miniRow">
     <button id="pause" disabled>Pause</button>
     <button id="restart" disabled>Start again</button>
   </div>
 
-  <div class="opt">
+  <div class="opt" id="synthOpts">
     <div class="speed">
       <span class="lbl">Speed</span>
       <input type="range" id="rate" min="0.5" max="1.2" step="0.05" value="0.9" aria-label="Reading speed">
@@ -920,6 +922,7 @@ select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
   </div>
 
   <div id="reading"></div>
+  <p class="synchint" id="syncHint" style="display:none">Tap any line to jump to that part of the recording.</p>
 
 
   <p class="foot">Melinda Coles Violin Academy</p>
@@ -995,6 +998,8 @@ const synth = window.speechSynthesis;
 const $ = id => document.getElementById(id);
 const head = $('head'), lede = $('lede'), chooser = $('chooser'), pick = $('pick');
 const pastebox = $('pastebox'), paste = $('own'), voiceSel = $('voice');
+const syncHint = $('syncHint');
+const miniRow = $('miniRow'), synthOpts = $('synthOpts');
 const mineBox = $('mine'), au = $('au'), arate = $('arate'), arateLabel = $('arateLabel');
 const playBtn = $('play'), pauseBtn = $('pause'), restartBtn = $('restart');
 const auNote = $('auNote');
@@ -1096,7 +1101,7 @@ function currentText() {
   return LESSONS[pick.value].text;
 }
 
-function showText(t) {
+let showText = function (t) {
   reading.innerHTML = '';
   chunks = (t.match(/[^.!?\n]+[.!?]*\s*|\n+/g) || [t]).filter(c => c.length);
   chunks.forEach((c, i) => {
@@ -1104,7 +1109,7 @@ function showText(t) {
     s.className = 's'; s.dataset.i = i; s.textContent = c;
     reading.appendChild(s);
   });
-}
+};
 
 function paint(i) {
   reading.querySelectorAll('.s').forEach(el => {
@@ -1176,6 +1181,62 @@ setInterval(() => {
 }, 9000);
 window.addEventListener('beforeunload', () => synth.cancel());
 
+// ---- following the words along with Melinda's recording ----
+// There are no real timestamps for a recording, so each line is given a share
+// of the running time based on how long it is to say, with a little extra for
+// the pause at a paragraph break. Tapping a line jumps straight to it.
+let marks = [];
+
+function buildMarks() {
+  const spans = [...reading.querySelectorAll('.s')];
+  const dur = au.duration;
+  if (!spans.length || !isFinite(dur) || dur <= 0) { marks = []; return; }
+
+  const weights = spans.map(s => {
+    const t = s.textContent;
+    if (!t.trim()) return 3.2;                    // a pause between paragraphs
+    return t.trim().length + 5;                   // a beat at the end of a line
+  });
+  const total = weights.reduce((a, b) => a + b, 0);
+
+  let run = 0;
+  marks = weights.map(w => {
+    const at = (run / total) * dur;
+    run += w;
+    return at;
+  });
+
+  reading.classList.add('live');
+  syncHint.style.display = 'block';
+}
+
+function followAudio() {
+  if (!marks.length) return;
+  const t = au.currentTime;
+  let i = 0;
+  while (i + 1 < marks.length && marks[i + 1] <= t) i++;
+  const spans = reading.querySelectorAll('.s');
+  if (!spans[i] || !spans[i].textContent.trim()) return;
+  if (+spans[i].dataset.i !== lastPainted) { lastPainted = +spans[i].dataset.i; paint(lastPainted); }
+}
+let lastPainted = -1;
+
+au.addEventListener('durationchange', buildMarks);
+au.addEventListener('timeupdate', followAudio);
+au.addEventListener('pause', () => { lastPainted = -1; });
+au.addEventListener('ended', () => {
+  lastPainted = -1;
+  reading.querySelectorAll('.s').forEach(el => el.classList.remove('on', 'done'));
+});
+
+reading.addEventListener('click', e => {
+  const s = e.target.closest('.s');
+  if (!s || !marks.length || !reading.classList.contains('live')) return;
+  au.currentTime = marks[+s.dataset.i] || 0;
+  lastPainted = -1;
+  au.play();
+});
+
 // ---- Melinda's own recording, when there is one ----
 function keepPitch() {
   if ('preservesPitch' in au) au.preservesPitch = true;
@@ -1187,16 +1248,39 @@ function loadRecording() {
   const lesson = direct || (pick.value !== 'paste' ? LESSONS[pick.value] : null);
   const src = lesson && lesson.audio;
   au.pause();
-  if (!src) { mineBox.style.display = 'none'; au.removeAttribute('src'); return; }
+  if (!src) { mineBox.style.display = 'none'; au.removeAttribute('src'); synthVisible(true); return; }
   au.setAttribute('src', src);
   au.playbackRate = +arate.value;
   keepPitch();
   au.load();
 }
 
-// If the file is not there, say nothing - just fall back to the read-aloud.
-au.addEventListener('error', () => { mineBox.style.display = 'none'; });
-au.addEventListener('loadedmetadata', () => { mineBox.style.display = 'block'; keepPitch(); });
+// rebuild the timings if the text is redrawn
+const _showText = showText;
+showText = function (t) { _showText(t); if (au.duration) buildMarks(); };
+
+// A lesson Melinda has recorded is heard in her voice only. The read-aloud
+// appears solely when there is no recording for that lesson.
+function synthVisible(on) {
+  playBtn.style.display = on ? 'block' : 'none';
+  miniRow.style.display = on ? 'flex' : 'none';
+  synthOpts.style.display = on ? 'block' : 'none';
+}
+
+au.addEventListener('error', () => {
+  mineBox.style.display = 'none';
+  reading.classList.remove('live');
+  syncHint.style.display = 'none';
+  marks = [];
+  synthVisible(true);
+});
+
+au.addEventListener('loadedmetadata', () => {
+  mineBox.style.display = 'block';
+  synthVisible(false);
+  if (speaking) { speaking = false; synth.cancel(); finish(); }
+  keepPitch();
+});
 au.addEventListener('play', () => { if (speaking) { speaking = false; synth.cancel(); finish(); } });
 
 arate.addEventListener('input', () => {
