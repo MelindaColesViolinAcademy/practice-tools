@@ -822,257 +822,283 @@ table.chart td button[aria-pressed="true"] {
 
 </style>
 <style>
-.wrap{max-width:820px;margin:0 auto;padding:28px 20px 80px}
-.eyebrow{font-family:var(--body);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--eucalypt);margin:0 0 6px}
-h1{font-family:var(--display);font-weight:700;color:var(--forest);font-size:2rem;line-height:1.15;margin:0 0 10px}
-.lede{font-family:var(--body);color:var(--charcoal);font-size:1.02rem;line-height:1.65;margin:0 0 26px;max-width:60ch}
-.card{background:var(--cream);border:1px solid var(--pale-sage);border-radius:14px;padding:20px;margin:0 0 20px}
-.card h2{font-family:var(--display);font-weight:700;color:var(--forest);font-size:1.05rem;margin:0 0 14px}
-label{display:block;font-family:var(--body);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--eucalypt);margin:0 0 6px}
-select,textarea{width:100%;box-sizing:border-box;font-family:var(--body);font-size:1rem;color:var(--charcoal);background:#fff;border:1px solid var(--sage);border-radius:9px;padding:11px 12px}
+.wrap{max-width:780px;margin:0 auto;padding:30px 20px 90px}
+.eyebrow{font-family:var(--body);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--eucalypt);margin:0 0 8px}
+h1{font-family:var(--display);font-weight:700;color:var(--forest);font-size:2rem;line-height:1.18;margin:0 0 14px}
+.lede{font-family:var(--body);color:#38332C;font-size:1.05rem;line-height:1.7;margin:0 0 28px;max-width:58ch}
+.bigbtn{display:block;width:100%;box-sizing:border-box;font-family:var(--display);font-weight:700;font-size:1.5rem;
+  background:var(--forest);color:var(--ivory);border:none;border-radius:999px;padding:26px 20px;cursor:pointer;
+  box-shadow:0 3px 0 #26331f;transition:.12s}
+.bigbtn:hover{background:#3a5040}
+.bigbtn:active{transform:translateY(2px);box-shadow:0 1px 0 #26331f}
+.bigbtn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.bigbtn.stopmode{background:var(--blush);color:#5b3f38;box-shadow:0 3px 0 #c0a49c}
+.bigbtn.stopmode:hover{background:#e3ccc5}
+.mini{display:flex;gap:10px;margin:14px 0 0}
+.mini button{flex:1;font-family:var(--body);font-weight:600;font-size:1rem;background:transparent;color:var(--forest);
+  border:1px solid var(--sage);border-radius:999px;padding:13px;cursor:pointer}
+.mini button:hover{background:var(--pale-sage)}
+.mini button:disabled{opacity:.35;cursor:not-allowed}
+#reading{font-family:var(--body);font-size:1.24rem;line-height:2;color:#2A2621;font-weight:500;white-space:pre-wrap;
+  background:rgba(255,255,255,.55);border:1px solid rgba(170,182,162,.4);border-radius:16px;padding:26px;margin:26px 0 0;backdrop-filter:blur(2px)}
+#reading .s{border-radius:5px;padding:1px 3px}
+#reading .s.on{background:rgba(197,161,92,.38);color:#2A2621;box-shadow:0 0 0 2px rgba(197,161,92,.22)}
+#reading .s.done{color:#6E7A6B}
+label{display:block;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;color:var(--eucalypt);margin:0 0 6px}
+select,textarea{width:100%;box-sizing:border-box;font-family:var(--body);font-size:1rem;color:#2A2621;
+  background:#fff;border:1px solid var(--sage);border-radius:9px;padding:12px}
+textarea{min-height:130px;line-height:1.6;margin-top:6px}
 select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
-textarea{min-height:120px;line-height:1.6;resize:vertical}
-.row{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 14px}
-.row>div{flex:1 1 220px}
-.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:4px 0 0}
-button{font-family:var(--body);font-weight:600;font-size:.95rem;border-radius:999px;border:1px solid transparent;padding:12px 24px;cursor:pointer;transition:.15s}
-button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-.primary{background:var(--forest);color:var(--ivory)}
-.primary:hover{background:#26331f}
-.ghost{background:transparent;color:var(--forest);border-color:var(--sage)}
-.ghost:hover{background:var(--pale-sage)}
-button:disabled{opacity:.4;cursor:not-allowed}
-.speed{display:flex;align-items:center;gap:10px;flex:1 1 240px;min-width:200px}
-.speed input{flex:1;accent-color:var(--forest)}
-.speed span{font-family:var(--body);font-size:.9rem;color:var(--charcoal);min-width:76px}
-#reading{font-family:var(--body);font-size:1.18rem;line-height:1.95;color:var(--charcoal);white-space:pre-wrap}
-#reading .s{border-radius:5px;padding:1px 3px;transition:background .15s}
-#reading .s.on{background:var(--gold);color:#2b2620}
-#reading .s.done{color:var(--eucalypt)}
-.empty{font-family:var(--body);color:var(--eucalypt);font-style:italic}
-.note{font-family:var(--body);font-size:.9rem;line-height:1.6;color:var(--eucalypt);margin:10px 0 0}
-.warn{background:var(--blush);color:#5b3f38;border-radius:9px;padding:12px 14px;font-family:var(--body);font-size:.92rem;line-height:1.55;margin:0 0 20px;display:none}
-.tips{border-top:1px solid var(--pale-sage);margin:34px 0 0;padding:22px 0 0}
-.tips h2{font-family:var(--display);color:var(--forest);font-size:1.05rem;margin:0 0 10px}
-.tips li{font-family:var(--body);color:var(--charcoal);line-height:1.7;margin:0 0 7px}
-.modes{display:flex;gap:0;background:var(--pale-sage);border-radius:999px;padding:4px;margin:0 0 18px;max-width:420px}
-.modes button{flex:1;border-radius:999px;padding:10px 14px;background:transparent;color:var(--forest);border:none;font-size:.9rem}
-.modes button.on{background:var(--forest);color:var(--ivory)}
-#mine audio{width:100%;margin:6px 0 14px}
-#noaudio{font-family:var(--body);color:var(--eucalypt);font-style:italic;line-height:1.6}
-.foot{font-family:var(--body);font-size:.82rem;color:var(--eucalypt);text-align:center;margin:44px 0 0}
+.minelabel{font-family:var(--display);font-weight:700;color:var(--forest);font-size:1.1rem;margin:0 0 12px}
+#mine{background:rgba(255,255,255,.55);border:1px solid rgba(170,182,162,.4);border-radius:16px;padding:22px 20px;margin:0 0 26px}
+#mine audio{width:100%}
+.minehint{font-family:var(--body);font-size:.88rem;color:var(--eucalypt);line-height:1.6;margin:10px 0 0}
+.orline{font-family:var(--body);font-size:.9rem;color:var(--eucalypt);text-align:center;margin:20px 0 -8px;
+  letter-spacing:.02em}
+.opt{background:var(--cream);border:1px solid var(--pale-sage);border-radius:14px;padding:18px 20px;margin:18px 0 0}
+.speed{display:flex;align-items:center;gap:14px}
+.speed input{flex:1;accent-color:var(--forest);height:26px}
+#rateLabel{font-family:var(--body);font-size:1rem;font-weight:600;color:var(--forest);min-width:34px;text-align:right}
+.voicerow{display:flex;align-items:center;gap:14px;margin:14px 0 0}
+.voicerow select{flex:1}
+.lbl{font-family:var(--body);font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--eucalypt);min-width:52px}
+.chooser{margin:0 0 26px}
+.warn{background:var(--blush);color:#5b3f38;border-radius:10px;padding:14px 16px;font-family:var(--body);
+  font-size:.94rem;line-height:1.6;margin:0 0 22px;display:none}
+.foot{font-family:var(--body);font-size:.82rem;color:var(--eucalypt);text-align:center;margin:48px 0 0}
 </style>
 
 <div class="wrap">
   <p class="eyebrow">The Music Room</p>
-  <h1>Listen to your lesson</h1>
-  <p class="lede">Choose a lesson, or paste in any text you'd like read to you. The words light up as they're spoken, so you can follow along — and you can slow the voice right down if you'd like time to take it in.</p>
+  <h1 id="head">Listen to your lesson</h1>
+  <p class="lede" id="lede">Press the button and the lesson will be read to you. The words light up as they are spoken, so you can follow along.</p>
 
   <div class="warn" id="warn"></div>
 
-  <div class="card">
-    <h2>What would you like to hear?</h2>
-    <label for="pick">Lesson</label>
+  <div class="chooser" id="chooser">
+    <label for="pick">Choose a lesson</label>
     <select id="pick"></select>
-    <div id="pastebox" style="display:none;margin-top:16px">
-      <label for="own">Your own text</label>
-      <textarea id="own" placeholder="Paste or type anything here and press Listen."></textarea>
+    <div id="pastebox" style="display:none">
+      <textarea id="own" placeholder="Paste or type anything here, then press Listen."></textarea>
     </div>
   </div>
 
-  <div class="modes" id="modes" style="display:none">
-    <button id="mMine" class="on">Melinda's voice</button>
-    <button id="mRobot">Read-along voice</button>
-  </div>
-
-  <div class="card" id="mine" style="display:none">
-    <h2>Melinda reading this lesson</h2>
-    <audio id="au" controls preload="none"></audio>
-    <div class="controls">
-      <div class="speed">
-        <input type="range" id="arate" min="0.6" max="1.2" step="0.05" value="1" aria-label="Playback speed">
-        <span id="arateLabel">Speed 1</span>
-      </div>
+  <div id="mine" style="display:none">
+    <p class="minelabel">Melinda reading this lesson</p>
+    <audio id="au" controls preload="metadata"></audio>
+    <div class="speed" style="margin-top:12px">
+      <span class="lbl">Speed</span>
+      <input type="range" id="arate" min="0.6" max="1.15" step="0.05" value="1" aria-label="Playback speed">
+      <span id="arateLabel">1</span>
     </div>
-    <p class="note">Slowing this down keeps Melinda's voice at its normal pitch &mdash; it will not go squeaky.</p>
+    <p class="minehint">Slowing this down keeps Melinda&rsquo;s voice sounding normal.</p>
+    <p class="orline">or have the words read out and highlighted</p>
   </div>
 
-  <div class="card" id="robot">
-    <h2>The voice</h2>
-    <div class="row">
-      <div>
-        <label for="voice">Voice</label>
-        <select id="voice"></select>
-      </div>
+  <button class="bigbtn" id="play">Listen to this lesson</button>
+  <div class="mini">
+    <button id="pause" disabled>Pause</button>
+    <button id="restart" disabled>Start again</button>
+  </div>
+
+  <div class="opt">
+    <div class="speed">
+      <span class="lbl">Speed</span>
+      <input type="range" id="rate" min="0.5" max="1.2" step="0.05" value="0.9" aria-label="Reading speed">
+      <span id="rateLabel">0.9</span>
     </div>
-    <div class="controls">
-      <button class="primary" id="play">▶  Listen</button>
-      <button class="ghost" id="pause" disabled>Pause</button>
-      <button class="ghost" id="stop" disabled>Stop</button>
-      <div class="speed">
-        <input type="range" id="rate" min="0.5" max="1.3" step="0.05" value="0.9" aria-label="Speaking speed">
-        <span id="rateLabel">Speed 0.9</span>
-      </div>
+    <div class="voicerow">
+      <span class="lbl">Voice</span>
+      <select id="voice"></select>
     </div>
-    <p class="note">Your voice and speed are remembered on this device.</p>
+    <p id="auNote" style="display:none;font-size:.88rem;color:#5b3f38;background:var(--blush);
+       border-radius:9px;padding:12px 14px;line-height:1.6;margin:12px 0 0">
+      This device has no Australian voice installed yet. On an iPhone or Mac you can add one free:
+      Settings, then Accessibility, then Spoken Content, then Voices, and choose English (Australia).
+      Karen and Matilda are the warmest.</p>
   </div>
 
-  <div class="card">
-    <h2>Follow along</h2>
-    <div id="reading"><span class="empty">Choose a lesson above, then press Listen.</span></div>
-  </div>
+  <div id="reading"></div>
 
-  <div class="tips">
-    <h2>Getting the most from it</h2>
-    <ul>
-      <li>Slow the speed to 0.7 the first time through, then again at normal speed.</li>
-      <li>Listen once with the violin down, then once with it up.</li>
-      <li>Press Pause whenever you want to try something before carrying on.</li>
-      <li>Headphones help if there's noise around you.</li>
-    </ul>
-  </div>
 
   <p class="foot">Melinda Coles Violin Academy</p>
 </div>
 
 <script>
-/* ------------------------------------------------------------------
+/* ==================================================================
    YOUR LESSONS
-   To add a lesson: copy one block and change the title and the text.
-   Keep the backticks ` ` around the text. Everything else stays.
------------------------------------------------------------------- */
+
+   To add one, copy a block and change the three lines.
+   "id" is the short name used in the link. Keep it lowercase with
+   dashes, and no spaces.
+
+   The button in that Podia lesson then links to:
+     https://practice.melindacoles.au/lesson-reader.html?l=THE-ID
+
+   So the lesson below is reached with:  ...lesson-reader.html?l=practice
+================================================================== */
 const LESSONS = [
   {
-    title: "What practice should really be",
-    // Recorded it yourself? Put the file in an "audio" folder beside this page
-    // and add the line below. Delete the line if there is no recording yet.
-    audio: "audio/what-practice-should-be.mp3",
-    text: `Practice is not about getting everything right. It is about spending a little time with your violin, often.
+    id: "bow-hold",
+    title: "Preparation — Rosin and the bow hold",
+    // Name your recording exactly bow-hold.m4a and upload it to the repo,
+    // and it will appear at the top of this page on its own.
+    audio: "bow-hold.m4a",
+    text: `Preparation for lessons.
 
-Ten quiet minutes a day will take you further than one long session on a Sunday. Your hands learn by returning, not by straining.
+Part one. Rosining the bow.
 
-Start each practice the same way. Sit or stand comfortably. Take one breath. Play one open string and listen to it all the way to the end of the bow.
+Rosin is essential for producing sound on the violin. It creates the friction needed for the bow hair to grip the strings and make them vibrate. Without rosin, the bow will slide across the strings and produce very little sound.
 
-If something is not working, make it smaller. Play half the line. Then a quarter. Then two notes. There is always a smaller step, and taking it is not going backwards.
+To apply rosin, hold the bow in your right hand and the rosin in your left hand.
 
-Finish while it still feels good. Stop on something you can play, so the last thing your hands remember is the thing that worked.`
-  },
-  {
-    title: "Before you begin — getting set up",
-    text: `Before you play, give yourself a moment to get comfortable.
+Place the rosin gently against the bow hair, making sure it touches the full width of the hair.
 
-Stand with your feet about hip width apart, weight even, knees soft. Let your shoulders drop away from your ears.
+Slowly move the rosin up and down along the bow hair, from the frog toward the tip. Use light, even pressure and smooth movements. There is no need to press hard. A gentle motion works best.
 
-Bring the violin up to your collarbone. Let your head rest gently, not press. If you are gripping, you are holding too hard.
+For beginners, about five to ten smooth strokes of rosin is usually enough before practice.
 
-Check your bow hand. The thumb is bent, the fingers are relaxed and curved, and the little finger rests on top. If your hand feels stiff, shake it out and start again.
+After applying rosin, tap the bow lightly, or wipe the violin strings with a soft cloth, to remove any extra rosin dust.
 
-None of this has to be perfect. It only has to be comfortable enough to play.`
-  },
-  {
-    title: "Your first notes on the A string",
-    text: `We are going to play the open A string.
+Remember, a small amount of rosin used regularly helps produce a clear, steady sound, while keeping the bow hair in good condition.
 
-Place the bow on the string, about halfway between the bridge and the fingerboard. Let the weight of your arm rest into the string. You do not need to press.
+Part two. The bow band hold.
 
-Draw the bow slowly from the frog to the tip. Listen for a steady sound, and let it last as long as the bow does.
+Take your time in learning this. This exercise helps both adult and child beginners understand how the bow hold should feel. The elastic band acts as a guide, to help your fingers find the correct position on the bow.
 
-Now come back the other way, from the tip to the frog. Same speed. Same listening.
+Step one. Grab an elastic band. Take a small elastic band that can stretch comfortably around the bow.
 
-Do that four times. If the sound scratches, you are probably too close to the bridge, or pressing too hard. Move a little away from the bridge and let the arm relax.
+Step two. Place the elastic band under the bow stick. Slide the elastic band underneath the bow stick, near the frog.
 
-That is your first note. Everything else is built on it.`
-  },
-  {
-    title: "— Paste my own text —",
-    text: ""
+Step three. Wrap one end around the screw. Take one end of the elastic band and wrap it around the bow screw.
+
+Step four. Wrap the other end the opposite way. Take the other end of the elastic band and wrap it around the screw in the opposite direction. This will create a small elastic guide under the bow.
+
+Step five. Make rabbit ears with your right hand. Bring your hand up, and make rabbit ears by lowering your two middle fingers.
+
+Step six. Place your middle fingers under the elastic band. Slide your middle and ring finger under the elastic band, so they gently rest against the bow.
+
+Step seven. Place your pinky on the screw. Keep your pinky finger straight and balanced on top of the screw at the end of the bow.
+
+Step eight. Place your index finger. Finally, slightly bend your index finger, and place it on the bow winding.
+
+This setup helps your hand develop a balanced and relaxed bow hold, which is one of the most important foundations for violin playing.
+
+Take your time, and repeat this exercise until your hand feels comfortable and natural on the bow.`
   }
 ];
 
-/* ---------- nothing below here needs changing ---------- */
+/* -------------------- nothing below needs changing -------------------- */
 
 const synth = window.speechSynthesis;
-const modes = document.getElementById('modes');
-const mMine = document.getElementById('mMine');
-const mRobot = document.getElementById('mRobot');
-const mineCard = document.getElementById('mine');
-const robotCard = document.getElementById('robot');
-const au = document.getElementById('au');
-const arate = document.getElementById('arate');
-const arateLabel = document.getElementById('arateLabel');
-let mode = 'mine';
-const pick = document.getElementById('pick');
-const paste = document.getElementById('own');
-const pastebox = document.getElementById('pastebox');
-const voiceSel = document.getElementById('voice');
-const playBtn = document.getElementById('play');
-const pauseBtn = document.getElementById('pause');
-const stopBtn = document.getElementById('stop');
-const rate = document.getElementById('rate');
-const rateLabel = document.getElementById('rateLabel');
-const reading = document.getElementById('reading');
-const warn = document.getElementById('warn');
+const $ = id => document.getElementById(id);
+const head = $('head'), lede = $('lede'), chooser = $('chooser'), pick = $('pick');
+const pastebox = $('pastebox'), paste = $('own'), voiceSel = $('voice');
+const mineBox = $('mine'), au = $('au'), arate = $('arate'), arateLabel = $('arateLabel');
+const playBtn = $('play'), pauseBtn = $('pause'), restartBtn = $('restart');
+const auNote = $('auNote');
+const rate = $('rate'), rateLabel = $('rateLabel'), reading = $('reading'), warn = $('warn');
 
 if (!synth) {
   warn.style.display = 'block';
-  warn.textContent = "This browser can't read text aloud. Try Safari, Chrome or Edge.";
+  warn.textContent = "This browser cannot read text aloud. Please try Safari, Chrome or Edge.";
   playBtn.disabled = true;
 }
+
+// Which lesson? ?l=id in the link picks one and hides the chooser.
+const wanted = new URLSearchParams(location.search).get('l');
+const direct = wanted ? LESSONS.find(l => l.id === wanted) : null;
 
 LESSONS.forEach((l, i) => {
   const o = document.createElement('option');
   o.value = i; o.textContent = l.title; pick.appendChild(o);
 });
+const pasteOpt = document.createElement('option');
+pasteOpt.value = 'paste'; pasteOpt.textContent = 'Something else — paste it in';
+pick.appendChild(pasteOpt);
 
-let voices = [], chunks = [], idx = 0, speaking = false;
+if (direct) {
+  chooser.style.display = 'none';
+  head.textContent = direct.title;
+  lede.textContent = 'Press the button and this lesson will be read to you. The words light up as they are spoken, so you can follow along.';
+  document.title = direct.title + ' — read aloud';
+}
+
+let voices = [], chunks = [], speaking = false;
+
+const isAU = v => (v.lang || '').toLowerCase() === 'en-au';
+// Australian voices that ship on Mac, iPhone, Windows and Android.
+const AU_QUALITY = ['karen', 'matilda', 'catherine', 'nicole', 'tina', 'lee', 'russell', 'james'];
+
+function auScore(v) {
+  const n = v.name.toLowerCase();
+  let s = 0;
+  if (/premium|enhanced|neural|natural|siri/.test(n)) s -= 4;   // better sounding first
+  const i = AU_QUALITY.findIndex(q => n.includes(q));
+  s += (i === -1 ? 9 : i);
+  if (v.localService) s -= 1;                                    // works offline
+  return s;
+}
 
 function loadVoices() {
-  voices = synth.getVoices().filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
-  if (!voices.length) voices = synth.getVoices();
+  const all = synth ? synth.getVoices() : [];
+  voices = all.filter(v => (v.lang || '').toLowerCase().startsWith('en'));
+  if (!voices.length) voices = all;
+
+  const rank = v => ({ 'en-au': 0, 'en-nz': 1, 'en-gb': 2, 'en-ie': 3 })[(v.lang||'').toLowerCase()] ?? 4;
+  voices.sort((a, b) =>
+    rank(a) - rank(b) ||
+    (isAU(a) && isAU(b) ? auScore(a) - auScore(b) : 0) ||
+    a.name.localeCompare(b.name));
+
   voiceSel.innerHTML = '';
-  const rank = v => {
-    const l = v.lang.toLowerCase();
-    if (l === 'en-au') return 0;
-    if (l === 'en-gb') return 1;
-    if (l === 'en-nz' || l === 'en-ie') return 2;
-    return 3;
-  };
-  voices.sort((a, b) => rank(a) - rank(b) || a.name.localeCompare(b.name));
+  const aus = document.createElement('optgroup'); aus.label = 'Australian voices';
+  const oth = document.createElement('optgroup'); oth.label = 'Other English voices';
+  let auCount = 0;
+
   voices.forEach((v, i) => {
     const o = document.createElement('option');
     o.value = i;
-    o.textContent = v.name + (v.lang.toLowerCase() === 'en-au' ? '  (Australian)' : '  (' + v.lang + ')');
-    voiceSel.appendChild(o);
+    o.textContent = v.name;
+    if (isAU(v)) { aus.appendChild(o); auCount++; }
+    else { o.textContent = v.name + '  (' + v.lang + ')'; oth.appendChild(o); }
   });
-  const saved = localStorage.getItem('mcva-voice');
-  if (saved !== null && voices[saved]) voiceSel.value = saved;
+
+  if (auCount) voiceSel.appendChild(aus);
+  voiceSel.appendChild(oth);
+  auNote.style.display = auCount ? 'none' : 'block';
+
+  // Remember the voice by name. Positions shift between devices and updates,
+  // so a saved number would point at the wrong voice.
+  const saved = localStorage.getItem('mcva-voice-name');
+  const byName = saved ? voices.findIndex(v => v.name === saved) : -1;
+  voiceSel.value = byName > -1 ? byName : 0;
 }
 loadVoices();
 if (synth) synth.onvoiceschanged = loadVoices;
 
-const savedRate = localStorage.getItem('mcva-rate');
-if (savedRate) { rate.value = savedRate; }
-rateLabel.textContent = 'Speed ' + (+rate.value).toFixed(2).replace(/0$/, '');
-
-rate.addEventListener('input', () => {
-  rateLabel.textContent = 'Speed ' + (+rate.value).toFixed(2).replace(/0$/, '');
-  localStorage.setItem('mcva-rate', rate.value);
+const sr = localStorage.getItem('mcva-rate');
+if (sr) rate.value = sr;
+const showRate = () => rateLabel.textContent = String(+rate.value);
+showRate();
+rate.addEventListener('input', () => { showRate(); localStorage.setItem('mcva-rate', rate.value); });
+voiceSel.addEventListener('change', () => {
+  const v = voices[voiceSel.value];
+  if (v) localStorage.setItem('mcva-voice-name', v.name);
 });
-voiceSel.addEventListener('change', () => localStorage.setItem('mcva-voice', voiceSel.value));
+// clear the old position-based setting from earlier versions
+localStorage.removeItem('mcva-voice');
 
 function currentText() {
-  const l = LESSONS[pick.value];
-  return (l && l.text.trim()) ? l.text : paste.value;
+  if (direct) return direct.text;
+  if (pick.value === 'paste') return paste.value;
+  return LESSONS[pick.value].text;
 }
 
 function showText(t) {
   reading.innerHTML = '';
-  if (!t.trim()) {
-    reading.innerHTML = '<span class="empty">Choose a lesson above, then press Listen.</span>';
-    return;
-  }
-  chunks = t.match(/[^.!?\n]+[.!?]*\s*|\n+/g) || [t];
-  chunks = chunks.filter(c => c.length);
+  chunks = (t.match(/[^.!?\n]+[.!?]*\s*|\n+/g) || [t]).filter(c => c.length);
   chunks.forEach((c, i) => {
     const s = document.createElement('span');
     s.className = 's'; s.dataset.i = i; s.textContent = c;
@@ -1090,64 +1116,18 @@ function paint(i) {
   if (cur) cur.scrollIntoView({ block: 'center', behavior: 'smooth' });
 }
 
-function keepPitch() {
-  if ('preservesPitch' in au) au.preservesPitch = true;
-  au.mozPreservesPitch = true;
-  au.webkitPreservesPitch = true;
-}
-
-function applyMode() {
-  const rec = LESSONS[pick.value] && LESSONS[pick.value].audio;
-  modes.style.display = rec ? 'flex' : 'none';
-  const useMine = !!rec && mode === 'mine';
-  mineCard.style.display = useMine ? 'block' : 'none';
-  robotCard.style.display = useMine ? 'none' : 'block';
-  mMine.classList.toggle('on', mode === 'mine');
-  mRobot.classList.toggle('on', mode !== 'mine');
-  if (useMine) {
-    if (au.getAttribute('src') !== rec) au.setAttribute('src', rec);
-    au.playbackRate = +arate.value;
-    keepPitch();
-  } else {
-    au.pause();
-  }
-}
-
-mMine.addEventListener('click', () => { mode = 'mine'; stopAll(); applyMode(); });
-mRobot.addEventListener('click', () => { mode = 'robot'; au.pause(); applyMode(); });
-
-arate.addEventListener('input', () => {
-  au.playbackRate = +arate.value;
-  keepPitch();
-  arateLabel.textContent = 'Speed ' + String(+arate.value);
-});
-
-au.addEventListener('error', () => {
-  if (mode === 'mine' && au.getAttribute('src')) {
-    mineCard.innerHTML = '<h2>Melinda reading this lesson</h2>' +
-      '<p id="noaudio">That recording is not uploaded yet. Use the read-along voice for now.</p>';
-  }
-});
-
-pick.addEventListener('change', () => {
-  stopAll();
-  mode = 'mine';
-  applyMode();
-  pastebox.style.display = LESSONS[pick.value].text.trim() ? 'none' : 'block';
-  showText(currentText());
-});
-paste.addEventListener('input', () => { if (!speaking) showText(currentText()); });
-
 function speakFrom(i) {
-  if (i >= chunks.length) { finish(); return; }
-  idx = i;
-  const t = chunks[i].trim();
+  const spans = reading.querySelectorAll('.s');
+  if (i >= spans.length) { finish(); return; }
+  // Read from the page itself, not from the stored text, so that a page
+  // translated by the browser is spoken in the translated words.
+  const t = spans[i].textContent.trim();
   if (!t) { speakFrom(i + 1); return; }
   paint(i);
   const u = new SpeechSynthesisUtterance(t);
-  if (voices[voiceSel.value]) u.voice = voices[voiceSel.value];
+  const chosen = voices[voiceSel.value];
+  if (chosen) { u.voice = chosen; u.lang = chosen.lang; }
   u.rate = +rate.value;
-  u.pitch = 1;
   u.onend = () => { if (speaking) speakFrom(i + 1); };
   u.onerror = () => { if (speaking) speakFrom(i + 1); };
   synth.speak(u);
@@ -1156,42 +1136,78 @@ function speakFrom(i) {
 function finish() {
   speaking = false;
   reading.querySelectorAll('.s').forEach(el => el.classList.remove('on', 'done'));
-  playBtn.textContent = '▶  Listen';
-  pauseBtn.disabled = true; stopBtn.disabled = true; pauseBtn.textContent = 'Pause';
+  playBtn.textContent = 'Listen to this lesson';
+  playBtn.classList.remove('stopmode');
+  pauseBtn.disabled = true; restartBtn.disabled = true; pauseBtn.textContent = 'Pause';
 }
 
-function stopAll() {
-  speaking = false;
-  synth.cancel();
-  finish();
-}
-
-playBtn.addEventListener('click', () => {
+function start() {
   const t = currentText();
   if (!t.trim()) { paste.focus(); return; }
-  if (speaking) return;
   synth.cancel();
   showText(t);
   speaking = true;
-  playBtn.textContent = '▶  Reading…';
-  pauseBtn.disabled = false; stopBtn.disabled = false;
+  playBtn.textContent = 'Stop';
+  playBtn.classList.add('stopmode');
+  pauseBtn.disabled = false; restartBtn.disabled = false;
   speakFrom(0);
-});
+}
 
+playBtn.addEventListener('click', () => {
+  if (speaking) { speaking = false; synth.cancel(); finish(); }
+  else start();
+});
 pauseBtn.addEventListener('click', () => {
   if (synth.paused) { synth.resume(); pauseBtn.textContent = 'Pause'; }
-  else { synth.pause(); pauseBtn.textContent = 'Continue'; }
+  else { synth.pause(); pauseBtn.textContent = 'Carry on'; }
 });
+restartBtn.addEventListener('click', () => { speaking = false; synth.cancel(); start(); });
 
-stopBtn.addEventListener('click', stopAll);
+pick.addEventListener('change', () => {
+  speaking = false; synth.cancel(); finish();
+  pastebox.style.display = pick.value === 'paste' ? 'block' : 'none';
+  showText(currentText());
+});
+paste.addEventListener('input', () => { if (!speaking) showText(currentText()); });
 
-// Chrome stops speaking after about 15 seconds unless it is nudged.
+// Chrome stops speaking after about 15 seconds unless nudged.
 setInterval(() => {
   if (speaking && synth.speaking && !synth.paused) { synth.pause(); synth.resume(); }
 }, 9000);
-
 window.addEventListener('beforeunload', () => synth.cancel());
 
-applyMode();
+// ---- Melinda's own recording, when there is one ----
+function keepPitch() {
+  if ('preservesPitch' in au) au.preservesPitch = true;
+  au.mozPreservesPitch = true;
+  au.webkitPreservesPitch = true;
+}
+
+function loadRecording() {
+  const lesson = direct || (pick.value !== 'paste' ? LESSONS[pick.value] : null);
+  const src = lesson && lesson.audio;
+  au.pause();
+  if (!src) { mineBox.style.display = 'none'; au.removeAttribute('src'); return; }
+  au.setAttribute('src', src);
+  au.playbackRate = +arate.value;
+  keepPitch();
+  au.load();
+}
+
+// If the file is not there, say nothing - just fall back to the read-aloud.
+au.addEventListener('error', () => { mineBox.style.display = 'none'; });
+au.addEventListener('loadedmetadata', () => { mineBox.style.display = 'block'; keepPitch(); });
+au.addEventListener('play', () => { if (speaking) { speaking = false; synth.cancel(); finish(); } });
+
+arate.addEventListener('input', () => {
+  au.playbackRate = +arate.value;
+  keepPitch();
+  arateLabel.textContent = String(+arate.value);
+});
+
+playBtn.addEventListener('click', () => au.pause());
+pick.addEventListener('change', loadRecording);
+
+loadRecording();
 showText(currentText());
 </script>
