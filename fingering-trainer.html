@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fingering Trainer | Melinda Coles Violin Academy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@700&family=Livvic:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* ============================================================
+   MELINDA COLES VIOLIN ACADEMY — shared page theme
+   Everything this page needs is inside this one file.
+   Change a colour here and every page changes.
+   Do not add colours outside this palette.
+   ============================================================ */
+
+/* Same two fonts the website uses, so these pages match melindacoles.au exactly */
+
+:root {
+  /* --- MCVA palette. These nine are the whole system. --- */
+  --forest:     #314333;   /* major headings, primary buttons, nav */
+  --eucalypt:   #7F927F;   /* secondary elements */
+  --sage:       #AAB6A2;   /* secondary headings, quotations */
+  --pale-sage:  #DDE3D8;   /* light panels, secondary buttons */
+  --ivory:      #F8F3E9;   /* main background */
+  --cream:      #FCF9F2;   /* cards, alternate background */
+  --gold:       #C5A15C;   /* fine lines and small details ONLY */
+  --charcoal:   #4B463F;   /* body text */
+  --blush:      #D8BDB5;   /* very occasional soft accent */
+
+  --display: "Chivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;   /* headings */
+  --body:    "Livvic", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;   /* body text */
+
+  --radius: 14px;
+  --maxw:   760px;
+  --shadow: 0 1px 2px rgba(49,67,51,.04), 0 14px 36px -26px rgba(49,67,51,.30);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 22px 80px;
+  background-color: var(--ivory);
+  /* extremely subtle paper texture. Delete this line for a flat background. */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='.035'/></svg>");
+  color: var(--charcoal);
+  font-family: var(--body);
+  font-size: 17.5px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--maxw); margin: 0 auto; }
+
+/* --- headings --- */
+h1, h2, h3 { font-family: var(--display); color: var(--forest); font-weight: 700; }
+h1 { font-size: clamp(30px, 5vw, 41px); line-height: 1.16; letter-spacing: -.015em; margin: 0 0 14px; }
+h2 { font-size: 26px; line-height: 1.26; letter-spacing: -.01em; margin: 0 0 14px; }
+h3 { font-size: 19px; letter-spacing: -.005em; margin: 0 0 8px; }
+h2.secondary, h3.secondary { color: var(--eucalypt); }
+
+.eyebrow {
+  font-family: var(--body); font-size: 11.5px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--eucalypt); margin: 0 0 12px;
+}
+.lede { font-size: 19px; color: var(--charcoal); opacity: .82; margin: 0 0 6px; max-width: 62ch; }
+p { margin: 0 0 15px; }
+a { color: var(--forest); text-underline-offset: 3px; }
+
+/* --- gold divider: a fine line, never a block --- */
+.rule { border: 0; height: 1px; background: var(--gold); opacity: .55; margin: 28px 0; }
+.rule-short { border: 0; height: 1px; width: 64px; background: var(--gold); margin: 20px 0 26px; }
+
+.page-head { padding: 46px 0 4px; }
+
+/* --- cards --- */
+.card {
+  background: var(--cream);
+  border: 1px solid rgba(197,161,92,.28);
+  border-radius: var(--radius);
+  padding: 30px 30px 26px;
+  margin: 0 0 22px;
+  box-shadow: var(--shadow);
+}
+
+/* --- quotation --- */
+blockquote {
+  font-family: var(--body); font-size: 20px; font-style: italic;
+  color: var(--eucalypt); border-left: 2px solid var(--gold);
+  margin: 26px 0; padding: 4px 0 4px 22px;
+}
+
+/* --- tip / note from Melinda --- */
+.tip {
+  background: var(--pale-sage);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 0 0 24px;
+}
+.tip .label {
+  display: block; margin-bottom: 6px;
+  font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase;
+  font-weight: 600; color: var(--forest);
+}
+.tip p:last-child { margin-bottom: 0; }
+
+/* --- checklist --- */
+.checklist { list-style: none; margin: 0; padding: 0; }
+.checklist li { border-top: 1px solid rgba(170,182,162,.45); padding: 14px 0; }
+.checklist li:first-child { border-top: 0; }
+.checklist label { display: flex; gap: 14px; align-items: flex-start; cursor: pointer; }
+.checklist input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  flex: 0 0 auto; width: 21px; height: 21px; margin: 3px 0 0;
+  border: 1.5px solid var(--eucalypt); border-radius: 5px;
+  background: var(--cream); cursor: pointer; position: relative;
+  transition: background .15s ease, border-color .15s ease;
+}
+.checklist input[type="checkbox"]:checked { background: var(--forest); border-color: var(--forest); }
+.checklist input[type="checkbox"]:checked::after {
+  content: ""; position: absolute; left: 6.5px; top: 2.5px;
+  width: 5px; height: 10px; border: solid var(--ivory);
+  border-width: 0 2px 2px 0; transform: rotate(43deg);
+}
+.checklist input[type="checkbox"]:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.checklist .name { font-weight: 600; display: block; color: var(--forest); }
+.checklist .note { display: block; margin-top: 1px; font-size: 15.5px; color: var(--charcoal); opacity: .78; }
+
+/* --- multiple choice --- */
+.choices { list-style: none; margin: 0; padding: 0; }
+.choices li { margin: 0 0 10px; }
+.choices label {
+  display: flex; gap: 13px; align-items: center; cursor: pointer;
+  padding: 13px 17px; border: 1px solid rgba(170,182,162,.7);
+  border-radius: 10px; background: var(--ivory);
+  transition: border-color .15s ease, background .15s ease;
+}
+.choices label:hover { border-color: var(--eucalypt); }
+.choices input[type="radio"] { accent-color: var(--forest); width: 18px; height: 18px; }
+.choices li:has(input:checked) label { border-color: var(--forest); background: var(--pale-sage); }
+
+/* --- 1 to 5 scale --- */
+.scale { display: flex; gap: 9px; flex-wrap: wrap; }
+.scale button {
+  flex: 1 1 62px; padding: 13px 0;
+  font-family: var(--display); font-size: 18px; font-weight: 700;
+  border: 1px solid rgba(170,182,162,.7); background: var(--ivory); color: var(--forest);
+  border-radius: 10px; cursor: pointer; transition: all .15s ease;
+}
+.scale button:hover { border-color: var(--eucalypt); }
+.scale button[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+
+/* --- buttons --- */
+.btn {
+  display: inline-block; border: 1px solid transparent; cursor: pointer; text-decoration: none;
+  font-family: var(--body); font-size: 16px; font-weight: 600;
+  padding: 13px 24px; border-radius: 10px;
+  transition: filter .15s ease, transform .05s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--forest); color: var(--ivory); }
+.btn-primary:hover { filter: brightness(1.14); }
+.btn-secondary { background: var(--pale-sage); color: var(--forest); }
+.btn-ghost { background: transparent; color: var(--eucalypt); border-color: var(--sage); }
+.btn-row { display: flex; gap: 11px; flex-wrap: wrap; margin-top: 22px; }
+
+/* --- progress --- */
+.progress { height: 8px; background: var(--pale-sage); border-radius: 99px; overflow: hidden; margin: 24px 0 10px; }
+.progress > span { display: block; height: 100%; width: 0; background: var(--eucalypt); border-radius: 99px; transition: width .35s ease; }
+.progress-text { font-size: 15.5px; color: var(--charcoal); opacity: .8; margin: 0; }
+
+/* --- result --- */
+.result {
+  margin-top: 20px; padding: 18px 22px; border-radius: var(--radius);
+  background: var(--pale-sage); color: var(--forest);
+  font-family: var(--body); font-size: 17.5px;
+}
+.result:empty { display: none; }
+
+/* --- footer --- */
+.page-foot {
+  margin-top: 50px; padding-top: 22px; border-top: 1px solid rgba(197,161,92,.4);
+  font-size: 14.5px; color: var(--eucalypt);
+  display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+}
+.page-foot a { color: var(--forest); font-weight: 600; }
+.magic { font-family: var(--body); font-style: italic; }
+
+
+/* --- numbered step sequence --- */
+.steps { list-style: none; margin: 0 0 6px; padding: 0; counter-reset: step; }
+.steps li {
+  counter-increment: step; display: flex; gap: 14px; align-items: flex-start;
+  padding: 11px 0; opacity: .45; transition: opacity .2s ease;
+}
+.steps li::before {
+  content: counter(step); flex: 0 0 auto;
+  width: 27px; height: 27px; border-radius: 50%;
+  background: var(--pale-sage); color: var(--forest);
+  font-family: var(--display); font-size: 14px; font-weight: 700;
+  display: grid; place-items: center;
+}
+.steps li.done { opacity: .55; }
+.steps li.done::before { background: var(--eucalypt); color: var(--ivory); }
+.steps li.current { opacity: 1; }
+.steps li.current::before { background: var(--forest); color: var(--ivory); }
+.steps .label { font-weight: 600; color: var(--forest); }
+.step-note {
+  margin-top: 14px; padding: 15px 18px; border-radius: 10px;
+  background: var(--pale-sage); color: var(--forest); font-size: 16.5px;
+}
+
+/* --- tabs / prompt chips --- */
+.tabs { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 4px; }
+.tabs button {
+  padding: 10px 18px; border-radius: 99px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory); color: var(--forest);
+  font-family: var(--body); font-size: 15.5px; font-weight: 600;
+  transition: all .15s ease;
+}
+.tabs button:hover { border-color: var(--eucalypt); }
+.tabs button[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+
+/* --- pulse / beat display --- */
+.pulse { display: flex; gap: 7px; justify-content: center; margin: 6px 0 18px; flex-wrap: wrap; }
+.pulse span {
+  flex: 0 0 auto; min-width: 46px; padding: 14px 0; text-align: center;
+  border-radius: 10px; border: 1px solid var(--sage); background: var(--ivory);
+  font-family: var(--display); font-size: 18px; font-weight: 700; color: var(--eucalypt);
+  transition: background .06s linear, color .06s linear, transform .06s linear;
+}
+.pulse span.off { font-size: 15px; opacity: .6; }
+.pulse span.hit { background: var(--forest); color: var(--ivory); transform: scale(1.06); }
+
+.tempo { display: flex; align-items: center; gap: 14px; margin: 4px 0 18px; }
+.tempo input[type="range"] { flex: 1; accent-color: var(--forest); }
+.tempo output { font-family: var(--display); font-weight: 700; color: var(--forest); min-width: 74px; }
+
+/* --- reflection box --- */
+textarea {
+  width: 100%; min-height: 120px; padding: 14px 16px;
+  border: 1px solid var(--sage); border-radius: 10px;
+  background: var(--ivory); color: var(--charcoal);
+  font-family: var(--body); font-size: 16.5px; line-height: 1.6; resize: vertical;
+}
+textarea:focus { outline: 2px solid var(--gold); outline-offset: 2px; border-color: var(--eucalypt); }
+.saved { margin-top: 12px; font-size: 15.5px; color: var(--eucalypt); }
+
+ul.plain { margin: 0 0 4px; padding-left: 22px; }
+ul.plain li { margin-bottom: 7px; }
+
+
+/* --- stat tiles --- */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 6px; }
+.stat {
+  background: var(--ivory); border: 1px solid rgba(170,182,162,.7);
+  border-radius: 12px; padding: 18px 16px; text-align: center;
+}
+.stat .n { display: block; font-family: var(--display); font-weight: 700; font-size: 32px; color: var(--forest); line-height: 1.1; }
+.stat .n.word { font-size: 21px; padding: 6px 0 5px; }
+.stat .k { display: block; margin-top: 5px; font-size: 13px; letter-spacing: .04em; color: var(--eucalypt); }
+
+/* --- day picker --- */
+.days { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.days button {
+  flex: 1 1 60px; padding: 14px 0; border-radius: 10px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory); color: var(--forest);
+  font-family: var(--body); font-size: 15px; font-weight: 600; transition: all .15s ease;
+}
+.days button:hover { border-color: var(--eucalypt); }
+.days button[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+
+/* --- rating rows --- */
+.rating { padding: 16px 0; border-top: 1px solid rgba(170,182,162,.45); }
+.rating:first-of-type { border-top: 0; padding-top: 4px; }
+.rating .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 9px; }
+.rating .who { font-weight: 600; color: var(--forest); }
+.rating .val { font-family: var(--display); font-weight: 700; color: var(--eucalypt); font-size: 15px; }
+.rating .row { display: flex; gap: 7px; }
+.rating .row button {
+  flex: 1 1 0; padding: 11px 0; border-radius: 9px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory); color: var(--forest);
+  font-family: var(--display); font-weight: 700; font-size: 16px; transition: all .15s ease;
+}
+.rating .row button:hover { border-color: var(--eucalypt); }
+.rating .row button[aria-pressed="true"] { background: var(--eucalypt); border-color: var(--eucalypt); color: var(--ivory); }
+
+/* --- simple table --- */
+table.plain { width: 100%; border-collapse: collapse; font-size: 16px; }
+table.plain th, table.plain td { text-align: left; padding: 11px 12px; border-bottom: 1px solid rgba(170,182,162,.45); vertical-align: top; }
+table.plain th { font-family: var(--display); font-weight: 700; font-size: 14px; color: var(--forest); }
+table.plain tr:last-child td { border-bottom: 0; }
+table.plain td:first-child { font-weight: 600; color: var(--forest); white-space: nowrap; }
+.tablewrap { overflow-x: auto; }
+
+input[type="text"] {
+  width: 100%; padding: 13px 16px; border: 1px solid var(--sage); border-radius: 10px;
+  background: var(--ivory); color: var(--charcoal); font-family: var(--body); font-size: 16.5px;
+}
+input[type="text"]:focus { outline: 2px solid var(--gold); outline-offset: 2px; border-color: var(--eucalypt); }
+
+
+/* --- violin diagram --- */
+.violin-wrap { display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap; }
+.violin { width: 190px; height: auto; flex: 0 0 auto; display: block; margin: 0 auto; }
+.violin .hit { cursor: pointer; }
+.violin .hit .edge { transition: filter .15s ease, stroke .15s ease; }
+.violin .hit:hover .edge { stroke: var(--gold); stroke-width: 3; }
+.violin .hit.on .edge { stroke: var(--forest); stroke-width: 3.4; filter: drop-shadow(0 0 6px rgba(49,67,51,.4)); }
+.violin-side { flex: 1 1 260px; min-width: 240px; }
+.part-list { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 14px; }
+
+
+/* --- photographic violin with clickable parts --- */
+.violin-photo { position: relative; width: 200px; flex: 0 0 auto; margin: 0 auto; }
+.violin-photo img { width: 100%; height: auto; display: block; border-radius: 10px; }
+.hotspot {
+  position: absolute; margin: 0; padding: 0; cursor: pointer;
+  background: transparent; border: 1.5px dashed rgba(197,161,92,.6); border-radius: 8px;
+  transition: border-color .15s ease, background .15s ease, border-style .15s ease;
+}
+.hotspot:hover { border: 2px solid var(--gold); background: rgba(197,161,92,.16); }
+.hotspot.on { border: 2px solid var(--forest); background: rgba(49,67,51,.18); }
+.hotspot:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.photo-note { font-size: 13.5px; color: var(--eucalypt); text-align: center; margin: 10px 0 0; }
+
+
+/* --- tuner readout and meter --- */
+.readout { text-align: center; padding: 6px 0 2px; }
+.readout .note {
+  font-family: var(--display); font-weight: 700; font-size: 64px; line-height: 1;
+  color: var(--forest); letter-spacing: -.02em;
+}
+.readout .note.dim { color: var(--sage); }
+.readout .hz { font-family: var(--body); font-size: 17px; color: var(--eucalypt); margin-top: 4px; }
+.readout .cents { font-family: var(--body); font-size: 15.5px; color: var(--charcoal); opacity: .75; margin-top: 2px; }
+
+.meter { position: relative; height: 56px; margin: 22px 0 10px; }
+.meter .track {
+  position: absolute; left: 0; right: 0; top: 22px; height: 10px;
+  background: var(--pale-sage); border-radius: 99px; overflow: hidden;
+}
+.meter .centre {
+  position: absolute; left: 50%; top: 12px; width: 2px; height: 30px;
+  background: var(--forest); transform: translateX(-50%); border-radius: 2px;
+}
+.meter .zone {
+  position: absolute; left: 46%; right: 46%; top: 22px; height: 10px;
+  background: rgba(49,67,51,.22); border-radius: 99px;
+}
+.meter .needle {
+  position: absolute; top: 8px; width: 5px; height: 38px; border-radius: 3px;
+  background: var(--eucalypt); left: 50%; transform: translateX(-50%);
+  transition: left .09s linear, background .15s ease;
+}
+.meter.good .needle { background: var(--forest); }
+.meter .ends { position: absolute; top: 40px; left: 0; right: 0; display: flex; justify-content: space-between; }
+.meter .ends span { font-size: 13px; color: var(--eucalypt); }
+
+.strings-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 4px; }
+.strings-grid .s {
+  text-align: center; padding: 14px 6px; border-radius: 12px;
+  border: 1px solid rgba(170,182,162,.7); background: var(--ivory); transition: all .15s ease;
+}
+.strings-grid .s .l { display: block; font-family: var(--display); font-weight: 700; font-size: 24px; color: var(--forest); }
+.strings-grid .s .f { display: block; font-size: 12.5px; color: var(--eucalypt); margin-top: 3px; }
+.strings-grid .s.active { background: var(--pale-sage); border-color: var(--forest); }
+
+.status { display: flex; gap: 18px; flex-wrap: wrap; font-size: 14.5px; color: var(--eucalypt); margin-top: 14px; }
+.status b { color: var(--forest); font-weight: 600; }
+
+
+/* --- straight bow lane --- */
+.lane {
+  position: relative; height: 190px; border-radius: 12px;
+  background: var(--ivory); border: 1px solid rgba(170,182,162,.7);
+  touch-action: none; cursor: grab; overflow: hidden; user-select: none;
+}
+.lane.dragging { cursor: grabbing; }
+.lane .edge-label {
+  position: absolute; left: 12px; font-size: 12.5px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--eucalypt);
+}
+.lane .edge-label.top { top: 9px; }
+.lane .edge-label.bottom { bottom: 9px; }
+.lane .centreline {
+  position: absolute; left: 0; right: 0; top: 50%; height: 0;
+  border-top: 2px dashed rgba(197,161,92,.75);
+}
+.lane .band {
+  position: absolute; left: 0; right: 0; top: 42%; height: 16%;
+  background: rgba(49,67,51,.07);
+}
+.lane .pacer {
+  position: absolute; top: 50%; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--gold); transform: translate(-50%, -50%); opacity: .85;
+}
+.lane .bow {
+  position: absolute; width: 120px; height: 10px; border-radius: 6px;
+  background: var(--forest); transform: translate(-50%, -50%);
+  box-shadow: 0 2px 6px rgba(49,67,51,.3);
+}
+.lane .hint {
+  position: absolute; left: 0; right: 0; bottom: 34px; text-align: center;
+  font-size: 14px; color: var(--eucalypt); pointer-events: none;
+}
+
+
+/* --- fingerboard diagram --- */
+.fb-wrap { overflow-x: auto; padding-bottom: 4px; }
+.fingerboard {
+  position: relative; min-width: 300px; height: 300px;
+  background: linear-gradient(180deg, #3B2A1C 0%, #2E2015 100%);
+  border-radius: 14px 14px 10px 10px; margin: 8px 0 6px;
+  border: 1px solid #241910;
+}
+.fingerboard .nut {
+  position: absolute; top: 0; left: 0; right: 0; height: 12px;
+  background: #E6DCC8; border-radius: 12px 12px 0 0;
+}
+.fingerboard .str {
+  position: absolute; top: 12px; bottom: 0; width: 2px;
+  background: rgba(237,230,214,.75); transform: translateX(-50%);
+}
+.fingerboard .str.thick { width: 3.5px; }
+.fingerboard .slabel {
+  position: absolute; top: -24px; transform: translateX(-50%);
+  font-family: var(--display); font-weight: 700; font-size: 15px; color: var(--forest);
+}
+.fingerboard .dot {
+  position: absolute; width: 34px; height: 34px; border-radius: 50%;
+  transform: translate(-50%, -50%); display: grid; place-items: center;
+  font-family: var(--display); font-weight: 700; font-size: 13px;
+  background: rgba(248,243,233,.14); color: rgba(248,243,233,.75);
+  border: 1px solid rgba(248,243,233,.28); cursor: pointer;
+  transition: all .15s ease;
+}
+.fingerboard .dot:hover { background: rgba(197,161,92,.4); color: #fff; border-color: var(--gold); }
+.fingerboard .dot.on {
+  background: var(--gold); color: #2E2015; border-color: #fff;
+  box-shadow: 0 0 0 3px rgba(197,161,92,.35); font-size: 14px;
+}
+.fingerboard .flabel {
+  position: absolute; left: 6px; transform: translateY(-50%);
+  font-size: 11.5px; color: rgba(248,243,233,.5); letter-spacing: .06em;
+}
+.note-table { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.note-table .row {
+  background: var(--ivory); border: 1px solid rgba(170,182,162,.7);
+  border-radius: 10px; padding: 13px 15px;
+}
+.note-table .row b { display: block; font-family: var(--display); color: var(--forest); margin-bottom: 3px; }
+.note-table .row span { font-size: 15.5px; color: var(--charcoal); }
+
+@media (max-width: 560px) {
+  body { font-size: 16.5px; padding: 0 17px 60px; }
+  .card { padding: 22px 20px 20px; }
+  .page-head { padding-top: 34px; }
+}
+
+@media print {
+  body { background: #fff; background-image: none; padding: 0; }
+  .card { box-shadow: none; break-inside: avoid; }
+  .btn-row, .progress, .page-foot, .tabs, .pulse, .tempo, .days { display: none; }
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-head">
+    <p class="eyebrow">Melinda Coles Violin Academy</p>
+    <h1>Fingering trainer</h1>
+    <p class="lede">First position, on all four strings. Tap the fingerboard or choose a string and
+      finger to see which note you get — and hear it. Second finger is high throughout.</p>
+    <hr class="rule-short">
+  </header>
+
+  <div class="tip">
+    <span class="label">A note from Melinda</span>
+    <p>There are no frets, so nothing tells you where the note lives except your ear and your hand's
+      memory. This page is here to build the map. The ear comes with time.</p>
+  </div>
+
+  <section class="card">
+    <h2>The fingerboard</h2>
+    <p style="margin-top:-4px;margin-bottom:12px">Strings run left to right: G, D, A, E — lowest to
+      highest. Finger 0 means an open string, no fingers down at all.</p>
+    <div class="fb-wrap">
+      <div class="fingerboard" id="fb">
+        <div class="nut"></div>
+      </div>
+    </div>
+    <div class="step-note" id="fbNote">Tap any circle on the fingerboard.</div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="hear">Hear this note</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 class="secondary">Or choose it here</h2>
+    <div class="tabs" id="strPick" style="margin-bottom:14px">
+      <button type="button" data-s="G" aria-pressed="false">G string</button>
+      <button type="button" data-s="D" aria-pressed="false">D string</button>
+      <button type="button" data-s="A" aria-pressed="true">A string</button>
+      <button type="button" data-s="E" aria-pressed="false">E string</button>
+    </div>
+    <div class="tabs" id="fingPick">
+      <button type="button" data-f="0" aria-pressed="true">0</button>
+      <button type="button" data-f="1" aria-pressed="false">1</button>
+      <button type="button" data-f="2" aria-pressed="false">2</button>
+      <button type="button" data-f="3" aria-pressed="false">3</button>
+      <button type="button" data-f="4" aria-pressed="false">4</button>
+    </div>
+    <div class="readout" style="padding-top:14px">
+      <div class="note" id="bigNote">A</div>
+      <div class="hz" id="bigWhich">A string, open — no fingers down</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>First position notes</h2>
+    <p style="margin-top:-4px;margin-bottom:16px">The pattern every beginner learns first.
+      Fourth finger gives the same note as the next open string — which is how you check you are in tune.
+      Second finger is high throughout.</p>
+    <div class="note-table">
+      <div class="row"><b>G string</b><span>G · A · B · C · D</span></div>
+      <div class="row"><b>D string</b><span>D · E · F♯ · G · A</span></div>
+      <div class="row"><b>A string</b><span>A · B · C♯ · D · E</span></div>
+      <div class="row"><b>E string</b><span>E · F♯ · G♯ · A · B</span></div>
+    </div>
+    <p style="margin-top:18px"><strong>B, F♯, C♯ and G♯ are all high second fingers.</strong> In this
+      pattern the second finger sits high — right up beside the third finger, close enough to touch.
+      The gap between first and second is wide; the gap between second and third is tiny. Getting that
+      shape into your hand is most of what first position is.</p>
+    <p>There is also a <em>low</em> second finger, giving F natural on the D string or C natural on the A.
+      You will meet it soon enough. Everything on this page is high two.</p>
+
+    <blockquote>Play fourth finger on the D string, then the open A. They should sound the same.
+      If they do not, your hand has drifted.</blockquote>
+  </section>
+
+  <section class="card">
+    <h2>Test yourself</h2>
+    <p style="margin-top:-4px;margin-bottom:14px">Ten questions, ten points each.</p>
+    <div class="step-note" id="qText">Press start when you are ready.</div>
+    <div class="tabs" id="qOpts" style="margin-top:16px"></div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-primary" id="qGo">Start</button>
+      <button type="button" class="btn btn-ghost" id="qReset">Start again</button>
+    </div>
+    <p class="progress-text" id="qScore">Not started.</p>
+    <div class="result" id="qDone"></div>
+  </section>
+
+  <footer class="page-foot">
+    <span class="magic">Music is my magic.</span>
+    <a href="https://www.melindacoles.au/">Back to the Academy</a>
+  </footer>
+
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const STR = ['G','D','A','E'];
+const NOTES = {
+  G: ['G','A','B','C','D'],
+  D: ['D','E','F♯','G','A'],
+  A: ['A','B','C♯','D','E'],
+  E: ['E','F♯','G♯','A','B']
+};
+/* semitones above the open string for fingers 0-4 in first position */
+const STEPS = { G:[0,2,4,5,7], D:[0,2,4,5,7], A:[0,2,4,5,7], E:[0,2,4,5,7] };
+const OPEN  = { G:196.00, D:293.66, A:440.00, E:659.25 };
+
+let curS = 'A', curF = 0;
+
+/* Where each finger really sits. Distance along a string for n semitones is
+   1 - 2^(-n/12), so the gap between second and third finger is much smaller
+   than between first and second. Evenly spaced dots teach the wrong hand shape. */
+const SEMI = [0, 2, 4, 5, 7];
+const yFor = f => {
+  const d = n => 1 - Math.pow(2, -n / 12);
+  return +(8 + (d(SEMI[f]) / d(7)) * 84).toFixed(2);
+};
+
+/* ---- build the fingerboard ---- */
+(function build() {
+  const fb = $('fb');
+  STR.forEach((s, i) => {
+    const x = 14 + i * 24;                       // percent across
+    const line = document.createElement('div');
+    line.className = 'str' + (i < 2 ? ' thick' : '');
+    line.style.left = x + '%';
+    fb.appendChild(line);
+    const lab = document.createElement('div');
+    lab.className = 'slabel'; lab.style.left = x + '%'; lab.textContent = s;
+    fb.appendChild(lab);
+    [0,1,2,3,4].forEach(f => {
+      const y = yFor(f);
+      const d = document.createElement('button');
+      d.type = 'button'; d.className = 'dot';
+      d.style.left = x + '%'; d.style.top = y + '%';
+      d.dataset.s = s; d.dataset.f = f;
+      d.textContent = NOTES[s][f];
+      d.setAttribute('aria-label', s + ' string, finger ' + f + ', note ' + NOTES[s][f]);
+      fb.appendChild(d);
+    });
+  });
+  [0,1,2,3,4].forEach(f => {
+    const l = document.createElement('div');
+    l.className = 'flabel'; l.style.top = yFor(f) + '%';
+    l.textContent = f === 0 ? 'open' : (f === 2 ? 'high 2' : f);
+    fb.appendChild(l);
+  });
+  fb.addEventListener('click', e => {
+    const d = e.target.closest('.dot');
+    if (d) select(d.dataset.s, Number(d.dataset.f), true);
+  });
+})();
+
+function tone(hz, ms) {
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const o = ctx.createOscillator(), g = ctx.createGain();
+  o.type = 'triangle'; o.frequency.value = hz;
+  g.gain.setValueAtTime(0.0001, ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.22, ctx.currentTime + 0.04);
+  g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + ms / 1000);
+  o.connect(g); g.connect(ctx.destination);
+  o.start(); o.stop(ctx.currentTime + ms / 1000 + 0.05);
+  setTimeout(() => ctx.close(), ms + 200);
+}
+
+function select(s, f, play) {
+  curS = s; curF = f;
+  document.querySelectorAll('.fingerboard .dot').forEach(d =>
+    d.classList.toggle('on', d.dataset.s === s && Number(d.dataset.f) === f));
+  [...$('strPick').children].forEach(b => b.setAttribute('aria-pressed', b.dataset.s === s));
+  [...$('fingPick').children].forEach(b => b.setAttribute('aria-pressed', Number(b.dataset.f) === f));
+  const note = NOTES[s][f];
+  $('bigNote').textContent = note;
+  $('bigWhich').textContent = f === 0
+    ? s + ' string, open — no fingers down'
+    : s + ' string, ' + (f === 2 ? 'high second finger' : 'finger ' + f) + ' — the note is ' + note;
+  let extra = '';
+  if (f === 2) extra = ' This is a <strong>high second finger</strong> — it sits right up against the third finger, almost touching it. That closeness is the whole shape of the hand in this pattern.';
+  if (f === 3) extra = ' Third finger sits close above the second, not halfway between second and fourth.';
+  if (f === 4) extra = ' Fourth finger sounds the same as the next open string — use that to check you are in tune.';
+  $('fbNote').innerHTML = f === 0
+    ? '<strong>Open ' + s + '.</strong> No fingers down. This is the sound to tune to and to check yourself against.'
+    : '<strong>' + note + '.</strong> Finger ' + f + ' on the ' + s + ' string.' + extra;
+  if (play) hearIt();
+}
+function hearIt() { tone(OPEN[curS] * Math.pow(2, STEPS[curS][curF] / 12), 1100); }
+$('hear').addEventListener('click', hearIt);
+$('strPick').addEventListener('click', e => { if (e.target.tagName === 'BUTTON') select(e.target.dataset.s, curF, true); });
+$('fingPick').addEventListener('click', e => { if (e.target.tagName === 'BUTTON') select(curS, Number(e.target.dataset.f), true); });
+select('A', 0, false);
+
+/* ---- quiz ---- */
+let qi = -1, qScore = 0, qCur = null, answered = false;
+function makeQ() {
+  const s = STR[Math.floor(Math.random() * 4)];
+  const f = Math.floor(Math.random() * 5);
+  const right = NOTES[s][f];
+  const pool = new Set([right]);
+  while (pool.size < 4) {
+    const s2 = STR[Math.floor(Math.random() * 4)], f2 = Math.floor(Math.random() * 5);
+    pool.add(NOTES[s2][f2]);
+  }
+  const opts = [...pool].sort(() => Math.random() - 0.5);
+  return { s, f, right, opts };
+}
+function drawQ() {
+  qCur = makeQ(); answered = false;
+  $('qText').textContent = qCur.f === 0
+    ? 'Which note is the open ' + qCur.s + ' string?'
+    : (qCur.f === 2 ? 'High second finger' : 'Finger ' + qCur.f)
+      + ' on the ' + qCur.s + ' string gives which note?';
+  $('qOpts').innerHTML = qCur.opts.map(o => '<button type="button" data-n="' + o + '">' + o + '</button>').join('');
+  $('qGo').textContent = 'Next question';
+}
+$('qOpts').addEventListener('click', e => {
+  if (e.target.tagName !== 'BUTTON' || answered || !qCur) return;
+  answered = true;
+  const ok = e.target.dataset.n === qCur.right;
+  if (ok) qScore += 10;
+  [...$('qOpts').children].forEach(b => b.setAttribute('aria-pressed', b.dataset.n === qCur.right));
+  $('qText').innerHTML = ok
+    ? '<strong>Yes.</strong> ' + (qCur.f === 0 ? 'The open ' :
+        (qCur.f === 2 ? 'High second finger on the ' : 'Finger ' + qCur.f + ' on the '))
+      + qCur.s + ' string is ' + qCur.right + '.'
+    : '<strong>Not quite.</strong> It is ' + qCur.right + '. '
+      + (qCur.f === 0 ? 'Open strings are the four you tune: G, D, A, E.'
+                      : 'Look it up on the fingerboard above and play it — hearing it makes it stick.');
+  $('qScore').textContent = qScore + ' points after ' + (qi + 1)
+    + (qi === 0 ? ' question.' : ' questions.');
+});
+
+$('qGo').addEventListener('click', () => {
+  if (qi < 0) { qi = 0; qScore = 0; $('qDone').textContent = ''; drawQ();
+    $('qScore').textContent = 'Question 1 of 10.'; return; }
+  if (qi < 9) { qi++; drawQ(); return; }
+  $('qOpts').innerHTML = '';
+  $('qText').textContent = 'Finished.';
+  $('qGo').textContent = 'Start'; qi = -1; qCur = null;
+  $('qScore').textContent = 'Ten questions, 100 points.';
+  $('qDone').textContent = qScore === 100
+    ? '100 out of 100. You know first position properly — now the work is getting your fingers to agree with your head.'
+    : qScore >= 70 ? qScore + ' out of 100. Good. The ones that catch people are usually the third and fourth fingers.'
+    : qScore >= 40 ? qScore + ' out of 100. A fair start. Play each note on the fingerboard above as you learn it — hearing beats memorising.'
+    : qScore + ' out of 100. Come back to this after a week with the fingerboard. It is a lot to hold in your head at once.';
+});
+
+$('qReset').addEventListener('click', () => {
+  qi = -1; qScore = 0; qCur = null;
+  $('qText').textContent = 'Press start when you are ready.';
+  $('qOpts').innerHTML = ''; $('qGo').textContent = 'Start';
+  $('qScore').textContent = 'Not started.'; $('qDone').textContent = '';
+});
+</script>
+</body>
+</html>
