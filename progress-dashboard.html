@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Progress Dashboard | Melinda Coles Violin Academy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@700&family=Livvic:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* ============================================================
+   MELINDA COLES VIOLIN ACADEMY — shared page theme
+   Everything this page needs is inside this one file.
+   Change a colour here and every page changes.
+   Do not add colours outside this palette.
+   ============================================================ */
+
+/* Same two fonts the website uses, so these pages match melindacoles.au exactly */
+
+:root {
+  /* --- MCVA palette. These nine are the whole system. --- */
+  --forest:     #314333;   /* major headings, primary buttons, nav */
+  --eucalypt:   #7F927F;   /* secondary elements */
+  --sage:       #AAB6A2;   /* secondary headings, quotations */
+  --pale-sage:  #DDE3D8;   /* light panels, secondary buttons */
+  --ivory:      #F8F3E9;   /* main background */
+  --cream:      #FCF9F2;   /* cards, alternate background */
+  --gold:       #C5A15C;   /* fine lines and small details ONLY */
+  --charcoal:   #4B463F;   /* body text */
+  --blush:      #D8BDB5;   /* very occasional soft accent */
+
+  --display: "Chivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;   /* headings */
+  --body:    "Livvic", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;   /* body text */
+
+  --radius: 14px;
+  --maxw:   760px;
+  --shadow: 0 1px 2px rgba(49,67,51,.04), 0 14px 36px -26px rgba(49,67,51,.30);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 22px 80px;
+  background-color: var(--ivory);
+  /* extremely subtle paper texture. Delete this line for a flat background. */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='.035'/></svg>");
+  color: var(--charcoal);
+  font-family: var(--body);
+  font-size: 17.5px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--maxw); margin: 0 auto; }
+
+/* --- headings --- */
+h1, h2, h3 { font-family: var(--display); color: var(--forest); font-weight: 700; }
+h1 { font-size: clamp(30px, 5vw, 41px); line-height: 1.16; letter-spacing: -.015em; margin: 0 0 14px; }
+h2 { font-size: 26px; line-height: 1.26; letter-spacing: -.01em; margin: 0 0 14px; }
+h3 { font-size: 19px; letter-spacing: -.005em; margin: 0 0 8px; }
+h2.secondary, h3.secondary { color: var(--eucalypt); }
+
+.eyebrow {
+  font-family: var(--body); font-size: 11.5px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--eucalypt); margin: 0 0 12px;
+}
+.lede { font-size: 19px; color: var(--charcoal); opacity: .82; margin: 0 0 6px; max-width: 62ch; }
+p { margin: 0 0 15px; }
+a { color: var(--forest); text-underline-offset: 3px; }
+
+/* --- gold divider: a fine line, never a block --- */
+.rule { border: 0; height: 1px; background: var(--gold); opacity: .55; margin: 28px 0; }
+.rule-short { border: 0; height: 1px; width: 64px; background: var(--gold); margin: 20px 0 26px; }
+
+.page-head { padding: 46px 0 4px; }
+
+/* --- cards --- */
+.card {
+  background: var(--cream);
+  border: 1px solid rgba(197,161,92,.28);
+  border-radius: var(--radius);
+  padding: 30px 30px 26px;
+  margin: 0 0 22px;
+  box-shadow: var(--shadow);
+}
+
+/* --- quotation --- */
+blockquote {
+  font-family: var(--body); font-size: 20px; font-style: italic;
+  color: var(--eucalypt); border-left: 2px solid var(--gold);
+  margin: 26px 0; padding: 4px 0 4px 22px;
+}
+
+/* --- tip / note from Melinda --- */
+.tip {
+  background: var(--pale-sage);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 0 0 24px;
+}
+.tip .label {
+  display: block; margin-bottom: 6px;
+  font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase;
+  font-weight: 600; color: var(--forest);
+}
+.tip p:last-child { margin-bottom: 0; }
+
+/* --- checklist --- */
+.checklist { list-style: none; margin: 0; padding: 0; }
+.checklist li { border-top: 1px solid rgba(170,182,162,.45); padding: 14px 0; }
+.checklist li:first-child { border-top: 0; }
+.checklist label { display: flex; gap: 14px; align-items: flex-start; cursor: pointer; }
+.checklist input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  flex: 0 0 auto; width: 21px; height: 21px; margin: 3px 0 0;
+  border: 1.5px solid var(--eucalypt); border-radius: 5px;
+  background: var(--cream); cursor: pointer; position: relative;
+  transition: background .15s ease, border-color .15s ease;
+}
+.checklist input[type="checkbox"]:checked { background: var(--forest); border-color: var(--forest); }
+.checklist input[type="checkbox"]:checked::after {
+  content: ""; position: absolute; left: 6.5px; top: 2.5px;
+  width: 5px; height: 10px; border: solid var(--ivory);
+  border-width: 0 2px 2px 0; transform: rotate(43deg);
+}
+.checklist input[type="checkbox"]:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.checklist .name { font-weight: 600; display: block; color: var(--forest); }
+.checklist .note { display: block; margin-top: 1px; font-size: 15.5px; color: var(--charcoal); opacity: .78; }
+
+/* --- multiple choice --- */
+.choices { list-style: none; margin: 0; padding: 0; }
+.choices li { margin: 0 0 10px; }
+.choices label {
+  display: flex; gap: 13px; align-items: center; cursor: pointer;
+  padding: 13px 17px; border: 1px solid rgba(170,182,162,.7);
+  border-radius: 10px; background: var(--ivory);
+  transition: border-color .15s ease, background .15s ease;
+}
+.choices label:hover { border-color: var(--eucalypt); }
+.choices input[type="radio"] { accent-color: var(--forest); width: 18px; height: 18px; }
+.choices li:has(input:checked) label { border-color: var(--forest); background: var(--pale-sage); }
+
+/* --- 1 to 5 scale --- */
+.scale { display: flex; gap: 9px; flex-wrap: wrap; }
+.scale button {
+  flex: 1 1 62px; padding: 13px 0;
+  font-family: var(--display); font-size: 18px; font-weight: 700;
+  border: 1px solid rgba(170,182,162,.7); background: var(--ivory); color: var(--forest);
+  border-radius: 10px; cursor: pointer; transition: all .15s ease;
+}
+.scale button:hover { border-color: var(--eucalypt); }
+.scale button[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+
+/* --- buttons --- */
+.btn {
+  display: inline-block; border: 1px solid transparent; cursor: pointer; text-decoration: none;
+  font-family: var(--body); font-size: 16px; font-weight: 600;
+  padding: 13px 24px; border-radius: 10px;
+  transition: filter .15s ease, transform .05s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--forest); color: var(--ivory); }
+.btn-primary:hover { filter: brightness(1.14); }
+.btn-secondary { background: var(--pale-sage); color: var(--forest); }
+.btn-ghost { background: transparent; color: var(--eucalypt); border-color: var(--sage); }
+.btn-row { display: flex; gap: 11px; flex-wrap: wrap; margin-top: 22px; }
+
+/* --- progress --- */
+.progress { height: 8px; background: var(--pale-sage); border-radius: 99px; overflow: hidden; margin: 24px 0 10px; }
+.progress > span { display: block; height: 100%; width: 0; background: var(--eucalypt); border-radius: 99px; transition: width .35s ease; }
+.progress-text { font-size: 15.5px; color: var(--charcoal); opacity: .8; margin: 0; }
+
+/* --- result --- */
+.result {
+  margin-top: 20px; padding: 18px 22px; border-radius: var(--radius);
+  background: var(--pale-sage); color: var(--forest);
+  font-family: var(--body); font-size: 17.5px;
+}
+.result:empty { display: none; }
+
+/* --- footer --- */
+.page-foot {
+  margin-top: 50px; padding-top: 22px; border-top: 1px solid rgba(197,161,92,.4);
+  font-size: 14.5px; color: var(--eucalypt);
+  display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+}
+.page-foot a { color: var(--forest); font-weight: 600; }
+.magic { font-family: var(--body); font-style: italic; }
+
+
+/* --- numbered step sequence --- */
+.steps { list-style: none; margin: 0 0 6px; padding: 0; counter-reset: step; }
+.steps li {
+  counter-increment: step; display: flex; gap: 14px; align-items: flex-start;
+  padding: 11px 0; opacity: .45; transition: opacity .2s ease;
+}
+.steps li::before {
+  content: counter(step); flex: 0 0 auto;
+  width: 27px; height: 27px; border-radius: 50%;
+  background: var(--pale-sage); color: var(--forest);
+  font-family: var(--display); font-size: 14px; font-weight: 700;
+  display: grid; place-items: center;
+}
+.steps li.done { opacity: .55; }
+.steps li.done::before { background: var(--eucalypt); color: var(--ivory); }
+.steps li.current { opacity: 1; }
+.steps li.current::before { background: var(--forest); color: var(--ivory); }
+.steps .label { font-weight: 600; color: var(--forest); }
+.step-note {
+  margin-top: 14px; padding: 15px 18px; border-radius: 10px;
+  background: var(--pale-sage); color: var(--forest); font-size: 16.5px;
+}
+
+/* --- tabs / prompt chips --- */
+.tabs { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 4px; }
+.tabs button {
+  padding: 10px 18px; border-radius: 99px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory); color: var(--forest);
+  font-family: var(--body); font-size: 15.5px; font-weight: 600;
+  transition: all .15s ease;
+}
+.tabs button:hover { border-color: var(--eucalypt); }
+.tabs button[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+
+/* --- pulse / beat display --- */
+.pulse { display: flex; gap: 7px; justify-content: center; margin: 6px 0 18px; flex-wrap: wrap; }
+.pulse span {
+  flex: 0 0 auto; min-width: 46px; padding: 14px 0; text-align: center;
+  border-radius: 10px; border: 1px solid var(--sage); background: var(--ivory);
+  font-family: var(--display); font-size: 18px; font-weight: 700; color: var(--eucalypt);
+  transition: background .06s linear, color .06s linear, transform .06s linear;
+}
+.pulse span.off { font-size: 15px; opacity: .6; }
+.pulse span.hit { background: var(--forest); color: var(--ivory); transform: scale(1.06); }
+
+.tempo { display: flex; align-items: center; gap: 14px; margin: 4px 0 18px; }
+.tempo input[type="range"] { flex: 1; accent-color: var(--forest); }
+.tempo output { font-family: var(--display); font-weight: 700; color: var(--forest); min-width: 74px; }
+
+/* --- reflection box --- */
+textarea {
+  width: 100%; min-height: 120px; padding: 14px 16px;
+  border: 1px solid var(--sage); border-radius: 10px;
+  background: var(--ivory); color: var(--charcoal);
+  font-family: var(--body); font-size: 16.5px; line-height: 1.6; resize: vertical;
+}
+textarea:focus { outline: 2px solid var(--gold); outline-offset: 2px; border-color: var(--eucalypt); }
+.saved { margin-top: 12px; font-size: 15.5px; color: var(--eucalypt); }
+
+ul.plain { margin: 0 0 4px; padding-left: 22px; }
+ul.plain li { margin-bottom: 7px; }
+
+
+/* --- stat tiles --- */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 6px; }
+.stat {
+  background: var(--ivory); border: 1px solid rgba(170,182,162,.7);
+  border-radius: 12px; padding: 18px 16px; text-align: center;
+}
+.stat .n { display: block; font-family: var(--display); font-weight: 700; font-size: 32px; color: var(--forest); line-height: 1.1; }
+.stat .n.word { font-size: 21px; padding: 6px 0 5px; }
+.stat .k { display: block; margin-top: 5px; font-size: 13px; letter-spacing: .04em; color: var(--eucalypt); }
+
+/* --- day picker --- */
+.days { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.days button {
+  flex: 1 1 60px; padding: 14px 0; border-radius: 10px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory); color: var(--forest);
+  font-family: var(--body); font-size: 15px; font-weight: 600; transition: all .15s ease;
+}
+.days button:hover { border-color: var(--eucalypt); }
+.days button[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+
+/* --- rating rows --- */
+.rating { padding: 16px 0; border-top: 1px solid rgba(170,182,162,.45); }
+.rating:first-of-type { border-top: 0; padding-top: 4px; }
+.rating .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 9px; }
+.rating .who { font-weight: 600; color: var(--forest); }
+.rating .val { font-family: var(--display); font-weight: 700; color: var(--eucalypt); font-size: 15px; }
+.rating .row { display: flex; gap: 7px; }
+.rating .row button {
+  flex: 1 1 0; padding: 11px 0; border-radius: 9px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory); color: var(--forest);
+  font-family: var(--display); font-weight: 700; font-size: 16px; transition: all .15s ease;
+}
+.rating .row button:hover { border-color: var(--eucalypt); }
+.rating .row button[aria-pressed="true"] { background: var(--eucalypt); border-color: var(--eucalypt); color: var(--ivory); }
+
+/* --- simple table --- */
+table.plain { width: 100%; border-collapse: collapse; font-size: 16px; }
+table.plain th, table.plain td { text-align: left; padding: 11px 12px; border-bottom: 1px solid rgba(170,182,162,.45); vertical-align: top; }
+table.plain th { font-family: var(--display); font-weight: 700; font-size: 14px; color: var(--forest); }
+table.plain tr:last-child td { border-bottom: 0; }
+table.plain td:first-child { font-weight: 600; color: var(--forest); white-space: nowrap; }
+.tablewrap { overflow-x: auto; }
+
+input[type="text"] {
+  width: 100%; padding: 13px 16px; border: 1px solid var(--sage); border-radius: 10px;
+  background: var(--ivory); color: var(--charcoal); font-family: var(--body); font-size: 16.5px;
+}
+input[type="text"]:focus { outline: 2px solid var(--gold); outline-offset: 2px; border-color: var(--eucalypt); }
+
+@media (max-width: 560px) {
+  body { font-size: 16.5px; padding: 0 17px 60px; }
+  .card { padding: 22px 20px 20px; }
+  .page-head { padding-top: 34px; }
+}
+
+@media print {
+  body { background: #fff; background-image: none; padding: 0; }
+  .card { box-shadow: none; break-inside: avoid; }
+  .btn-row, .progress, .page-foot, .tabs, .pulse, .tempo, .days { display: none; }
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-head">
+    <p class="eyebrow">Melinda Coles Violin Academy</p>
+    <h1>Your progress this week</h1>
+    <p class="lede">Somewhere to see how the week has actually gone — practice days, how the five
+      main areas feel, and what you would like to work on next. Everything stays on your own device.</p>
+    <hr class="rule-short">
+  </header>
+
+  <div class="tip">
+    <span class="label">A note from Melinda</span>
+    <p>Rate honestly, not hopefully. A four that is really a two helps nobody, and a low score is
+      not a bad week — it is just the thing to give a few minutes a day to.</p>
+  </div>
+
+  <section class="card">
+    <h2>This week at a glance</h2>
+    <div class="stats">
+      <div class="stat"><span class="n" id="sDays">0</span><span class="k">practice days</span></div>
+      <div class="stat"><span class="n" id="sTasks">0</span><span class="k">lesson tasks done</span></div>
+      <div class="stat"><span class="n" id="sAvg">0</span><span class="k">average skill score</span></div>
+      <div class="stat"><span class="n word" id="sState">Just beginning</span><span class="k">where you are</span></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Practice days</h2>
+    <p style="margin-top:-4px;margin-bottom:14px">Tap each day you picked the violin up. Even five minutes counts.</p>
+    <div class="days" id="days"></div>
+    <p class="progress-text" id="daysText">No days marked yet.</p>
+  </section>
+
+  <section class="card">
+    <h2>How the five areas feel</h2>
+    <p style="margin-top:-4px;margin-bottom:8px">One is very uncertain, five is secure and consistent.</p>
+    <div id="skills"></div>
+  </section>
+
+  <section class="card">
+    <h2>This week's lesson tasks</h2>
+    <ul class="checklist" id="tasks">
+      <li><label><input type="checkbox"><span><span class="name">Setup and posture reviewed</span></span></label></li>
+      <li><label><input type="checkbox"><span><span class="name">Open-string tone reviewed</span></span></label></li>
+      <li><label><input type="checkbox"><span><span class="name">Legato bowing practised</span></span></label></li>
+      <li><label><input type="checkbox"><span><span class="name">Rhythm reviewed with a pulse or metronome</span></span></label></li>
+      <li><label><input type="checkbox"><span><span class="name">Fingering patterns reviewed</span></span></label></li>
+      <li><label><input type="checkbox"><span><span class="name">Reflection or weekly goal written</span></span></label></li>
+    </ul>
+    <div class="progress"><span id="taskbar"></span></div>
+    <p class="progress-text" id="taskText">Nothing ticked yet.</p>
+  </section>
+
+  <section class="card">
+    <h2 class="secondary">What you are working on</h2>
+    <p style="margin-top:-4px;margin-bottom:12px">One thing. For example: keep bow changes quieter in the legato exercises.</p>
+    <input type="text" id="goal" placeholder="This week I am working on...">
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="saveGoal">Save this</button>
+    </div>
+    <p class="saved" id="goalMsg">Nothing saved yet.</p>
+  </section>
+
+  <section class="card">
+    <h2 class="secondary">Notes</h2>
+    <p style="margin-top:-4px;margin-bottom:12px">Anything that keeps coming up, anything that improved,
+      anything to remember for next time.</p>
+    <textarea id="notes" placeholder="What kept happening? What got easier?"></textarea>
+    <div class="btn-row">
+      <button type="button" class="btn btn-secondary" id="saveNotes">Save notes</button>
+    </div>
+    <p class="saved" id="notesMsg">Nothing saved yet.</p>
+  </section>
+
+  <section class="card">
+    <h2>Your week, summed up</h2>
+    <div class="btn-row" style="margin-top:0">
+      <button type="button" class="btn btn-primary" id="summarise">Show me my week</button>
+      <button type="button" class="btn btn-ghost" id="newWeek">Start a new week</button>
+    </div>
+    <div class="result" id="summary"></div>
+  </section>
+
+  <section class="card">
+    <h2 class="secondary">What to watch for in each area</h2>
+    <div class="tablewrap">
+      <table class="plain">
+        <tr><th>Area</th><th>What improvement looks like</th></tr>
+        <tr><td>Posture</td><td>Less tension, more stability, a setup that feels the same every time</td></tr>
+        <tr><td>Bowing</td><td>A cleaner sound, smoother bow changes, more control at the turn</td></tr>
+        <tr><td>Rhythm</td><td>A steadier pulse, counting that holds, less rushing when it gets hard</td></tr>
+        <tr><td>Fingering</td><td>More secure spacing and clearer left-hand placement</td></tr>
+        <tr><td>Tone</td><td>A more even sound, and more consistency from one end of the bow to the other</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    <span class="magic">Music is my magic.</span>
+    <a href="https://www.melindacoles.au/">Back to the Academy</a>
+  </footer>
+
+</div>
+
+<script>
+const KEY = 'mcva-progress-week';
+const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const SKILLS = [
+  ['posture', 'Posture and setup'],
+  ['bowing',  'Bowing and legato control'],
+  ['rhythm',  'Rhythm and pulse'],
+  ['fingers', 'Fingering accuracy'],
+  ['tone',    'Tone consistency']
+];
+
+let state = { days: [], skills: {}, tasks: [], goal: '', notes: '' };
+try { const raw = localStorage.getItem(KEY); if (raw) state = Object.assign(state, JSON.parse(raw)); } catch (e) {}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+/* --- days --- */
+const daysEl = document.getElementById('days');
+daysEl.innerHTML = DAYS.map(d =>
+  '<button type="button" data-d="' + d + '" aria-pressed="false">' + d + '</button>').join('');
+daysEl.addEventListener('click', e => {
+  if (e.target.tagName !== 'BUTTON') return;
+  const d = e.target.dataset.d;
+  state.days = state.days.includes(d) ? state.days.filter(x => x !== d) : state.days.concat(d);
+  save(); render();
+});
+
+/* --- skills --- */
+const skillsEl = document.getElementById('skills');
+skillsEl.innerHTML = SKILLS.map(([k, label]) =>
+  '<div class="rating" data-k="' + k + '">' +
+    '<div class="top"><span class="who">' + label + '</span><span class="val" data-val="' + k + '">not rated</span></div>' +
+    '<div class="row">' + [1,2,3,4,5].map(n =>
+      '<button type="button" data-k="' + k + '" data-n="' + n + '" aria-pressed="false">' + n + '</button>').join('') +
+    '</div></div>').join('');
+skillsEl.addEventListener('click', e => {
+  if (e.target.tagName !== 'BUTTON') return;
+  state.skills[e.target.dataset.k] = Number(e.target.dataset.n);
+  save(); render();
+});
+
+/* --- tasks --- */
+const tasksEl = document.getElementById('tasks');
+const taskBoxes = () => [...tasksEl.querySelectorAll('input[type=checkbox]')];
+tasksEl.addEventListener('change', () => {
+  state.tasks = taskBoxes().map(b => b.checked);
+  save(); render();
+});
+
+/* --- goal and notes --- */
+document.getElementById('saveGoal').addEventListener('click', () => {
+  state.goal = document.getElementById('goal').value; save();
+  document.getElementById('goalMsg').textContent = state.goal.trim()
+    ? 'Saved. It will be here when you come back.' : 'Nothing to save yet.';
+});
+document.getElementById('saveNotes').addEventListener('click', () => {
+  state.notes = document.getElementById('notes').value; save();
+  document.getElementById('notesMsg').textContent = state.notes.trim()
+    ? 'Saved. Notes stay on this device — nobody else sees them.' : 'Nothing to save yet.';
+});
+
+/* --- summary --- */
+document.getElementById('summarise').addEventListener('click', () => {
+  const rated = SKILLS.filter(([k]) => state.skills[k]);
+  const done = state.tasks.filter(Boolean).length;
+  if (!rated.length && !state.days.length) {
+    document.getElementById('summary').textContent =
+      'Mark the days you practised and rate a few areas first, then I can tell you something useful.';
+    return;
+  }
+  let out = 'You practised on ' + state.days.length + (state.days.length === 1 ? ' day' : ' days')
+          + ' and finished ' + done + ' of 6 lesson tasks.';
+  if (rated.length) {
+    const best  = rated.reduce((a, b) => state.skills[a[0]] >= state.skills[b[0]] ? a : b);
+    const worst = rated.reduce((a, b) => state.skills[a[0]] <= state.skills[b[0]] ? a : b);
+    out += ' ' + best[1] + ' is your strongest area at the moment.';
+    if (best[0] !== worst[0]) out += ' Give ' + worst[1].toLowerCase() + ' a few focused minutes a day this week — that is the one that will move everything else.';
+  }
+  if (state.days.length >= 5) out += ' Five days or more is the thing that actually builds a violinist. Well done.';
+  else if (state.days.length <= 2) out += ' Short and often beats long and rare — even ten minutes counts as a day.';
+  document.getElementById('summary').textContent = out;
+});
+
+document.getElementById('newWeek').addEventListener('click', () => {
+  state = { days: [], skills: {}, tasks: [], goal: state.goal, notes: '' };
+  save(); render();
+  document.getElementById('summary').textContent = '';
+  document.getElementById('notesMsg').textContent = 'Nothing saved yet.';
+});
+
+/* --- render --- */
+function render() {
+  [...daysEl.children].forEach(b => b.setAttribute('aria-pressed', state.days.includes(b.dataset.d)));
+  document.getElementById('daysText').textContent = state.days.length
+    ? state.days.length + (state.days.length === 1 ? ' day' : ' days') + ' marked: ' + state.days.join(', ')
+    : 'No days marked yet.';
+
+  SKILLS.forEach(([k]) => {
+    const v = state.skills[k] || 0;
+    document.querySelector('[data-val="' + k + '"]').textContent = v ? v + ' out of 5' : 'not rated';
+    document.querySelectorAll('button[data-k="' + k + '"]').forEach(b =>
+      b.setAttribute('aria-pressed', Number(b.dataset.n) === v));
+  });
+
+  taskBoxes().forEach((b, i) => b.checked = !!state.tasks[i]);
+  const done = taskBoxes().filter(b => b.checked).length;
+  document.getElementById('taskbar').style.width = (done / 6 * 100) + '%';
+  document.getElementById('taskText').textContent = done ? done + ' of 6 done.' : 'Nothing ticked yet.';
+
+  document.getElementById('goal').value = state.goal || '';
+  document.getElementById('notes').value = state.notes || '';
+
+  const rated = SKILLS.map(([k]) => state.skills[k]).filter(Boolean);
+  const avg = rated.length ? (rated.reduce((a, b) => a + b, 0) / rated.length) : 0;
+  document.getElementById('sDays').textContent  = state.days.length;
+  document.getElementById('sTasks').textContent = done;
+  document.getElementById('sAvg').textContent   = avg ? avg.toFixed(1) : '0';
+
+  const pct = (state.days.length / 7) * 33 + (done / 6) * 33 + (avg / 5) * 34;
+  document.getElementById('sState').textContent =
+    pct >= 82 ? 'Secure' : pct >= 60 ? 'Steady' : pct >= 32 ? 'Building' : 'Just beginning';
+}
+render();
+</script>
+</body>
+</html>
