@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Know Your Violin | Melinda Coles Violin Academy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@700&family=Livvic:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* ============================================================
+   MELINDA COLES VIOLIN ACADEMY — shared page theme
+   Everything this page needs is inside this one file.
+   Change a colour here and every page changes.
+   Do not add colours outside this palette.
+   ============================================================ */
+
+/* Same two fonts the website uses, so these pages match melindacoles.au exactly */
+
+:root {
+  /* --- MCVA palette. These nine are the whole system. --- */
+  --forest:     #314333;   /* major headings, primary buttons, nav */
+  --eucalypt:   #7F927F;   /* secondary elements */
+  --sage:       #AAB6A2;   /* secondary headings, quotations */
+  --pale-sage:  #DDE3D8;   /* light panels, secondary buttons */
+  --ivory:      #F8F3E9;   /* main background */
+  --cream:      #FCF9F2;   /* cards, alternate background */
+  --gold:       #C5A15C;   /* fine lines and small details ONLY */
+  --charcoal:   #4B463F;   /* body text */
+  --blush:      #D8BDB5;   /* very occasional soft accent */
+
+  --display: "Chivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;   /* headings */
+  --body:    "Livvic", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;   /* body text */
+
+  --radius: 14px;
+  --maxw:   760px;
+  --shadow: 0 1px 2px rgba(49,67,51,.04), 0 14px 36px -26px rgba(49,67,51,.30);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 22px 80px;
+  background-color: var(--ivory);
+  /* extremely subtle paper texture. Delete this line for a flat background. */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='.035'/></svg>");
+  color: var(--charcoal);
+  font-family: var(--body);
+  font-size: 17.5px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--maxw); margin: 0 auto; }
+
+/* --- headings --- */
+h1, h2, h3 { font-family: var(--display); color: var(--forest); font-weight: 700; }
+h1 { font-size: clamp(30px, 5vw, 41px); line-height: 1.16; letter-spacing: -.015em; margin: 0 0 14px; }
+h2 { font-size: 26px; line-height: 1.26; letter-spacing: -.01em; margin: 0 0 14px; }
+h3 { font-size: 19px; letter-spacing: -.005em; margin: 0 0 8px; }
+h2.secondary, h3.secondary { color: var(--eucalypt); }
+
+.eyebrow {
+  font-family: var(--body); font-size: 11.5px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--eucalypt); margin: 0 0 12px;
+}
+.lede { font-size: 19px; color: var(--charcoal); opacity: .82; margin: 0 0 6px; max-width: 62ch; }
+p { margin: 0 0 15px; }
+a { color: var(--forest); text-underline-offset: 3px; }
+
+/* --- gold divider: a fine line, never a block --- */
+.rule { border: 0; height: 1px; background: var(--gold); opacity: .55; margin: 28px 0; }
+.rule-short { border: 0; height: 1px; width: 64px; background: var(--gold); margin: 20px 0 26px; }
+
+.page-head { padding: 46px 0 4px; }
+
+/* --- cards --- */
+.card {
+  background: var(--cream);
+  border: 1px solid rgba(197,161,92,.28);
+  border-radius: var(--radius);
+  padding: 30px 30px 26px;
+  margin: 0 0 22px;
+  box-shadow: var(--shadow);
+}
+
+/* --- quotation --- */
+blockquote {
+  font-family: var(--body); font-size: 20px; font-style: italic;
+  color: var(--eucalypt); border-left: 2px solid var(--gold);
+  margin: 26px 0; padding: 4px 0 4px 22px;
+}
+
+/* --- tip / note from Melinda --- */
+.tip {
+  background: var(--pale-sage);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 0 0 24px;
+}
+.tip .label {
+  display: block; margin-bottom: 6px;
+  font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase;
+  font-weight: 600; color: var(--forest);
+}
+.tip p:last-child { margin-bottom: 0; }
+
+/* --- checklist --- */
+.checklist { list-style: none; margin: 0; padding: 0; }
+.checklist li { border-top: 1px solid rgba(170,182,162,.45); padding: 14px 0; }
+.checklist li:first-child { border-top: 0; }
+.checklist label { display: flex; gap: 14px; align-items: flex-start; cursor: pointer; }
+.checklist input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  flex: 0 0 auto; width: 21px; height: 21px; margin: 3px 0 0;
+  border: 1.5px solid var(--eucalypt); border-radius: 5px;
+  background: var(--cream); cursor: pointer; position: relative;
+  transition: background .15s ease, border-color .15s ease;
+}
+.checklist input[type="checkbox"]:checked { background: var(--forest); border-color: var(--forest); }
+.checklist input[type="checkbox"]:checked::after {
+  content: ""; position: absolute; left: 6.5px; top: 2.5px;
+  width: 5px; height: 10px; border: solid var(--ivory);
+  border-width: 0 2px 2px 0; transform: rotate(43deg);
+}
+.checklist input[type="checkbox"]:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.checklist .name { font-weight: 600; display: block; color: var(--forest); }
+.checklist .note { display: block; margin-top: 1px; font-size: 15.5px; color: var(--charcoal); opacity: .78; }
+
+/* --- multiple choice --- */
+.choices { list-style: none; margin: 0; padding: 0; }
+.choices li { margin: 0 0 10px; }
+.choices label {
+  display: flex; gap: 13px; align-items: center; cursor: pointer;
+  padding: 13px 17px; border: 1px solid rgba(170,182,162,.7);
+  border-radius: 10px; background: var(--ivory);
+  transition: border-color .15s ease, background .15s ease;
+}
+.choices label:hover { border-color: var(--eucalypt); }
+.choices input[type="radio"] { accent-color: var(--forest); width: 18px; height: 18px; }
+.choices li:has(input:checked) label { border-color: var(--forest); background: var(--pale-sage); }
+
+/* --- 1 to 5 scale --- */
+.scale { display: flex; gap: 9px; flex-wrap: wrap; }
+.scale button {
+  flex: 1 1 62px; padding: 13px 0;
+  font-family: var(--display); font-size: 18px; font-weight: 700;
+  border: 1px solid rgba(170,182,162,.7); background: var(--ivory); color: var(--forest);
+  border-radius: 10px; cursor: pointer; transition: all .15s ease;
+}
+.scale button:hover { border-color: var(--eucalypt); }
+.scale button[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+
+/* --- buttons --- */
+.btn {
+  display: inline-block; border: 1px solid transparent; cursor: pointer; text-decoration: none;
+  font-family: var(--body); font-size: 16px; font-weight: 600;
+  padding: 13px 24px; border-radius: 10px;
+  transition: filter .15s ease, transform .05s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--forest); color: var(--ivory); }
+.btn-primary:hover { filter: brightness(1.14); }
+.btn-secondary { background: var(--pale-sage); color: var(--forest); }
+.btn-ghost { background: transparent; color: var(--eucalypt); border-color: var(--sage); }
+.btn-row { display: flex; gap: 11px; flex-wrap: wrap; margin-top: 22px; }
+
+/* --- progress --- */
+.progress { height: 8px; background: var(--pale-sage); border-radius: 99px; overflow: hidden; margin: 24px 0 10px; }
+.progress > span { display: block; height: 100%; width: 0; background: var(--eucalypt); border-radius: 99px; transition: width .35s ease; }
+.progress-text { font-size: 15.5px; color: var(--charcoal); opacity: .8; margin: 0; }
+
+/* --- result --- */
+.result {
+  margin-top: 20px; padding: 18px 22px; border-radius: var(--radius);
+  background: var(--pale-sage); color: var(--forest);
+  font-family: var(--body); font-size: 17.5px;
+}
+.result:empty { display: none; }
+
+/* --- footer --- */
+.page-foot {
+  margin-top: 50px; padding-top: 22px; border-top: 1px solid rgba(197,161,92,.4);
+  font-size: 14.5px; color: var(--eucalypt);
+  display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+}
+.page-foot a { color: var(--forest); font-weight: 600; }
+.magic { font-family: var(--body); font-style: italic; }
+
+
+/* --- numbered step sequence --- */
+.steps { list-style: none; margin: 0 0 6px; padding: 0; counter-reset: step; }
+.steps li {
+  counter-increment: step; display: flex; gap: 14px; align-items: flex-start;
+  padding: 11px 0; opacity: .45; transition: opacity .2s ease;
+}
+.steps li::before {
+  content: counter(step); flex: 0 0 auto;
+  width: 27px; height: 27px; border-radius: 50%;
+  background: var(--pale-sage); color: var(--forest);
+  font-family: var(--display); font-size: 14px; font-weight: 700;
+  display: grid; place-items: center;
+}
+.steps li.done { opacity: .55; }
+.steps li.done::before { background: var(--eucalypt); color: var(--ivory); }
+.steps li.current { opacity: 1; }
+.steps li.current::before { background: var(--forest); color: var(--ivory); }
+.steps .label { font-weight: 600; color: var(--forest); }
+.step-note {
+  margin-top: 14px; padding: 15px 18px; border-radius: 10px;
+  background: var(--pale-sage); color: var(--forest); font-size: 16.5px;
+}
+
+/* --- tabs / prompt chips --- */
+.tabs { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 4px; }
+.tabs button {
+  padding: 10px 18px; border-radius: 99px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory); color: var(--forest);
+  font-family: var(--body); font-size: 15.5px; font-weight: 600;
+  transition: all .15s ease;
+}
+.tabs button:hover { border-color: var(--eucalypt); }
+.tabs button[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+
+/* --- pulse / beat display --- */
+.pulse { display: flex; gap: 7px; justify-content: center; margin: 6px 0 18px; flex-wrap: wrap; }
+.pulse span {
+  flex: 0 0 auto; min-width: 46px; padding: 14px 0; text-align: center;
+  border-radius: 10px; border: 1px solid var(--sage); background: var(--ivory);
+  font-family: var(--display); font-size: 18px; font-weight: 700; color: var(--eucalypt);
+  transition: background .06s linear, color .06s linear, transform .06s linear;
+}
+.pulse span.off { font-size: 15px; opacity: .6; }
+.pulse span.hit { background: var(--forest); color: var(--ivory); transform: scale(1.06); }
+
+.tempo { display: flex; align-items: center; gap: 14px; margin: 4px 0 18px; }
+.tempo input[type="range"] { flex: 1; accent-color: var(--forest); }
+.tempo output { font-family: var(--display); font-weight: 700; color: var(--forest); min-width: 74px; }
+
+/* --- reflection box --- */
+textarea {
+  width: 100%; min-height: 120px; padding: 14px 16px;
+  border: 1px solid var(--sage); border-radius: 10px;
+  background: var(--ivory); color: var(--charcoal);
+  font-family: var(--body); font-size: 16.5px; line-height: 1.6; resize: vertical;
+}
+textarea:focus { outline: 2px solid var(--gold); outline-offset: 2px; border-color: var(--eucalypt); }
+.saved { margin-top: 12px; font-size: 15.5px; color: var(--eucalypt); }
+
+ul.plain { margin: 0 0 4px; padding-left: 22px; }
+ul.plain li { margin-bottom: 7px; }
+
+
+/* --- stat tiles --- */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 6px; }
+.stat {
+  background: var(--ivory); border: 1px solid rgba(170,182,162,.7);
+  border-radius: 12px; padding: 18px 16px; text-align: center;
+}
+.stat .n { display: block; font-family: var(--display); font-weight: 700; font-size: 32px; color: var(--forest); line-height: 1.1; }
+.stat .n.word { font-size: 21px; padding: 6px 0 5px; }
+.stat .k { display: block; margin-top: 5px; font-size: 13px; letter-spacing: .04em; color: var(--eucalypt); }
+
+/* --- day picker --- */
+.days { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.days button {
+  flex: 1 1 60px; padding: 14px 0; border-radius: 10px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory); color: var(--forest);
+  font-family: var(--body); font-size: 15px; font-weight: 600; transition: all .15s ease;
+}
+.days button:hover { border-color: var(--eucalypt); }
+.days button[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+
+/* --- rating rows --- */
+.rating { padding: 16px 0; border-top: 1px solid rgba(170,182,162,.45); }
+.rating:first-of-type { border-top: 0; padding-top: 4px; }
+.rating .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 9px; }
+.rating .who { font-weight: 600; color: var(--forest); }
+.rating .val { font-family: var(--display); font-weight: 700; color: var(--eucalypt); font-size: 15px; }
+.rating .row { display: flex; gap: 7px; }
+.rating .row button {
+  flex: 1 1 0; padding: 11px 0; border-radius: 9px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory); color: var(--forest);
+  font-family: var(--display); font-weight: 700; font-size: 16px; transition: all .15s ease;
+}
+.rating .row button:hover { border-color: var(--eucalypt); }
+.rating .row button[aria-pressed="true"] { background: var(--eucalypt); border-color: var(--eucalypt); color: var(--ivory); }
+
+/* --- simple table --- */
+table.plain { width: 100%; border-collapse: collapse; font-size: 16px; }
+table.plain th, table.plain td { text-align: left; padding: 11px 12px; border-bottom: 1px solid rgba(170,182,162,.45); vertical-align: top; }
+table.plain th { font-family: var(--display); font-weight: 700; font-size: 14px; color: var(--forest); }
+table.plain tr:last-child td { border-bottom: 0; }
+table.plain td:first-child { font-weight: 600; color: var(--forest); white-space: nowrap; }
+.tablewrap { overflow-x: auto; }
+
+input[type="text"] {
+  width: 100%; padding: 13px 16px; border: 1px solid var(--sage); border-radius: 10px;
+  background: var(--ivory); color: var(--charcoal); font-family: var(--body); font-size: 16.5px;
+}
+input[type="text"]:focus { outline: 2px solid var(--gold); outline-offset: 2px; border-color: var(--eucalypt); }
+
+
+/* --- violin diagram --- */
+.violin-wrap { display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap; }
+.violin { width: 190px; height: auto; flex: 0 0 auto; display: block; margin: 0 auto; }
+.violin .hit { cursor: pointer; }
+.violin .hit .edge { transition: filter .15s ease, stroke .15s ease; }
+.violin .hit:hover .edge { stroke: var(--gold); stroke-width: 3; }
+.violin .hit.on .edge { stroke: var(--forest); stroke-width: 3.4; filter: drop-shadow(0 0 6px rgba(49,67,51,.4)); }
+.violin-side { flex: 1 1 260px; min-width: 240px; }
+.part-list { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 14px; }
+
+
+/* --- photographic violin with clickable parts --- */
+.violin-photo { position: relative; width: 200px; flex: 0 0 auto; margin: 0 auto; }
+.violin-photo img { width: 100%; height: auto; display: block; border-radius: 10px; }
+.hotspot {
+  position: absolute; margin: 0; padding: 0; cursor: pointer;
+  background: transparent; border: 1.5px dashed rgba(197,161,92,.6); border-radius: 8px;
+  transition: border-color .15s ease, background .15s ease, border-style .15s ease;
+}
+.hotspot:hover { border: 2px solid var(--gold); background: rgba(197,161,92,.16); }
+.hotspot.on { border: 2px solid var(--forest); background: rgba(49,67,51,.18); }
+.hotspot:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.photo-note { font-size: 13.5px; color: var(--eucalypt); text-align: center; margin: 10px 0 0; }
+
+
+/* --- tuner readout and meter --- */
+.readout { text-align: center; padding: 6px 0 2px; }
+.readout .note {
+  font-family: var(--display); font-weight: 700; font-size: 64px; line-height: 1;
+  color: var(--forest); letter-spacing: -.02em;
+}
+.readout .note.dim { color: var(--sage); }
+.readout .hz { font-family: var(--body); font-size: 17px; color: var(--eucalypt); margin-top: 4px; }
+.readout .cents { font-family: var(--body); font-size: 15.5px; color: var(--charcoal); opacity: .75; margin-top: 2px; }
+
+.meter { position: relative; height: 56px; margin: 22px 0 10px; }
+.meter .track {
+  position: absolute; left: 0; right: 0; top: 22px; height: 10px;
+  background: var(--pale-sage); border-radius: 99px; overflow: hidden;
+}
+.meter .centre {
+  position: absolute; left: 50%; top: 12px; width: 2px; height: 30px;
+  background: var(--forest); transform: translateX(-50%); border-radius: 2px;
+}
+.meter .zone {
+  position: absolute; left: 46%; right: 46%; top: 22px; height: 10px;
+  background: rgba(49,67,51,.22); border-radius: 99px;
+}
+.meter .needle {
+  position: absolute; top: 8px; width: 5px; height: 38px; border-radius: 3px;
+  background: var(--eucalypt); left: 50%; transform: translateX(-50%);
+  transition: left .09s linear, background .15s ease;
+}
+.meter.good .needle { background: var(--forest); }
+.meter .ends { position: absolute; top: 40px; left: 0; right: 0; display: flex; justify-content: space-between; }
+.meter .ends span { font-size: 13px; color: var(--eucalypt); }
+
+.strings-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 4px; }
+.strings-grid .s {
+  text-align: center; padding: 14px 6px; border-radius: 12px;
+  border: 1px solid rgba(170,182,162,.7); background: var(--ivory); transition: all .15s ease;
+}
+.strings-grid .s .l { display: block; font-family: var(--display); font-weight: 700; font-size: 24px; color: var(--forest); }
+.strings-grid .s .f { display: block; font-size: 12.5px; color: var(--eucalypt); margin-top: 3px; }
+.strings-grid .s.active { background: var(--pale-sage); border-color: var(--forest); }
+
+.status { display: flex; gap: 18px; flex-wrap: wrap; font-size: 14.5px; color: var(--eucalypt); margin-top: 14px; }
+.status b { color: var(--forest); font-weight: 600; }
+
+
+/* --- straight bow lane --- */
+.lane {
+  position: relative; height: 190px; border-radius: 12px;
+  background: var(--ivory); border: 1px solid rgba(170,182,162,.7);
+  touch-action: none; cursor: grab; overflow: hidden; user-select: none;
+}
+.lane.dragging { cursor: grabbing; }
+.lane .edge-label {
+  position: absolute; left: 12px; font-size: 12.5px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--eucalypt);
+}
+.lane .edge-label.top { top: 9px; }
+.lane .edge-label.bottom { bottom: 9px; }
+.lane .centreline {
+  position: absolute; left: 0; right: 0; top: 50%; height: 0;
+  border-top: 2px dashed rgba(197,161,92,.75);
+}
+.lane .band {
+  position: absolute; left: 0; right: 0; top: 42%; height: 16%;
+  background: rgba(49,67,51,.07);
+}
+.lane .pacer {
+  position: absolute; top: 50%; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--gold); transform: translate(-50%, -50%); opacity: .85;
+}
+.lane .bow {
+  position: absolute; width: 120px; height: 10px; border-radius: 6px;
+  background: var(--forest); transform: translate(-50%, -50%);
+  box-shadow: 0 2px 6px rgba(49,67,51,.3);
+}
+.lane .hint {
+  position: absolute; left: 0; right: 0; bottom: 34px; text-align: center;
+  font-size: 14px; color: var(--eucalypt); pointer-events: none;
+}
+
+@media (max-width: 560px) {
+  body { font-size: 16.5px; padding: 0 17px 60px; }
+  .card { padding: 22px 20px 20px; }
+  .page-head { padding-top: 34px; }
+}
+
+@media print {
+  body { background: #fff; background-image: none; padding: 0; }
+  .card { box-shadow: none; break-inside: avoid; }
+  .btn-row, .progress, .page-foot, .tabs, .pulse, .tempo, .days { display: none; }
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-head">
+    <p class="eyebrow">Melinda Coles Violin Academy</p>
+    <h1>Know your violin</h1>
+    <p class="lede">Twelve questions about the instrument itself, ten points each. Getting one wrong is the useful part —
+      it tells you exactly what to go back and read.</p>
+    <hr class="rule-short">
+  </header>
+
+  <div class="tip">
+    <span class="label">A note from Melinda</span>
+    <p>Knowing the parts of your violin is not trivia. When something buzzes, slips or sounds wrong,
+      being able to name the part is how you work out what to do about it.</p>
+  </div>
+
+  <section class="card">
+    <div class="progress"><span id="qbar"></span></div>
+    <p class="progress-text" id="qcount">Twelve questions, 120 points. Press start when you are ready.</p>
+
+    <h2 id="qText" style="margin-top:18px">Ready?</h2>
+    <div class="choices" id="qOpts"></div>
+    <div class="step-note" id="qWhy" style="display:none"></div>
+
+    <div class="btn-row">
+      <button type="button" class="btn btn-primary" id="qGo">Start</button>
+      <button type="button" class="btn btn-ghost" id="qReset">Start again</button>
+    </div>
+    <div class="result" id="qDone"></div>
+  </section>
+
+  <section class="card">
+    <h2 class="secondary">Where to look things up</h2>
+    <p style="margin-top:-4px">If any of these were new, the parts of the violin are laid out with a
+      photograph you can tap on the foundations page.</p>
+    <div class="btn-row" style="margin-top:14px">
+      <a class="btn btn-secondary" href="violin-foundations.html">Open violin foundations</a>
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    <span class="magic">Music is my magic.</span>
+    <a href="https://www.melindacoles.au/">Back to the Academy</a>
+  </footer>
+
+</div>
+
+<script>
+const Q = [
+  { q: "Which part supports the violin under your chin?",
+    a: ["The chin rest", "The shoulder rest", "The tailpiece", "The bridge"], c: 0,
+    why: "The chin rest sits on top of the violin, to the left of the tailpiece. The shoulder rest is the other one — it goes underneath, against your shoulder." },
+
+  { q: "Fine tuners are the safest way for a beginner to tune.",
+    a: ["True", "False"], c: 0,
+    why: "True. The little screws at the tailpiece move the pitch in small, controlled amounts. The pegs are for larger changes and take practice — and a slipping peg can drop a string suddenly." },
+
+  { q: "Which part holds the strings at the right height and carries their vibration into the body?",
+    a: ["The nut", "The bridge", "The tailpiece", "The soundpost"], c: 1,
+    why: "The bridge. It is not glued down — string tension alone holds it upright, which is why it can slowly lean forward and need straightening." },
+
+  { q: "The fingerboard has frets, like a guitar.",
+    a: ["True", "False"], c: 1,
+    why: "False, and this is the thing that makes the violin hard and beautiful. There is nothing to tell you where the note is — your ear decides, which is why tuning and listening matter so much from day one." },
+
+  { q: "What are the four strings, from lowest to highest?",
+    a: ["E, A, D, G", "G, D, A, E", "A, D, G, E", "D, G, A, E"], c: 1,
+    why: "G, D, A, E. The old way to remember it is Good Dogs Always Eat. G is the thickest and lowest, E the thinnest and highest." },
+
+  { q: "The scroll affects the sound of the violin.",
+    a: ["True", "False"], c: 1,
+    why: "False. The scroll is the maker's flourish — decoration and signature, carved by hand and different on every instrument. The sound comes from the body, the bridge and the soundpost." },
+
+  { q: "What is the carved decorative part at the very top called?",
+    a: ["The pegbox", "The scroll", "The nut", "The crown"], c: 1,
+    why: "The scroll. Just below it is the pegbox, which holds the four tuning pegs." },
+
+  { q: "What is the long black strip your fingers press the strings against?",
+    a: ["The fingerboard", "The neck", "The fretboard", "The soundboard"], c: 0,
+    why: "The fingerboard, usually ebony. The neck is the wooden part underneath it that your hand wraps around." },
+
+  { q: "How should the violin be held?",
+    a: ["Gripped firmly in the left hand",
+        "Resting on the collarbone, steadied by the jaw, with the left hand free",
+        "Balanced on the shoulder muscle",
+        "Pressed against the chest"], c: 1,
+    why: "Resting on the collarbone with the jaw settling on the chin rest. The left hand should be free to move — if it is holding the violin up, it cannot play." },
+
+  { q: "Which string is usually tuned first?",
+    a: ["The G string", "The D string", "The A string", "The E string"], c: 2,
+    why: "The A. It is the reference pitch orchestras tune to, and once it is right the other three are tuned against it." },
+
+  { q: "What is the small wooden post standing inside the violin called?",
+    a: ["The bass bar", "The soundpost", "The block", "The spine"], c: 1,
+    why: "The soundpost. It stands between the front and back of the instrument, carrying vibration through it. Luthiers call it the soul of the violin, and moving it a millimetre changes the sound." },
+
+  { q: "How often should the bow hair be loosened?",
+    a: ["Never", "Every time you finish playing", "Once a month", "Only if it feels tight"], c: 1,
+    why: "Every single time. Leaving a bow tight warps the stick over months and eventually ruins it. Loosen it before it goes back in the case, tighten it again next time." }
+];
+
+const $ = id => document.getElementById(id);
+let at = -1, score = 0, answered = false;
+
+function draw() {
+  const item = Q[at];
+  $('qText').textContent = item.q;
+  $('qOpts').innerHTML = item.a.map((t, i) =>
+    '<li><label><input type="radio" name="q" value="' + i + '"><span>' + t + '</span></label></li>').join('');
+  $('qWhy').style.display = 'none';
+  $('qbar').style.width = (at / Q.length * 100) + '%';
+  $('qcount').textContent = 'Question ' + (at + 1) + ' of ' + Q.length
+    + (at > 0 ? '  ·  ' + score + ' right so far' : '');
+  $('qGo').textContent = 'Next question';
+  $('qGo').disabled = true;
+  answered = false;
+}
+
+$('qOpts').addEventListener('change', e => {
+  if (answered) return;
+  answered = true;
+  const item = Q[at], pick = Number(e.target.value), ok = pick === item.c;
+  if (ok) score += 10;
+  $('qWhy').innerHTML = (ok ? '<strong>Yes. </strong>' : '<strong>Not quite. </strong>') + item.why;
+  $('qWhy').style.display = 'block';
+  $('qOpts').querySelectorAll('input').forEach(i => i.disabled = true);
+  $('qOpts').querySelectorAll('li')[item.c].querySelector('label').style.borderColor = 'var(--forest)';
+  $('qOpts').querySelectorAll('li')[item.c].querySelector('label').style.background = 'var(--pale-sage)';
+  $('qGo').disabled = false;
+  $('qcount').textContent = 'Question ' + (at + 1) + ' of ' + Q.length + '  ·  ' + score + ' points';
+});
+
+$('qGo').addEventListener('click', () => {
+  if (at < 0) { at = 0; score = 0; $('qDone').textContent = ''; draw(); return; }
+  if (at < Q.length - 1) { at++; draw(); return; }
+  $('qbar').style.width = '100%';
+  $('qText').textContent = 'Finished.';
+  $('qOpts').innerHTML = '';
+  $('qWhy').style.display = 'none';
+  $('qGo').textContent = 'Start';
+  $('qGo').disabled = false;
+  at = -1;
+  $('qcount').textContent = 'Twelve questions, 120 points.';
+  const max = Q.length * 10;
+  $('qDone').textContent = score === max
+    ? score + ' out of ' + max + '. Every single one. You know your instrument properly, which is more than most beginners do.'
+    : score >= 90 ? score + ' out of ' + max + '. Solid. Have a look back at whichever ones caught you out.'
+    : score >= 50 ? score + ' out of ' + max + '. A fair start — these take a while to stick. Open the foundations page and try again in a few days.'
+    : score + ' out of ' + max + '. Worth going through the foundations page before trying again. None of this is obvious, and nobody is born knowing it.';
+});
+
+$('qReset').addEventListener('click', () => {
+  at = -1; score = 0;
+  $('qText').textContent = 'Ready?';
+  $('qOpts').innerHTML = '';
+  $('qWhy').style.display = 'none';
+  $('qbar').style.width = '0%';
+  $('qcount').textContent = 'Twelve questions, 120 points. Press start when you are ready.';
+  $('qGo').textContent = 'Start'; $('qGo').disabled = false;
+  $('qDone').textContent = '';
+});
+</script>
+</body>
+</html>
