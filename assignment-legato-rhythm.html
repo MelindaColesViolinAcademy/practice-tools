@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assignment: Legato, Rhythm and First Position | Melinda Coles Violin Academy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@700&family=Livvic:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* ============================================================
+   MELINDA COLES VIOLIN ACADEMY — shared page theme
+   Everything this page needs is inside this one file.
+   Change a colour here and every page changes.
+   Do not add colours outside this palette.
+   ============================================================ */
+
+/* Same two fonts the website uses, so these pages match melindacoles.au exactly */
+
+:root {
+  /* --- MCVA palette. These nine are the whole system. --- */
+  --forest:     #314333;   /* major headings, primary buttons, nav */
+  --eucalypt:   #7F927F;   /* secondary elements */
+  --sage:       #AAB6A2;   /* secondary headings, quotations */
+  --pale-sage:  #DDE3D8;   /* light panels, secondary buttons */
+  --ivory:      #F8F3E9;   /* main background */
+  --cream:      #FCF9F2;   /* cards, alternate background */
+  --gold:       #C5A15C;   /* fine lines and small details ONLY */
+  --charcoal:   #4B463F;   /* body text */
+  --blush:      #D8BDB5;   /* very occasional soft accent */
+
+  --display: "Chivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;   /* headings */
+  --body:    "Livvic", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;   /* body text */
+
+  --radius: 14px;
+  --maxw:   760px;
+  --shadow: 0 1px 2px rgba(49,67,51,.04), 0 14px 36px -26px rgba(49,67,51,.30);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 22px 80px;
+  background-color: var(--ivory);
+  /* extremely subtle paper texture. Delete this line for a flat background. */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='.035'/></svg>");
+  color: var(--charcoal);
+  font-family: var(--body);
+  font-size: 17.5px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--maxw); margin: 0 auto; }
+
+/* --- headings --- */
+h1, h2, h3 { font-family: var(--display); color: var(--forest); font-weight: 700; }
+h1 { font-size: clamp(30px, 5vw, 41px); line-height: 1.16; letter-spacing: -.015em; margin: 0 0 14px; }
+h2 { font-size: 26px; line-height: 1.26; letter-spacing: -.01em; margin: 0 0 14px; }
+h3 { font-size: 19px; letter-spacing: -.005em; margin: 0 0 8px; }
+h2.secondary, h3.secondary { color: var(--eucalypt); }
+
+.eyebrow {
+  font-family: var(--body); font-size: 11.5px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--eucalypt); margin: 0 0 12px;
+}
+.lede { font-size: 19px; color: var(--charcoal); opacity: .82; margin: 0 0 6px; max-width: 62ch; }
+p { margin: 0 0 15px; }
+a { color: var(--forest); text-underline-offset: 3px; }
+
+/* --- gold divider: a fine line, never a block --- */
+.rule { border: 0; height: 1px; background: var(--gold); opacity: .55; margin: 28px 0; }
+.rule-short { border: 0; height: 1px; width: 64px; background: var(--gold); margin: 20px 0 26px; }
+
+.page-head { padding: 46px 0 4px; }
+
+/* --- cards --- */
+.card {
+  background: var(--cream);
+  border: 1px solid rgba(197,161,92,.28);
+  border-radius: var(--radius);
+  padding: 30px 30px 26px;
+  margin: 0 0 22px;
+  box-shadow: var(--shadow);
+}
+
+/* --- quotation --- */
+blockquote {
+  font-family: var(--body); font-size: 20px; font-style: italic;
+  color: var(--eucalypt); border-left: 2px solid var(--gold);
+  margin: 26px 0; padding: 4px 0 4px 22px;
+}
+
+/* --- tip / note from Melinda --- */
+.tip {
+  background: var(--pale-sage);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 0 0 24px;
+}
+.tip .label {
+  display: block; margin-bottom: 6px;
+  font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase;
+  font-weight: 600; color: var(--forest);
+}
+.tip p:last-child { margin-bottom: 0; }
+
+/* --- checklist --- */
+.checklist { list-style: none; margin: 0; padding: 0; }
+.checklist li { border-top: 1px solid rgba(170,182,162,.45); padding: 14px 0; }
+.checklist li:first-child { border-top: 0; }
+.checklist label { display: flex; gap: 14px; align-items: flex-start; cursor: pointer; }
+.checklist input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  flex: 0 0 auto; width: 21px; height: 21px; margin: 3px 0 0;
+  border: 1.5px solid var(--eucalypt); border-radius: 5px;
+  background: var(--cream); cursor: pointer; position: relative;
+  transition: background .15s ease, border-color .15s ease;
+}
+.checklist input[type="checkbox"]:checked { background: var(--forest); border-color: var(--forest); }
+.checklist input[type="checkbox"]:checked::after {
+  content: ""; position: absolute; left: 6.5px; top: 2.5px;
+  width: 5px; height: 10px; border: solid var(--ivory);
+  border-width: 0 2px 2px 0; transform: rotate(43deg);
+}
+.checklist input[type="checkbox"]:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.checklist .name { font-weight: 600; display: block; color: var(--forest); }
+.checklist .note { display: block; margin-top: 1px; font-size: 15.5px; color: var(--charcoal); opacity: .78; }
+
+/* --- multiple choice --- */
+.choices { list-style: none; margin: 0; padding: 0; }
+.choices li { margin: 0 0 10px; }
+.choices label {
+  display: flex; gap: 13px; align-items: center; cursor: pointer;
+  padding: 13px 17px; border: 1px solid rgba(170,182,162,.7);
+  border-radius: 10px; background: var(--ivory);
+  transition: border-color .15s ease, background .15s ease;
+}
+.choices label:hover { border-color: var(--eucalypt); }
+.choices input[type="radio"] { accent-color: var(--forest); width: 18px; height: 18px; }
+.choices li:has(input:checked) label { border-color: var(--forest); background: var(--pale-sage); }
+
+/* --- 1 to 5 scale --- */
+.scale { display: flex; gap: 9px; flex-wrap: wrap; }
+.scale button {
+  flex: 1 1 62px; padding: 13px 0;
+  font-family: var(--display); font-size: 18px; font-weight: 700;
+  border: 1px solid rgba(170,182,162,.7); background: var(--ivory); color: var(--forest);
+  border-radius: 10px; cursor: pointer; transition: all .15s ease;
+}
+.scale button:hover { border-color: var(--eucalypt); }
+.scale button[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+
+/* --- buttons --- */
+.btn {
+  display: inline-block; border: 1px solid transparent; cursor: pointer; text-decoration: none;
+  font-family: var(--body); font-size: 16px; font-weight: 600;
+  padding: 13px 24px; border-radius: 10px;
+  transition: filter .15s ease, transform .05s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--forest); color: var(--ivory); }
+.btn-primary:hover { filter: brightness(1.14); }
+.btn-secondary { background: var(--pale-sage); color: var(--forest); }
+.btn-ghost { background: transparent; color: var(--eucalypt); border-color: var(--sage); }
+.btn-row { display: flex; gap: 11px; flex-wrap: wrap; margin-top: 22px; }
+
+/* --- progress --- */
+.progress { height: 8px; background: var(--pale-sage); border-radius: 99px; overflow: hidden; margin: 24px 0 10px; }
+.progress > span { display: block; height: 100%; width: 0; background: var(--eucalypt); border-radius: 99px; transition: width .35s ease; }
+.progress-text { font-size: 15.5px; color: var(--charcoal); opacity: .8; margin: 0; }
+
+/* --- result --- */
+.result {
+  margin-top: 20px; padding: 18px 22px; border-radius: var(--radius);
+  background: var(--pale-sage); color: var(--forest);
+  font-family: var(--body); font-size: 17.5px;
+}
+.result:empty { display: none; }
+
+/* --- footer --- */
+.page-foot {
+  margin-top: 50px; padding-top: 22px; border-top: 1px solid rgba(197,161,92,.4);
+  font-size: 14.5px; color: var(--eucalypt);
+  display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+}
+.page-foot a { color: var(--forest); font-weight: 600; }
+.magic { font-family: var(--body); font-style: italic; }
+
+
+/* --- numbered step sequence --- */
+.steps { list-style: none; margin: 0 0 6px; padding: 0; counter-reset: step; }
+.steps li {
+  counter-increment: step; display: flex; gap: 14px; align-items: flex-start;
+  padding: 11px 0; opacity: .45; transition: opacity .2s ease;
+}
+.steps li::before {
+  content: counter(step); flex: 0 0 auto;
+  width: 27px; height: 27px; border-radius: 50%;
+  background: var(--pale-sage); color: var(--forest);
+  font-family: var(--display); font-size: 14px; font-weight: 700;
+  display: grid; place-items: center;
+}
+.steps li.done { opacity: .55; }
+.steps li.done::before { background: var(--eucalypt); color: var(--ivory); }
+.steps li.current { opacity: 1; }
+.steps li.current::before { background: var(--forest); color: var(--ivory); }
+.steps .label { font-weight: 600; color: var(--forest); }
+.step-note {
+  margin-top: 14px; padding: 15px 18px; border-radius: 10px;
+  background: var(--pale-sage); color: var(--forest); font-size: 16.5px;
+}
+
+/* --- tabs / prompt chips --- */
+.tabs { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 4px; }
+.tabs button {
+  padding: 10px 18px; border-radius: 99px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory); color: var(--forest);
+  font-family: var(--body); font-size: 15.5px; font-weight: 600;
+  transition: all .15s ease;
+}
+.tabs button:hover { border-color: var(--eucalypt); }
+.tabs button[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+
+/* --- pulse / beat display --- */
+.pulse { display: flex; gap: 7px; justify-content: center; margin: 6px 0 18px; flex-wrap: wrap; }
+.pulse span {
+  flex: 0 0 auto; min-width: 46px; padding: 14px 0; text-align: center;
+  border-radius: 10px; border: 1px solid var(--sage); background: var(--ivory);
+  font-family: var(--display); font-size: 18px; font-weight: 700; color: var(--eucalypt);
+  transition: background .06s linear, color .06s linear, transform .06s linear;
+}
+.pulse span.off { font-size: 15px; opacity: .6; }
+.pulse span.hit { background: var(--forest); color: var(--ivory); transform: scale(1.06); }
+
+.tempo { display: flex; align-items: center; gap: 14px; margin: 4px 0 18px; }
+.tempo input[type="range"] { flex: 1; accent-color: var(--forest); }
+.tempo output { font-family: var(--display); font-weight: 700; color: var(--forest); min-width: 74px; }
+
+/* --- reflection box --- */
+textarea {
+  width: 100%; min-height: 120px; padding: 14px 16px;
+  border: 1px solid var(--sage); border-radius: 10px;
+  background: var(--ivory); color: var(--charcoal);
+  font-family: var(--body); font-size: 16.5px; line-height: 1.6; resize: vertical;
+}
+textarea:focus { outline: 2px solid var(--gold); outline-offset: 2px; border-color: var(--eucalypt); }
+.saved { margin-top: 12px; font-size: 15.5px; color: var(--eucalypt); }
+
+ul.plain { margin: 0 0 4px; padding-left: 22px; }
+ul.plain li { margin-bottom: 7px; }
+
+
+/* --- stat tiles --- */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 6px; }
+.stat {
+  background: var(--ivory); border: 1px solid rgba(170,182,162,.7);
+  border-radius: 12px; padding: 18px 16px; text-align: center;
+}
+.stat .n { display: block; font-family: var(--display); font-weight: 700; font-size: 32px; color: var(--forest); line-height: 1.1; }
+.stat .n.word { font-size: 21px; padding: 6px 0 5px; }
+.stat .k { display: block; margin-top: 5px; font-size: 13px; letter-spacing: .04em; color: var(--eucalypt); }
+
+/* --- day picker --- */
+.days { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.days button {
+  flex: 1 1 60px; padding: 14px 0; border-radius: 10px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory); color: var(--forest);
+  font-family: var(--body); font-size: 15px; font-weight: 600; transition: all .15s ease;
+}
+.days button:hover { border-color: var(--eucalypt); }
+.days button[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+
+/* --- rating rows --- */
+.rating { padding: 16px 0; border-top: 1px solid rgba(170,182,162,.45); }
+.rating:first-of-type { border-top: 0; padding-top: 4px; }
+.rating .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 9px; }
+.rating .who { font-weight: 600; color: var(--forest); }
+.rating .val { font-family: var(--display); font-weight: 700; color: var(--eucalypt); font-size: 15px; }
+.rating .row { display: flex; gap: 7px; }
+.rating .row button {
+  flex: 1 1 0; padding: 11px 0; border-radius: 9px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory); color: var(--forest);
+  font-family: var(--display); font-weight: 700; font-size: 16px; transition: all .15s ease;
+}
+.rating .row button:hover { border-color: var(--eucalypt); }
+.rating .row button[aria-pressed="true"] { background: var(--eucalypt); border-color: var(--eucalypt); color: var(--ivory); }
+
+/* --- simple table --- */
+table.plain { width: 100%; border-collapse: collapse; font-size: 16px; }
+table.plain th, table.plain td { text-align: left; padding: 11px 12px; border-bottom: 1px solid rgba(170,182,162,.45); vertical-align: top; }
+table.plain th { font-family: var(--display); font-weight: 700; font-size: 14px; color: var(--forest); }
+table.plain tr:last-child td { border-bottom: 0; }
+table.plain td:first-child { font-weight: 600; color: var(--forest); white-space: nowrap; }
+.tablewrap { overflow-x: auto; }
+
+input[type="text"] {
+  width: 100%; padding: 13px 16px; border: 1px solid var(--sage); border-radius: 10px;
+  background: var(--ivory); color: var(--charcoal); font-family: var(--body); font-size: 16.5px;
+}
+input[type="text"]:focus { outline: 2px solid var(--gold); outline-offset: 2px; border-color: var(--eucalypt); }
+
+
+/* --- violin diagram --- */
+.violin-wrap { display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap; }
+.violin { width: 190px; height: auto; flex: 0 0 auto; display: block; margin: 0 auto; }
+.violin .hit { cursor: pointer; }
+.violin .hit .edge { transition: filter .15s ease, stroke .15s ease; }
+.violin .hit:hover .edge { stroke: var(--gold); stroke-width: 3; }
+.violin .hit.on .edge { stroke: var(--forest); stroke-width: 3.4; filter: drop-shadow(0 0 6px rgba(49,67,51,.4)); }
+.violin-side { flex: 1 1 260px; min-width: 240px; }
+.part-list { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 14px; }
+
+
+/* --- photographic violin with clickable parts --- */
+.violin-photo { position: relative; width: 200px; flex: 0 0 auto; margin: 0 auto; }
+.violin-photo img { width: 100%; height: auto; display: block; border-radius: 10px; }
+.hotspot {
+  position: absolute; margin: 0; padding: 0; cursor: pointer;
+  background: transparent; border: 1.5px dashed rgba(197,161,92,.6); border-radius: 8px;
+  transition: border-color .15s ease, background .15s ease, border-style .15s ease;
+}
+.hotspot:hover { border: 2px solid var(--gold); background: rgba(197,161,92,.16); }
+.hotspot.on { border: 2px solid var(--forest); background: rgba(49,67,51,.18); }
+.hotspot:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.photo-note { font-size: 13.5px; color: var(--eucalypt); text-align: center; margin: 10px 0 0; }
+
+
+/* --- tuner readout and meter --- */
+.readout { text-align: center; padding: 6px 0 2px; }
+.readout .note {
+  font-family: var(--display); font-weight: 700; font-size: 64px; line-height: 1;
+  color: var(--forest); letter-spacing: -.02em;
+}
+.readout .note.dim { color: var(--sage); }
+.readout .hz { font-family: var(--body); font-size: 17px; color: var(--eucalypt); margin-top: 4px; }
+.readout .cents { font-family: var(--body); font-size: 15.5px; color: var(--charcoal); opacity: .75; margin-top: 2px; }
+
+.meter { position: relative; height: 56px; margin: 22px 0 10px; }
+.meter .track {
+  position: absolute; left: 0; right: 0; top: 22px; height: 10px;
+  background: var(--pale-sage); border-radius: 99px; overflow: hidden;
+}
+.meter .centre {
+  position: absolute; left: 50%; top: 12px; width: 2px; height: 30px;
+  background: var(--forest); transform: translateX(-50%); border-radius: 2px;
+}
+.meter .zone {
+  position: absolute; left: 46%; right: 46%; top: 22px; height: 10px;
+  background: rgba(49,67,51,.22); border-radius: 99px;
+}
+.meter .needle {
+  position: absolute; top: 8px; width: 5px; height: 38px; border-radius: 3px;
+  background: var(--eucalypt); left: 50%; transform: translateX(-50%);
+  transition: left .09s linear, background .15s ease;
+}
+.meter.good .needle { background: var(--forest); }
+.meter .ends { position: absolute; top: 40px; left: 0; right: 0; display: flex; justify-content: space-between; }
+.meter .ends span { font-size: 13px; color: var(--eucalypt); }
+
+.strings-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 4px; }
+.strings-grid .s {
+  text-align: center; padding: 14px 6px; border-radius: 12px;
+  border: 1px solid rgba(170,182,162,.7); background: var(--ivory); transition: all .15s ease;
+}
+.strings-grid .s .l { display: block; font-family: var(--display); font-weight: 700; font-size: 24px; color: var(--forest); }
+.strings-grid .s .f { display: block; font-size: 12.5px; color: var(--eucalypt); margin-top: 3px; }
+.strings-grid .s.active { background: var(--pale-sage); border-color: var(--forest); }
+
+.status { display: flex; gap: 18px; flex-wrap: wrap; font-size: 14.5px; color: var(--eucalypt); margin-top: 14px; }
+.status b { color: var(--forest); font-weight: 600; }
+
+
+/* --- straight bow lane --- */
+.lane {
+  position: relative; height: 190px; border-radius: 12px;
+  background: var(--ivory); border: 1px solid rgba(170,182,162,.7);
+  touch-action: none; cursor: grab; overflow: hidden; user-select: none;
+}
+.lane.dragging { cursor: grabbing; }
+.lane .edge-label {
+  position: absolute; left: 12px; font-size: 12.5px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--eucalypt);
+}
+.lane .edge-label.top { top: 9px; }
+.lane .edge-label.bottom { bottom: 9px; }
+.lane .centreline {
+  position: absolute; left: 0; right: 0; top: 50%; height: 0;
+  border-top: 2px dashed rgba(197,161,92,.75);
+}
+.lane .band {
+  position: absolute; left: 0; right: 0; top: 42%; height: 16%;
+  background: rgba(49,67,51,.07);
+}
+.lane .pacer {
+  position: absolute; top: 50%; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--gold); transform: translate(-50%, -50%); opacity: .85;
+}
+.lane .bow {
+  position: absolute; width: 120px; height: 10px; border-radius: 6px;
+  background: var(--forest); transform: translate(-50%, -50%);
+  box-shadow: 0 2px 6px rgba(49,67,51,.3);
+}
+.lane .hint {
+  position: absolute; left: 0; right: 0; bottom: 34px; text-align: center;
+  font-size: 14px; color: var(--eucalypt); pointer-events: none;
+}
+
+
+/* --- fingerboard diagram --- */
+.fb-wrap { overflow-x: auto; padding-bottom: 4px; }
+.fingerboard {
+  position: relative; min-width: 300px; height: 300px;
+  background: linear-gradient(180deg, #3B2A1C 0%, #2E2015 100%);
+  border-radius: 14px 14px 10px 10px; margin: 8px 0 6px;
+  border: 1px solid #241910;
+}
+.fingerboard .nut {
+  position: absolute; top: 0; left: 0; right: 0; height: 12px;
+  background: #E6DCC8; border-radius: 12px 12px 0 0;
+}
+.fingerboard .str {
+  position: absolute; top: 12px; bottom: 0; width: 2px;
+  background: rgba(237,230,214,.75); transform: translateX(-50%);
+}
+.fingerboard .str.thick { width: 3.5px; }
+.fingerboard .slabel {
+  position: absolute; top: -24px; transform: translateX(-50%);
+  font-family: var(--display); font-weight: 700; font-size: 15px; color: var(--forest);
+}
+.fingerboard .dot {
+  position: absolute; width: 34px; height: 34px; border-radius: 50%;
+  transform: translate(-50%, -50%); display: grid; place-items: center;
+  font-family: var(--display); font-weight: 700; font-size: 13px;
+  background: rgba(248,243,233,.14); color: rgba(248,243,233,.75);
+  border: 1px solid rgba(248,243,233,.28); cursor: pointer;
+  transition: all .15s ease;
+}
+.fingerboard .dot:hover { background: rgba(197,161,92,.4); color: #fff; border-color: var(--gold); }
+.fingerboard .dot.on {
+  background: var(--gold); color: #2E2015; border-color: #fff;
+  box-shadow: 0 0 0 3px rgba(197,161,92,.35); font-size: 14px;
+}
+.fingerboard .flabel {
+  position: absolute; left: 6px; transform: translateY(-50%);
+  font-size: 11.5px; color: rgba(248,243,233,.5); letter-spacing: .06em;
+}
+.note-table { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.note-table .row {
+  background: var(--ivory); border: 1px solid rgba(170,182,162,.7);
+  border-radius: 10px; padding: 13px 15px;
+}
+.note-table .row b { display: block; font-family: var(--display); color: var(--forest); margin-bottom: 3px; }
+.note-table .row span { font-size: 15.5px; color: var(--charcoal); }
+
+
+/* --- verse --- */
+.verse {
+  font-size: 19px; line-height: 1.85; color: var(--charcoal);
+  border-left: 2px solid var(--gold); padding: 4px 0 4px 24px; margin: 22px 0;
+}
+.verse p { margin: 0 0 18px; }
+.verse p:last-child { margin-bottom: 0; }
+.verse em { font-style: normal; color: var(--forest); font-weight: 600; }
+
+/* --- hide-and-reveal revision list --- */
+.recall { list-style: none; margin: 0; padding: 0; }
+.recall li {
+  display: grid; grid-template-columns: 132px 1fr; gap: 18px; align-items: start;
+  border-top: 1px solid rgba(170,182,162,.45); padding: 14px 0;
+}
+.recall li:first-child { border-top: 0; padding-top: 4px; }
+.recall .term {
+  font-weight: 600; color: var(--forest); line-height: 1.55;
+  border-radius: 5px; transition: color .15s ease, background .15s ease;
+}
+.recall.hidden .term {
+  color: transparent; background: var(--pale-sage);
+  cursor: pointer; user-select: none; text-align: center;
+}
+.recall.hidden .term.shown { color: var(--forest); background: transparent; }
+.recall .desc { color: var(--charcoal); line-height: 1.6; }
+@media (max-width: 520px) {
+  .recall li { grid-template-columns: 1fr; gap: 3px; }
+  .recall.hidden .term { text-align: left; padding: 2px 12px; justify-self: start; min-width: 130px; }
+}
+
+
+/* --- rhythm notation --- */
+.note-pick { display: flex; gap: 12px; flex-wrap: wrap; }
+.note-pick button {
+  flex: 1 1 130px; padding: 18px 12px 14px; border-radius: 12px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory); color: var(--forest);
+  font-family: var(--body); font-size: 15px; font-weight: 600;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  transition: all .15s ease;
+}
+.note-pick button:hover { border-color: var(--eucalypt); }
+.note-pick button[aria-pressed="true"] { background: var(--pale-sage); border-color: var(--forest); }
+.note-pick svg { display: block; }
+
+.bar {
+  display: flex; gap: 10px; padding: 20px 16px; border-radius: 12px;
+  background: var(--ivory); border: 1px solid rgba(170,182,162,.7);
+  align-items: flex-end; justify-content: center; min-height: 104px; margin-bottom: 6px;
+}
+.bar .cell {
+  flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 8px 4px 4px; border-radius: 8px; transition: background .08s linear, transform .08s linear;
+}
+.bar .cell.hit { background: rgba(197,161,92,.34); transform: translateY(-3px); }
+.bar .cell .cnt { font-family: var(--display); font-weight: 700; font-size: 15px; color: var(--eucalypt); }
+.bar .cell.hit .cnt { color: var(--forest); }
+
+
+/* --- practice player --- */
+.dropzone {
+  border: 2px dashed var(--sage); border-radius: 14px; padding: 30px 22px;
+  text-align: center; background: var(--ivory); transition: all .15s ease; cursor: pointer;
+}
+.dropzone:hover, .dropzone.over { border-color: var(--gold); background: var(--pale-sage); }
+.dropzone p { margin: 0 0 6px; color: var(--forest); font-weight: 600; }
+.dropzone small { color: var(--eucalypt); }
+
+.track-name {
+  font-family: var(--display); font-weight: 700; font-size: 21px;
+  color: var(--forest); margin: 0 0 4px; word-break: break-word;
+}
+.times { display: flex; justify-content: space-between; font-size: 14.5px; color: var(--eucalypt); margin-top: 8px; }
+.times b { color: var(--forest); font-weight: 600; }
+
+.scrub { position: relative; height: 42px; margin-top: 12px; cursor: pointer; }
+.scrub .rail {
+  position: absolute; left: 0; right: 0; top: 16px; height: 10px;
+  background: var(--pale-sage); border-radius: 99px; overflow: hidden;
+}
+.scrub .played { position: absolute; left: 0; top: 0; bottom: 0; background: var(--eucalypt); }
+.scrub .loopzone {
+  position: absolute; top: 10px; height: 22px; background: rgba(197,161,92,.34);
+  border-left: 2px solid var(--gold); border-right: 2px solid var(--gold);
+  border-radius: 3px; pointer-events: none;
+}
+.scrub .head {
+  position: absolute; top: 8px; width: 4px; height: 26px; border-radius: 3px;
+  background: var(--forest); transform: translateX(-50%); pointer-events: none;
+}
+
+.speed-presets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+.speed-presets button {
+  flex: 1 1 64px; padding: 10px 0; border-radius: 9px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory); color: var(--forest);
+  font-family: var(--display); font-weight: 700; font-size: 15px; transition: all .15s ease;
+}
+.speed-presets button:hover { border-color: var(--eucalypt); }
+.speed-presets button[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+
+
+/* --- five-step journey --- */
+.journey { display: grid; gap: 12px; }
+.journey .stage {
+  display: grid; grid-template-columns: 46px 1fr; gap: 16px; align-items: start;
+  padding: 16px 18px; border-radius: 12px;
+  background: var(--ivory); border: 1px solid rgba(170,182,162,.7);
+}
+.journey .stage .n {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--pale-sage); color: var(--forest);
+  display: grid; place-items: center;
+  font-family: var(--display); font-weight: 700; font-size: 18px;
+}
+.journey .stage b { display: block; font-family: var(--display); color: var(--forest); font-size: 17px; margin-bottom: 2px; }
+.journey .stage span { color: var(--charcoal); }
+
+/* --- week of days --- */
+.week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+.week button {
+  padding: 14px 4px 12px; border-radius: 12px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory); color: var(--eucalypt);
+  font-family: var(--body); font-size: 13px; font-weight: 600;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  transition: all .15s ease;
+}
+.week button:hover { border-color: var(--eucalypt); }
+.week button .tick { font-family: var(--display); font-size: 19px; color: transparent; line-height: 1; }
+.week button[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+.week button[aria-pressed="true"] .tick { color: var(--gold); }
+@media (max-width: 480px) { .week { grid-template-columns: repeat(4, 1fr); } }
+
+/* --- badge --- */
+.badge {
+  text-align: center; padding: 28px 24px; border-radius: 14px;
+  background: var(--pale-sage); border: 1px solid var(--sage);
+}
+.badge .ring {
+  width: 74px; height: 74px; margin: 0 auto 14px; border-radius: 50%;
+  border: 2px solid var(--gold); display: grid; place-items: center;
+  font-family: var(--display); font-weight: 700; font-size: 26px; color: var(--forest);
+  background: var(--cream);
+}
+.badge b { display: block; font-family: var(--display); color: var(--forest); font-size: 19px; margin-bottom: 6px; }
+.badge span { color: var(--charcoal); }
+.badge.locked { opacity: .5; }
+
+
+/* --- monthly practice chart --- */
+table.chart { width: 100%; border-collapse: separate; border-spacing: 6px; }
+table.chart th {
+  font-family: var(--display); font-size: 13px; font-weight: 700; color: var(--eucalypt);
+  letter-spacing: .06em; text-transform: uppercase; padding: 2px 0 6px; text-align: center;
+}
+table.chart th.day { text-align: left; padding-left: 2px; }
+table.chart td.day {
+  font-weight: 600; color: var(--forest); white-space: nowrap; padding-right: 6px; font-size: 15.5px;
+}
+table.chart td button {
+  width: 100%; min-width: 44px; height: 44px; border-radius: 10px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory);
+  font-family: var(--display); font-weight: 700; font-size: 17px; color: transparent;
+  transition: all .12s ease;
+}
+table.chart td button:hover { border-color: var(--eucalypt); background: var(--pale-sage); }
+table.chart td button[aria-pressed="true"] {
+  background: var(--forest); border-color: var(--forest); color: var(--gold);
+}
+.chart-wrap { overflow-x: auto; }
+
+
+/* --- bowing symbols --- */
+.sym-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+.sym-card {
+  background: var(--ivory); border: 1px solid rgba(170,182,162,.7);
+  border-radius: 12px; padding: 22px 20px; text-align: center;
+}
+.sym-card svg { display: block; margin: 0 auto 12px; }
+.sym-card b { display: block; font-family: var(--display); color: var(--forest); font-size: 18px; margin-bottom: 5px; }
+.sym-card span { color: var(--charcoal); font-size: 15.5px; }
+
+.bowbar { display: flex; gap: 10px; justify-content: center; margin: 6px 0 14px; flex-wrap: wrap; }
+.bowbar .slot {
+  flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.bowbar .slot > button {
+  width: 66px; height: 66px; border-radius: 12px; cursor: pointer;
+  border: 1px solid var(--sage); background: var(--ivory);
+  display: grid; place-items: center; transition: all .15s ease;
+}
+.bowbar .slot > button:hover { border-color: var(--eucalypt); }
+.bowbar .slot > button.set { background: var(--pale-sage); border-color: var(--forest); }
+.bowbar .slot .beat { font-family: var(--display); font-weight: 700; font-size: 15px; color: var(--eucalypt); }
+.bowbar .slot.strong .beat { color: var(--forest); }
+
+
+/* --- motion study --- */
+.motion {
+  position: relative; height: 96px; border-radius: 12px; overflow: hidden;
+  background: var(--ivory); border: 1px solid rgba(170,182,162,.7); margin: 6px 0 14px;
+}
+.motion .track {
+  position: absolute; left: 5%; right: 5%; top: 50%; height: 3px;
+  background: rgba(170,182,162,.55); border-radius: 2px;
+}
+.motion .frog, .motion .tipmark {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--eucalypt);
+}
+.motion .frog { left: 8px; } .motion .tipmark { right: 8px; }
+.motion .stroke {
+  position: absolute; top: 50%; width: 84px; height: 9px; border-radius: 5px;
+  background: var(--forest); transform: translate(-50%, -50%);
+  box-shadow: 0 2px 8px rgba(49,67,51,.28);
+}
+.motion .flash {
+  position: absolute; left: 50%; top: 50%; width: 26px; height: 26px; border-radius: 50%;
+  background: var(--gold); transform: translate(-50%,-50%) scale(0); opacity: 0;
+}
+
+/* --- two-ended meters --- */
+.meter2 { margin: 16px 0 4px; }
+.meter2 .lab { display: flex; justify-content: space-between; font-size: 13px; color: var(--eucalypt); margin-bottom: 6px; }
+.meter2 .lab b { color: var(--forest); font-weight: 600; }
+.meter2 .rail { position: relative; height: 8px; background: var(--pale-sage); border-radius: 99px; }
+.meter2 .pip {
+  position: absolute; top: -4px; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--forest); transform: translateX(-50%); transition: left .3s ease;
+}
+
+/* --- pulse profile --- */
+.profile { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; align-items: end; height: 74px; }
+.profile div {
+  background: var(--pale-sage); border-radius: 6px 6px 3px 3px;
+  transition: height .25s ease, background .25s ease; min-height: 6px;
+}
+.profile div.lit { background: var(--eucalypt); }
+.profile div.now { background: var(--gold); }
+.profile-legend { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin-top: 6px; }
+.profile-legend span { text-align: center; font-size: 12px; color: var(--eucalypt); }
+
+
+/* --- principles poster --- */
+.poster-head { text-align: center; padding: 46px 0 6px; }
+.poster-head h1 { font-size: clamp(30px, 5.6vw, 44px); margin-bottom: 12px; }
+.poster-head .lede { margin: 0 auto; max-width: 54ch; }
+.gold-centre { border: 0; height: 1px; width: 78px; background: var(--gold); margin: 22px auto 30px; }
+
+.principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.principle {
+  background: var(--cream); border: 1px solid rgba(197,161,92,.3);
+  border-radius: 14px; padding: 24px 24px 22px;
+  display: grid; grid-template-columns: 42px 1fr; gap: 16px; align-items: start;
+}
+.principle .num {
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid var(--gold); color: var(--forest);
+  display: grid; place-items: center;
+  font-family: var(--display); font-weight: 700; font-size: 17px;
+  background: var(--ivory);
+}
+.principle b {
+  display: block; font-family: var(--display); font-weight: 700;
+  color: var(--forest); font-size: 19px; letter-spacing: -.005em; margin-bottom: 5px;
+}
+.principle span { color: var(--charcoal); line-height: 1.62; }
+.closing {
+  text-align: center; margin: 34px auto 0; max-width: 56ch;
+  font-family: var(--body); font-style: italic; font-size: 19px; color: var(--eucalypt);
+}
+
+@media print {
+  .poster-head { padding-top: 10px; }
+  .principles { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .principle { padding: 14px 16px; border-color: #bbb; break-inside: avoid; }
+  .principle b { font-size: 15px; }
+  .principle span { font-size: 12.5px; line-height: 1.45; }
+  .principle .num { width: 32px; height: 32px; font-size: 14px; }
+  .poster-head h1 { font-size: 28px; }
+  .poster-head .lede { font-size: 13px; }
+  .closing { font-size: 14px; margin-top: 16px; }
+  .gold-centre { margin: 12px auto 16px; }
+}
+
+
+/* --- assignment sections --- */
+.sec-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 4px; }
+.sec-head h2 { margin: 0; }
+.timebadge {
+  font-family: var(--body); font-size: 13px; font-weight: 600;
+  color: var(--forest); background: var(--pale-sage);
+  padding: 4px 12px; border-radius: 99px; white-space: nowrap;
+}
+.sectimer {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(170,182,162,.45);
+}
+.sectimer .clock {
+  font-family: var(--display); font-weight: 700; font-size: 24px; color: var(--forest);
+  min-width: 74px;
+}
+.sectimer .btn { padding: 9px 16px; font-size: 14.5px; }
+.sec-done { color: var(--eucalypt); font-size: 14.5px; }
+
+/* --- written answers --- */
+.qa { border-top: 1px solid rgba(170,182,162,.45); padding: 18px 0; }
+.qa:first-of-type { border-top: 0; padding-top: 4px; }
+.qa .ask { display: flex; gap: 12px; align-items: baseline; margin-bottom: 10px; }
+.qa .ask .n {
+  flex: 0 0 auto; font-family: var(--display); font-weight: 700; font-size: 14px;
+  color: var(--eucalypt); min-width: 20px;
+}
+.qa .ask p { margin: 0; font-weight: 600; color: var(--forest); }
+.qa textarea { min-height: 76px; font-size: 16px; }
+.qa .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
+.qa .row small { color: var(--eucalypt); font-size: 13.5px; }
+.model {
+  margin-top: 10px; padding: 14px 16px; border-radius: 10px;
+  background: var(--pale-sage); color: var(--forest); font-size: 16px; display: none;
+}
+.model.open { display: block; }
+
+@media (max-width: 560px) {
+  body { font-size: 16.5px; padding: 0 17px 60px; }
+  .card { padding: 22px 20px 20px; }
+  .page-head { padding-top: 34px; }
+}
+
+@media print {
+  body { background: #fff; background-image: none; padding: 0; }
+  .card { box-shadow: none; break-inside: avoid; }
+  .btn-row, .progress, .page-foot, .tabs, .pulse, .tempo, .days { display: none; }
+  table.chart td button { border: 1.5px solid #999; color: #000; background: #fff; }
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-head">
+    <p class="eyebrow">Melinda Coles Violin Academy · Assignment</p>
+    <h1>Legato, rhythm and first position</h1>
+    <p class="lede">Six sections, thirty to forty minutes in total. Each one has its own timer.
+      Nothing here needs doing in a single sitting — spread it over a few days if that suits you better.</p>
+    <hr class="rule-short">
+  </header>
+
+  <div class="tip">
+    <span class="label">What this assignment is for</span>
+    <p>Building consistency in tone, rhythm and the coordination between your two hands, while
+      staying relaxed. Four focus areas: <strong>legato bowing</strong>, <strong>pizzicato control</strong>,
+      <strong>rhythm accuracy</strong>, and <strong>left-hand finger placement in first position</strong>.</p>
+  </div>
+
+  <section class="card" data-sec="1" data-mins="8">
+    <div class="sec-head"><h2>1. Warm-up</h2><span class="timebadge">5 to 8 minutes</span></div>
+    <ul class="plain">
+      <li>Open strings: G, D, A, E</li>
+      <li>Four slow bows on each string</li>
+    </ul>
+    <div class="tip" style="margin-top:14px;margin-bottom:0">
+      <span class="label">Listen for</span>
+      <p style="margin-bottom:0">An even sound from frog to tip · no accent at the bow change ·
+        a relaxed shoulder and wrist</p>
+    </div>
+  </section>
+
+  <section class="card" data-sec="2" data-mins="10">
+    <div class="sec-head"><h2>2. Legato</h2><span class="timebadge">8 to 10 minutes</span></div>
+    <h3>Exercise A — two-note slurs</h3>
+    <ul class="plain">
+      <li>Stay on one string. On the A string, use B to C♯</li>
+      <li>Two notes to a bow</li>
+      <li>Repeat slowly, many times</li>
+    </ul>
+    <h3 style="margin-top:16px">Exercise B — four-note slurs</h3>
+    <ul class="plain">
+      <li>Use the scale pattern A – B – C♯ – D</li>
+      <li>One bow for the whole group</li>
+    </ul>
+    <div class="tip" style="margin-top:14px;margin-bottom:0">
+      <span class="label">Listen for</span>
+      <p style="margin-bottom:0">A smooth connection with no gaps · consistent bow speed ·
+        quiet direction changes</p>
+    </div>
+  </section>
+
+  <section class="card" data-sec="3" data-mins="5">
+    <div class="sec-head"><h2>3. Pizzicato</h2><span class="timebadge">5 minutes</span></div>
+    <ul class="plain">
+      <li>Pluck the open strings</li>
+      <li>Then simple finger patterns — A, B, C♯</li>
+    </ul>
+    <div class="tip" style="margin-top:14px;margin-bottom:0">
+      <span class="label">Listen for</span>
+      <p style="margin-bottom:0">A clean release without pulling the string too far ·
+        even rhythm · a relaxed hand after every pluck</p>
+    </div>
+  </section>
+
+  <section class="card" data-sec="4" data-mins="8">
+    <div class="sec-head"><h2>4. Rhythm</h2><span class="timebadge">5 to 8 minutes</span></div>
+    <h3>A. Busy Busy Stop Stop</h3>
+    <p style="margin-top:-2px"><strong>Busy Busy</strong> is four half notes. <strong>Stop Stop</strong>
+      is two whole notes. Sixteen beats altogether.</p>
+    <p>Count aloud: <strong>1–2 | 3–4 | 5–6 | 7–8 | hold | hold</strong></p>
+    <h3 style="margin-top:18px">B. Quavers</h3>
+    <p style="margin-top:-2px">Clap or play, counting out loud: <strong>1 &amp; 2 &amp; 3 &amp; 4 &amp;</strong></p>
+    <div class="tip" style="margin-top:14px;margin-bottom:0">
+      <span class="label">Listen for</span>
+      <p style="margin-bottom:0">Even spacing · and above all, not rushing the "and"</p>
+    </div>
+    <div class="btn-row" style="margin-top:16px">
+      <a class="btn btn-secondary" href="rhythm-practice.html">Open the rhythm trainer</a>
+    </div>
+  </section>
+
+  <section class="card" data-sec="5" data-mins="8">
+    <div class="sec-head"><h2>5. Finger placement</h2><span class="timebadge">5 to 8 minutes</span></div>
+    <ul class="plain">
+      <li>On the D and A strings</li>
+      <li>The pattern 0 – 1 – 2 – 3 – 4, up and back down</li>
+      <li>Remember the second finger is high — up against the third</li>
+    </ul>
+    <div class="tip" style="margin-top:14px;margin-bottom:0">
+      <span class="label">Listen for</span>
+      <p style="margin-bottom:0">Accurate spacing · curved fingers · as little tension as you can manage</p>
+    </div>
+    <div class="btn-row" style="margin-top:16px">
+      <a class="btn btn-secondary" href="fingering-trainer.html">Open the fingering trainer</a>
+    </div>
+  </section>
+
+  <section class="card" data-sec="6" data-mins="10">
+    <div class="sec-head"><h2>6. Put it together</h2><span class="timebadge">5 to 10 minutes</span></div>
+    <p style="margin-top:-2px">Play a simple four to eight bar piece, or combine the pieces yourself:</p>
+    <ul class="plain">
+      <li>Legato — slurred notes</li>
+      <li>Quavers</li>
+      <li>Simple fingering in first position</li>
+    </ul>
+    <p style="margin-bottom:0">Finish on something that sounds like music, however short.</p>
+  </section>
+  <section class="card">
+    <h2>Questions to answer</h2>
+    <p style="margin-top:-4px;margin-bottom:6px">Fourteen questions. Write as little or as much as you
+      like — your answers save on this device, and nobody else sees them unless you choose to send them.
+      Where there is a definite answer you can check yourself against mine.</p>
+    <h3 class="secondary" style="margin-top:22px">Bowing</h3>
+    <div id="qsBowing"></div>
+    <h3 class="secondary" style="margin-top:22px">Rhythm</h3>
+    <div id="qsRhythm"></div>
+    <h3 class="secondary" style="margin-top:22px">Applying it</h3>
+    <div id="qsApply"></div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-primary" id="saveAll">Save all my answers</button>
+      <button type="button" class="btn btn-ghost" id="clearAll">Clear everything</button>
+    </div>
+    <p class="saved" id="saveMsg">Answers save automatically as you type.</p>
+  </section>
+
+  <section class="card">
+    <h2>Self-check</h2>
+    <ul class="checklist" id="selfcheck">
+      <li><label><input type="checkbox"><span><span class="name">My tone is consistent across the bow</span><span class="note">The same sound at the tip as at the frog.</span></span></label></li>
+      <li><label><input type="checkbox"><span><span class="name">My fingers are landing accurately</span><span class="note">Fourth finger matches the next open string.</span></span></label></li>
+      <li><label><input type="checkbox"><span><span class="name">My rhythm is steady without speeding up</span><span class="note">Especially through the quavers.</span></span></label></li>
+      <li><label><input type="checkbox"><span><span class="name">I am staying relaxed</span><span class="note">Shoulder down, bow hand flexible, jaw unclenched.</span></span></label></li>
+    </ul>
+    <div class="result" id="scNote"></div>
+  </section>
+
+  <section class="card">
+    <h2>Sending it to me</h2>
+    <p style="margin-top:-4px">A video of one to two minutes. It does not need to be a performance —
+      I am looking at how you are moving, not whether it is perfect. One take is plenty.</p>
+    <ul class="checklist" id="submission">
+      <li><label><input type="checkbox"><span><span class="name">Open string legato</span></span></label></li>
+      <li><label><input type="checkbox"><span><span class="name">One slur exercise</span></span></label></li>
+      <li><label><input type="checkbox"><span><span class="name">One rhythm exercise</span></span></label></li>
+      <li><label><input type="checkbox"><span><span class="name">One short piece or pattern</span></span></label></li>
+    </ul>
+    <div class="progress"><span id="subbar"></span></div>
+    <p class="progress-text" id="subNote">Four things to include.</p>
+  </section>
+
+  <section class="card">
+    <h2 class="secondary">By the end of this you should be able to</h2>
+    <ul class="plain">
+      <li>Produce a steady legato tone</li>
+      <li>Understand basic rhythm subdivisions</li>
+      <li>Control pizzicato cleanly</li>
+      <li>Place your fingers more accurately in first position</li>
+    </ul>
+    <blockquote>Thirty to forty minutes altogether. If you only have fifteen, do sections one, four
+      and five — those three carry the most.</blockquote>
+  </section>
+
+  <footer class="page-foot">
+    <span class="magic">Music is my magic.</span>
+    <a href="https://www.melindacoles.au/">Back to the Academy</a>
+  </footer>
+
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const KEY = 'mcva-assignment-legato';
+
+/* ---------- per-section timers ---------- */
+document.querySelectorAll('[data-sec]').forEach(sec => {
+  const mins = Number(sec.dataset.mins);
+  let left = mins * 60, tick = null, ran = false;
+  const wrap = document.createElement('div');
+  wrap.className = 'sectimer';
+  wrap.innerHTML = '<span class="clock"></span>'
+    + '<button type="button" class="btn btn-secondary">Start</button>'
+    + '<button type="button" class="btn btn-ghost">Reset</button>'
+    + '<span class="sec-done"></span>';
+  sec.appendChild(wrap);
+  const [clock, startB, resetB, doneS] = [wrap.querySelector('.clock'), ...wrap.querySelectorAll('button'), wrap.querySelector('.sec-done')];
+  const show = () => {
+    const m = Math.floor(left / 60), s = left % 60;
+    clock.textContent = m + ':' + String(s).padStart(2, '0');
+  };
+  startB.addEventListener('click', () => {
+    if (tick) { clearInterval(tick); tick = null; startB.textContent = 'Start'; return; }
+    startB.textContent = 'Pause'; ran = true; doneS.textContent = '';
+    tick = setInterval(() => {
+      left--; show();
+      if (left <= 0) {
+        clearInterval(tick); tick = null; left = 0; show();
+        startB.textContent = 'Start';
+        doneS.textContent = 'Time. Move on when you are ready — no need to stop mid-phrase.';
+      }
+    }, 1000);
+  });
+  resetB.addEventListener('click', () => {
+    clearInterval(tick); tick = null; left = mins * 60; show();
+    startB.textContent = 'Start'; doneS.textContent = '';
+  });
+  show();
+});
+
+/* ---------- questions ---------- */
+const QS = {
+  qsBowing: [
+    { n: 1, q: "What is the difference between legato and staccato bowing?",
+      m: "Legato is smooth and joined, with no gap between the notes — often several notes in one bow. Staccato is the opposite: each note shortened, with a clear silence after it." },
+    { n: 2, q: "Why is it important to avoid an accent when changing bow direction in legato?",
+      m: "Because an accent at the change breaks the line. The listener hears a bump where there should be continuous sound, and the phrase stops being one thing and becomes a series of separate notes." },
+    { n: 3, q: "What part of your arm or hand helps keep the bow movement smooth?",
+      m: "The wrist and fingers. They absorb the change of direction so the arm does not have to stop and start — a stiff wrist puts a bump into every bow change." },
+    { n: 4, q: "What happens to your sound if the bow speed is inconsistent?" ,
+      m: "The volume and tone waver. Faster bow gives more sound, slower gives less, so uneven speed produces uneven sound even when you are not meaning to change anything." },
+    { n: 5, q: "How does bow pressure affect tone quality?",
+      m: "Too little and the sound is thin or whistles; too much and it chokes and turns scratchy. What you want is the weight of a relaxed arm resting on the string, not pressing into it." }
+  ],
+  qsRhythm: [
+    { n: 6, q: "What is the difference between a half note and a whole note in beats?",
+      m: "A half note is two beats, a whole note is four. So a whole note lasts twice as long as a half note." },
+    { n: 7, q: "In Busy Busy Stop Stop, how many total beats are there?",
+      m: "Sixteen. Four half notes make eight beats, and two whole notes make another eight." },
+    { n: 8, q: "What does the \\u0026 represent when counting quavers — 1 &amp; 2 &amp;?",
+      m: "The halfway point of the beat. The number is the beat itself, the and is the second quaver, exactly halfway between one beat and the next." },
+    { n: 9, q: "Why is it important not to rush the second note in a pair of quavers?",
+      m: "Because rushing it shortens the gap and the rhythm stops being even. It is the commonest rhythmic fault there is, and almost nobody hears themselves doing it without counting out loud." },
+    { n: 10, q: "How can you check whether your rhythm is steady while you practise?",
+      m: "Count out loud, use a metronome, or record thirty seconds and listen back. Counting in your head is not the same — it drifts with the playing." }
+  ],
+  qsApply: [
+    { n: 11, q: "Which part of this assignment was hardest, and why?", m: null },
+    { n: 12, q: "What did you notice about your tone when you slowed the bow down?", m: null },
+    { n: 13, q: "How did your rhythm change when you counted out loud?", m: null },
+    { n: 14, q: "What will you focus on in your next practice session?", m: null }
+  ]
+};
+let answers = {};
+try { answers = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(answers)); } catch (e) {} };
+
+Object.entries(QS).forEach(([id, list]) => {
+  $(id).innerHTML = list.map(item =>
+    '<div class="qa"><div class="ask"><span class="n">' + item.n + '</span><p>' + item.q + '</p></div>'
+    + '<textarea data-n="' + item.n + '" placeholder="Your answer..."></textarea>'
+    + (item.m ? '<div class="row"><button type="button" class="btn btn-ghost show" data-n="' + item.n
+        + '" style="padding:8px 14px;font-size:14px">See what I would say</button>'
+        + '<small>Write yours first — it is worth more that way.</small></div>'
+        + '<div class="model" id="m' + item.n + '">' + item.m + '</div>' : '')
+    + '</div>').join('');
+});
+document.querySelectorAll('.qa textarea').forEach(t => {
+  t.value = answers[t.dataset.n] || '';
+  t.addEventListener('input', () => { answers[t.dataset.n] = t.value; save(); });
+});
+document.querySelectorAll('.show').forEach(b =>
+  b.addEventListener('click', () => {
+    const m = $('m' + b.dataset.n);
+    m.classList.toggle('open');
+    b.textContent = m.classList.contains('open') ? 'Hide that' : 'See what I would say';
+  }));
+$('saveAll').addEventListener('click', () => {
+  save();
+  const n = Object.values(answers).filter(v => v && v.trim()).length;
+  $('saveMsg').textContent = n ? 'Saved. ' + n + ' of 14 answered — they will be here when you come back.' : 'Nothing written yet.';
+});
+$('clearAll').addEventListener('click', () => {
+  if (!confirm('Clear all fourteen answers?')) return;
+  answers = {}; save();
+  document.querySelectorAll('.qa textarea').forEach(t => t.value = '');
+  $('saveMsg').textContent = 'Cleared.';
+});
+
+/* ---------- self check and submission ---------- */
+$('selfcheck').addEventListener('change', () => {
+  const n = [...$('selfcheck').querySelectorAll('input')].filter(b => b.checked).length;
+  $('scNote').textContent = n === 4
+    ? 'All four. That is a genuinely good session — and honest self-assessment is a skill in itself.'
+    : n > 0 ? n + ' of 4. Whichever you could not tick honestly is your focus for next time.' : '';
+});
+$('submission').addEventListener('change', () => {
+  const all = [...$('submission').querySelectorAll('input')], n = all.filter(b => b.checked).length;
+  $('subbar').style.width = (n / all.length * 100) + '%';
+  $('subNote').textContent = n === all.length
+    ? 'All four covered. Send it whenever you are ready — one take is plenty.'
+    : n + ' of 4 covered.';
+});
+</script>
+</body>
+</html>
